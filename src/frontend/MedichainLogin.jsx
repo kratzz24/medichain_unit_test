@@ -5,6 +5,7 @@ import { useAuth } from "../context/AuthContext"
 import { Eye, EyeOff, Lock, Mail, Plus, ChevronRight } from "lucide-react"
 import MedichainLogo from "../components/MedichainLogo"
 import LoadingSpinner from "../components/LoadingSpinner"
+import RoleSelectionModal from "../components/RoleSelectionModal"
 import { showToast } from "../components/CustomToast"
 
 const MedichainLogin = () => {
@@ -17,6 +18,23 @@ const MedichainLogin = () => {
   const [rememberMe, setRememberMe] = useState(false)
   const [isSubmitting, setIsSubmitting] = useState(false)
   const [showPassword, setShowPassword] = useState(false)
+  const [isRoleModalOpen, setIsRoleModalOpen] = useState(false)
+
+  const handleSignUpClick = () => {
+    setIsRoleModalOpen(true)
+  }
+
+  const handleRoleSelect = (role) => {
+    if (role === 'doctor') {
+      navigate('/signup?role=doctor')
+    } else if (role === 'patient') {
+      navigate('/signup?role=patient')
+    }
+  }
+
+  const closeRoleModal = () => {
+    setIsRoleModalOpen(false)
+  }
 
   // Load remembered credentials on component mount
   useEffect(() => {
@@ -219,7 +237,7 @@ const MedichainLogin = () => {
 
                 <p className="signup-link">
                   Don't have an account? <span 
-                    onClick={() => navigate("/signup")} 
+                    onClick={handleSignUpClick} 
                     className="signup-link-text"
                     style={{ cursor: 'pointer' }}
                   >
@@ -273,6 +291,13 @@ const MedichainLogin = () => {
           </div>
         </div>
       </div>
+
+      {/* Role Selection Modal */}
+      <RoleSelectionModal 
+        isOpen={isRoleModalOpen}
+        onClose={closeRoleModal}
+        onRoleSelect={handleRoleSelect}
+      />
     </div>
   )
 }

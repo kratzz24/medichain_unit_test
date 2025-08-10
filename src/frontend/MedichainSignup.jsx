@@ -1,6 +1,6 @@
-import { useState } from "react"
+import { useState, useEffect } from "react"
 import "./MedichainLogin.css" // Reuse existing styles
-import { useNavigate } from "react-router-dom"
+import { useNavigate, useSearchParams } from "react-router-dom"
 import { useAuth } from "../context/AuthContext"
 import { Eye, EyeOff, Lock, Mail, User, Plus, ChevronRight } from "lucide-react"
 import MedichainLogo from "../components/MedichainLogo"
@@ -10,6 +10,7 @@ import { showToast } from "../components/CustomToast"
 const MedichainSignup = () => {
   const navigate = useNavigate()
   const { register } = useAuth() // Use the existing register function
+  const [searchParams] = useSearchParams()
   
   const [formData, setFormData] = useState({
     firstName: "",
@@ -17,11 +18,24 @@ const MedichainSignup = () => {
     email: "",
     password: "",
     confirmPassword: "",
-    userType: "patient" // or "doctor"
+    userType: "patient" // default
   })
   const [isSubmitting, setIsSubmitting] = useState(false)
   const [showPassword, setShowPassword] = useState(false)
   const [showConfirmPassword, setShowConfirmPassword] = useState(false)
+  const [isRolePreSelected, setIsRolePreSelected] = useState(false)
+
+  // Set the userType based on URL parameter
+  useEffect(() => {
+    const role = searchParams.get('role')
+    if (role && (role === 'doctor' || role === 'patient')) {
+      setFormData(prev => ({
+        ...prev,
+        userType: role
+      }))
+      setIsRolePreSelected(true) // Lock the role selection
+    }
+  }, [searchParams])
 
   const handleInputChange = (e) => {
     const { name, value } = e.target
@@ -196,7 +210,7 @@ const MedichainSignup = () => {
                       name="userType"
                       value={formData.userType}
                       onChange={handleInputChange}
-                      disabled={isSubmitting}
+                      disabled={isSubmitting || isRolePreSelected}
                     >
                       <option value="patient">Patient</option>
                       <option value="doctor">Doctor</option>

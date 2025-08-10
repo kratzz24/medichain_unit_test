@@ -1,5 +1,7 @@
 import React, { useState, useEffect, useRef } from 'react';
 import { useNavigate } from 'react-router-dom';
+import RoleSelectionModal from '../components/RoleSelectionModal';
+import Footer from '../components/Footer';
 import '../assets/styles/LandingPage.css';
 
 const LandingPage = () => {
@@ -12,6 +14,23 @@ const LandingPage = () => {
     patients: 10,
     encryption: 256
   });
+  const [isRoleModalOpen, setIsRoleModalOpen] = useState(false);
+
+  const handleGetStarted = () => {
+    setIsRoleModalOpen(true);
+  };
+
+  const handleRoleSelect = (role) => {
+    if (role === 'doctor') {
+      navigate('/signup?role=doctor');
+    } else if (role === 'patient') {
+      navigate('/signup?role=patient');
+    }
+  };
+
+  const closeRoleModal = () => {
+    setIsRoleModalOpen(false);
+  };
 
   useEffect(() => {
     const handleScroll = () => {
@@ -167,7 +186,7 @@ const LandingPage = () => {
               </button>
               <button
                 className="btn btn-primary"
-                onClick={() => navigate('/signup')}
+                onClick={handleGetStarted}
               >
                 Get Started
               </button>
@@ -189,7 +208,7 @@ const LandingPage = () => {
             <div className="hero-buttons">
               <button
                 className="btn btn-primary btn-large"
-                onClick={() => navigate('/signup')}
+                onClick={handleGetStarted}
               >
                 Start Your Journey
               </button>
@@ -311,17 +330,14 @@ const LandingPage = () => {
       </section>
 
       {/* Footer */}
-      <footer className="footer">
-        <div className="footer-main">
-          <strong>© 2025 MediChain</strong> — <em>AI-Driven Diagnosis & Blockchain Health Records System</em>
-        </div>
-        <div className="footer-sub">
-          Powered by Artificial Intelligence, AES & SHA-256 Encryption, and Blockchain Technology
-        </div>
-        <div className="footer-academic">
-          For academic use — Taguig City University | BSCS Thesis Project
-        </div>
-      </footer>
+      <Footer />
+
+      {/* Role Selection Modal */}
+      <RoleSelectionModal 
+        isOpen={isRoleModalOpen}
+        onClose={closeRoleModal}
+        onRoleSelect={handleRoleSelect}
+      />
     </div>
   );
 };
