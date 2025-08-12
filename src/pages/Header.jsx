@@ -1,14 +1,16 @@
 import React from "react"
-import { NavLink } from "react-router-dom"
+import { NavLink, useNavigate } from "react-router-dom"
 import { Settings, User, LogOut } from "lucide-react"
 import { useAuth } from "../context/AuthContext"
 import "../assets/styles/Header.css"
 
 const Header = () => {
   const { logout } = useAuth()
+  const navigate = useNavigate()
 
   const handleLogout = () => {
     logout()
+    navigate('/')
   }
 
   return (
@@ -16,7 +18,7 @@ const Header = () => {
       <div className="header-left">
         {/* Text-based Logo */}
         <div className="logo-container">
-          <div className="text-blue-600 font-bold text-xl tracking-wide">
+          <div>
             MEDICHAIN
           </div>
         </div>
@@ -53,9 +55,15 @@ const Header = () => {
       </div>
 
       <div className="header-right">
-        <button className="icon-button"><Settings size={24} /></button>
-        <button className="icon-button"><User size={24} /></button>
-        <button className="icon-button" onClick={handleLogout}><LogOut size={24} /></button>
+        <button className="icon-button" title="Settings">
+          <Settings size={20} />
+        </button>
+        <button className="icon-button" title="Profile">
+          <User size={20} />
+        </button>
+        <button className="icon-button" onClick={handleLogout} title="Logout">
+          <LogOut size={20} />
+        </button>
       </div>
     </header>
   )

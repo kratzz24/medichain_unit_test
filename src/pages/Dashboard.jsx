@@ -3,11 +3,17 @@ import React, { useEffect, useState } from "react"
 import Header from "./Header"
 import { Plus, Users, Clock, Activity, CheckCircle, AlertCircle, UserCheck } from "lucide-react"
 import { useAuth } from "../context/AuthContext"
-import { toast } from "react-toastify"
 import "../assets/styles/Dashboard.css"
 
+// Simple toast replacement
+const toast = {
+  info: (message) => {
+    alert(`ℹ️ ${message}`);
+  }
+};
+
 const Dashboard = () => {
-  const { user, refreshProfile } = useAuth()
+  const { user } = useAuth(); // Removed refreshProfile
   const [stats, setStats] = useState({
     totalPatients: 0,
     pendingApprovals: 0,
@@ -16,9 +22,6 @@ const Dashboard = () => {
   })
 
   useEffect(() => {
-    // Refresh user profile on component mount
-    refreshProfile()
-    
     // Load dashboard stats (placeholder for now)
     loadDashboardStats()
   }, [])
@@ -152,20 +155,24 @@ const Dashboard = () => {
                   <UserCheck size={20} />
                   User Information
                 </h3>
-                {user && (
+                {user ? (
                   <div className="user-details">
                     <div className="user-detail">
-                      <strong>Name:</strong> {user.name}
+                      <strong>Name:</strong> {user.name || 'N/A'}
                     </div>
                     <div className="user-detail">
-                      <strong>Email:</strong> {user.email}
+                      <strong>Email:</strong> {user.email || 'N/A'}
                     </div>
                     <div className="user-detail">
-                      <strong>Role:</strong> {user.role}
+                      <strong>Role:</strong> {user.role || 'N/A'}
                     </div>
                     <div className="user-detail">
-                      <strong>Member since:</strong> {user.created_at ? new Date(user.created_at).toLocaleDateString() : 'N/A'}
+                      <strong>Member since:</strong> {user.created_at ? new Date(user.created_at).toLocaleDateString() : 'Today'}
                     </div>
+                  </div>
+                ) : (
+                  <div className="user-details">
+                    <div className="user-detail">Loading user information...</div>
                   </div>
                 )}
               </div>
