@@ -420,6 +420,79 @@
   transform: none;
 }
 
+.login-btn.loading {
+  background: #1976d2;
+  cursor: wait;
+  position: relative;
+}
+
+.login-btn.loading:hover {
+  background: #1976d2;
+  transform: none;
+  box-shadow: 0 4px 14px rgba(21, 101, 192, 0.3);
+}
+
+/* Email Verification Prompt */
+.verification-prompt {
+  background: linear-gradient(135deg, #fff3cd 0%, #ffeaa7 100%);
+  border: 1px solid #ffc107;
+  border-radius: 12px;
+  padding: 16px;
+  margin: 16px 0;
+  display: flex;
+  align-items: flex-start;
+  gap: 12px;
+  box-shadow: 0 2px 8px rgba(255, 193, 7, 0.2);
+}
+
+.verification-icon {
+  flex-shrink: 0;
+  margin-top: 2px;
+}
+
+.verification-content {
+  flex: 1;
+}
+
+.verification-content p {
+  margin: 0 0 4px 0;
+  font-weight: 600;
+  color: #663c00;
+  font-size: 0.9rem;
+}
+
+.verification-text {
+  font-weight: 400 !important;
+  color: #856404;
+  font-size: 0.85rem !important;
+  margin-bottom: 12px !important;
+}
+
+.resend-btn {
+  background: #ffc107;
+  color: #663c00;
+  border: none;
+  border-radius: 8px;
+  padding: 8px 16px;
+  font-size: 0.85rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.resend-btn:hover:not(:disabled) {
+  background: #ffb300;
+  transform: translateY(-1px);
+}
+
+.resend-btn:disabled {
+  opacity: 0.7;
+  cursor: not-allowed;
+}
+
 .btn-spinner {
   animation: spin 1s linear infinite;
   width: 16px;

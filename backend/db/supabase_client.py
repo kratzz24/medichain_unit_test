@@ -2,11 +2,12 @@
 Supabase client configuration for medical records
 """
 import os
+import ssl
 from supabase import create_client, Client
 from dotenv import load_dotenv
 
-# Load environment variables
-load_dotenv()
+# Load environment variables from the parent directory
+load_dotenv(dotenv_path=os.path.join(os.path.dirname(__file__), '..', '.env'))
 
 class SupabaseClient:
     """Handles all Supabase database operations for medical records"""
@@ -14,11 +15,25 @@ class SupabaseClient:
     def __init__(self):
         self.supabase_url = os.getenv('SUPABASE_URL')
         self.supabase_key = os.getenv('SUPABASE_KEY')
+        self.supabase_service_key = os.getenv('SUPABASE_SERVICE_KEY')  # Service role key
         
         if not self.supabase_url or not self.supabase_key:
             raise ValueError("SUPABASE_URL and SUPABASE_KEY must be set in environment variables")
         
-        self.client: Client = create_client(self.supabase_url, self.supabase_key)
+        try:            
+            # Create client with anon key for regular operations
+            self.client: Client = create_client(self.supabase_url, self.supabase_key)
+            
+            # Create service client for admin operations (bypasses RLS)
+            if self.supabase_service_key:
+                self.service_client: Client = create_client(self.supabase_url, self.supabase_service_key)
+            else:
+                print("Warning: SUPABASE_SERVICE_KEY not found. Some operations may fail due to RLS.")
+                self.service_client = self.client
+                
+        except Exception as ssl_error:
+            print(f"Error creating Supabase client: {ssl_error}")
+            raise
     
     def create_health_record(self, record_data):
         """Create a new encrypted health record"""

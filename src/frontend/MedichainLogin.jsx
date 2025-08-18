@@ -1,8 +1,8 @@
 import { useState, useEffect } from "react"
 import "./MedichainLogin.css"
-import { useNavigate, useLocation } from "react-router-dom"
+import { useNavigate, useLocation, useSearchParams } from "react-router-dom"
 import { useAuth } from "../context/AuthContext"
-import { Eye, EyeOff, Lock, Mail, Plus, ChevronRight } from "lucide-react"
+import { Eye, EyeOff, Lock, Mail, Plus, ChevronRight, AlertCircle, CheckCircle } from "lucide-react"
 import MedichainLogo from "../components/MedichainLogo"
 import LoadingSpinner from "../components/LoadingSpinner"
 import RoleSelectionModal from "../components/RoleSelectionModal"
@@ -11,7 +11,8 @@ import { showToast } from "../components/CustomToast"
 const MedichainLogin = () => {
   const navigate = useNavigate()
   const location = useLocation()
-  const { login, isAuthenticated, loading } = useAuth()
+  const [searchParams] = useSearchParams()
+  const { login, isAuthenticated, loading, resendVerification } = useAuth()
   
   const [email, setEmail] = useState("")
   const [password, setPassword] = useState("")
@@ -19,6 +20,8 @@ const MedichainLogin = () => {
   const [isSubmitting, setIsSubmitting] = useState(false)
   const [showPassword, setShowPassword] = useState(false)
   const [isRoleModalOpen, setIsRoleModalOpen] = useState(false)
+  const [showVerificationPrompt, setShowVerificationPrompt] = useState(false)
+  const [isResendingVerification, setIsResendingVerification] = useState(false)
 
   const handleSignUpClick = () => {
     setIsRoleModalOpen(true)
@@ -56,6 +59,18 @@ const MedichainLogin = () => {
     }
   }, [isAuthenticated, loading, navigate, location])
 
+  // Check for verification status from URL params
+  useEffect(() => {
+    const verification = searchParams.get('verification')
+    const pendingEmail = localStorage.getItem('pending_verification_email')
+    
+    if (verification === 'pending' && pendingEmail) {
+      setEmail(pendingEmail)
+      setShowVerificationPrompt(true)
+      showToast.info("Please check your email and verify your account before logging in.")
+    }
+  }, [searchParams])
+
   const handleSubmit = async (e) => {
     e.preventDefault()
     
@@ -82,19 +97,52 @@ const MedichainLogin = () => {
           localStorage.removeItem("medichain_remembered_password")
         }
         
+        // Clear any pending verification email
+        localStorage.removeItem('pending_verification_email')
+        
         showToast.success("Login successful!")
         
         // Navigate to intended page or dashboard
         const from = location.state?.from?.pathname || "/dashboard"
         navigate(from, { replace: true })
       } else {
-        showToast.error(result.message || "Login failed")
+        // Check if it's a verification error
+        if (result.requiresVerification) {
+          setShowVerificationPrompt(true)
+          showToast.error("Please verify your email before logging in. Check your inbox for the verification link.")
+        } else {
+          showToast.error(result.message || "Login failed")
+        }
       }
     } catch (error) {
       console.error("Login error:", error)
       showToast.error("An unexpected error occurred. Please try again.")
     } finally {
       setIsSubmitting(false)
+    }
+  }
+
+  const handleResendVerification = async () => {
+    if (!email.trim()) {
+      showToast.error("Please enter your email address")
+      return
+    }
+
+    setIsResendingVerification(true)
+    
+    try {
+      const result = await resendVerification(email.trim())
+      
+      if (result.success) {
+        showToast.success("Verification email sent! Please check your inbox.")
+      } else {
+        showToast.error(result.error || "Failed to send verification email")
+      }
+    } catch (error) {
+      console.error("Resend verification error:", error)
+      showToast.error("Failed to send verification email. Please try again.")
+    } finally {
+      setIsResendingVerification(false)
     }
   }
 
@@ -146,6 +194,32 @@ const MedichainLogin = () => {
                 <h2>Welcome Back!</h2>
                 <p>Sign in to your MediChain account</p>
               </div>
+
+              {showVerificationPrompt && (
+                <div className="verification-prompt">
+                  <div className="verification-icon">
+                    <AlertCircle size={20} color="#ff9800" />
+                  </div>
+                  <div className="verification-content">
+                    <p>Email verification required</p>
+                    <p className="verification-text">
+                      Please check your email and click the verification link before logging in.
+                    </p>
+                    <button 
+                      type="button" 
+                      className="resend-btn"
+                      onClick={handleResendVerification}
+                      disabled={isResendingVerification}
+                    >
+                      {isResendingVerification ? (
+                        <LoadingSpinner size="small" text="" />
+                      ) : (
+                        "Resend verification email"
+                      )}
+                    </button>
+                  </div>
+                </div>
+              )}
 
               <form onSubmit={handleSubmit} className="login-form-wrapper">
                 <div className="input-group">

@@ -10,6 +10,7 @@ const api = axios.create({
   headers: {
     'Content-Type': 'application/json',
   },
+  timeout: 10000, // 10 second timeout
 });
 
 // Add token to requests if available
@@ -49,27 +50,23 @@ export const AuthProvider = ({ children }) => {
 
   // Check if user is logged in on mount
   useEffect(() => {
-    const checkAuthState = async () => {
-      const token = localStorage.getItem('token');
-      const savedUser = localStorage.getItem('medichain_user');
-      
-      if (token && savedUser) {
-        try {
-          const userData = JSON.parse(savedUser);
-          setUser(userData);
-          setIsAuthenticated(true);
-          // Verify token is still valid
-          await fetchCurrentUser();
-        } catch (error) {
-          console.error('Error parsing saved user data:', error);
-          clearAuthData();
-        }
-      } else {
-        setLoading(false);
+    const token = localStorage.getItem('token');
+    const savedUser = localStorage.getItem('medichain_user');
+    
+    if (token && savedUser) {
+      try {
+        const userData = JSON.parse(savedUser);
+        setUser(userData);
+        setIsAuthenticated(true);
+        // Verify token is still valid
+        fetchCurrentUser();
+      } catch (error) {
+        console.error('Error parsing saved user data:', error);
+        clearAuthData();
       }
-    };
-
-    checkAuthState();
+    } else {
+      setLoading(false);
+    }
   }, []);
 
   const clearAuthData = () => {
@@ -131,37 +128,32 @@ export const AuthProvider = ({ children }) => {
       }
       
       setError(errorMessage);
-      return { success: false, message: errorMessage };
+      console.error('Login error:', error);
+      return { success: false, error: errorMessage };
     } finally {
       setLoading(false);
     }
   };
 
-  const signup = async (email, password, firstName, lastName, role) => {
+  const signup = async (email, password, fullName, role) => {
     try {
       setError(null);
       setLoading(true);
       
-      const requestData = {
+      const response = await api.post('/api/auth/signup', {
         email,
         password,
-        first_name: firstName,
-        last_name: lastName,
+        full_name: fullName,
         role,
-      };
-      
-      console.log('DEBUG: Sending signup request:', requestData);
-      
-      const response = await api.post('/api/auth/signup', requestData);
+      });
 
       if (response.data.success) {
-        // Automatically log in the user after successful signup
         const { user, token } = response.data.data;
         localStorage.setItem('token', token);
         localStorage.setItem('medichain_user', JSON.stringify(user));
         setUser(user);
         setIsAuthenticated(true);
-        return { success: true, message: response.data.message };
+        return { success: true };
       } else {
         throw new Error(response.data.error || 'Signup failed');
       }
@@ -177,6 +169,7 @@ export const AuthProvider = ({ children }) => {
       }
       
       setError(errorMessage);
+      console.error('Signup error:', error);
       return { success: false, error: errorMessage };
     } finally {
       setLoading(false);
@@ -185,25 +178,29 @@ export const AuthProvider = ({ children }) => {
 
   const logout = () => {
     clearAuthData();
-    return Promise.resolve();
+  };
+
+  const updateUser = (updatedData) => {
+    const updatedUser = { ...user, ...updatedData };
+    setUser(updatedUser);
+    localStorage.setItem('medichain_user', JSON.stringify(updatedUser));
+  };
+
+  const clearError = () => {
+    setError(null);
   };
 
   const value = {
     user,
-    login,
-    signup,
-    logout,
     loading,
     error,
     isAuthenticated,
-    setError,
+    login,
+    signup,
+    logout,
+    updateUser,
+    clearError,
   };
 
-  return (
-    <AuthContext.Provider value={value}>
-      {children}
-    </AuthContext.Provider>
-  );
+  return <AuthContext.Provider value={value}>{children}</AuthContext.Provider>;
 };
-
-export default AuthContext;

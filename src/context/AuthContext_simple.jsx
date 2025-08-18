@@ -137,22 +137,17 @@ export const AuthProvider = ({ children }) => {
     }
   };
 
-  const signup = async (email, password, firstName, lastName, role) => {
+  const signup = async (email, password, fullName, role) => {
     try {
       setError(null);
       setLoading(true);
       
-      const requestData = {
+      const response = await api.post('/api/auth/signup', {
         email,
         password,
-        first_name: firstName,
-        last_name: lastName,
+        full_name: fullName,
         role,
-      };
-      
-      console.log('DEBUG: Sending signup request:', requestData);
-      
-      const response = await api.post('/api/auth/signup', requestData);
+      });
 
       if (response.data.success) {
         // Automatically log in the user after successful signup

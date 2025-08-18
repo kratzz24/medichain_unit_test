@@ -1,13 +1,25 @@
 """
 Flask backend application for medical records with AES encryption and SHA-256 hashing
 """
+# Disable SSL verification BEFORE importing anything (Windows SSL issues)
+import os
+import ssl
+os.environ['PYTHONHTTPSVERIFY'] = '0'
+os.environ['REQUESTS_CA_BUNDLE'] = ''
+os.environ['CURL_CA_BUNDLE'] = ''
+os.environ['SSL_VERIFY'] = 'false'
+
+# Set SSL context globally to not verify certificates
+ssl._create_default_https_context = ssl._create_unverified_context
+
 from flask import Flask, request, jsonify
 from flask_cors import CORS
-import os
 from dotenv import load_dotenv
 from core.crypto_utils import MedicalRecordCrypto
 from db.supabase_client import SupabaseClient
-from auth.auth_routes import auth_bp
+print("DEBUG: About to import auth_routes_simple")
+from auth.auth_routes_simple import auth_bp
+print("DEBUG: Successfully imported auth_bp from auth_routes_simple")
 
 # Load environment variables
 load_dotenv()

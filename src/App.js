@@ -5,6 +5,7 @@ import LandingPage from './pages/LandingPage';
 import MedichainLogin from './frontend/MedichainLogin';
 import MedichainSignup from './frontend/MedichainSignup';
 import Dashboard from './pages/Dashboard'; // Use the correct Dashboard component
+import AIAssistant from './pages/AIAssistant'; // Import the real AI Assistant
 import ProtectedRoute from './components/ProtectedRoute';
 import './App.css';
 
@@ -21,13 +22,6 @@ const Patients = () => (
   <div style={{ padding: '2rem', textAlign: 'center', marginTop: '80px' }}>
     <h2>Patients</h2>
     <p>Patients management coming soon...</p>
-  </div>
-);
-
-const AIAssistant = () => (
-  <div style={{ padding: '2rem', textAlign: 'center', marginTop: '80px' }}>
-    <h2>AI Assistant</h2>
-    <p>AI Assistant feature coming soon...</p>
   </div>
 );
 

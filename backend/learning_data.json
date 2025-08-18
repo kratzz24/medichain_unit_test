@@ -1,0 +1,3974 @@
+[
+  {
+    "timestamp": "2025-08-18T09:24:36.905118",
+    "symptoms": {
+      "fever": 1,
+      "cough": 1,
+      "shortness_of_breath": 1,
+      "fatigue": 1,
+      "headache": 0,
+      "sore_throat": 0
+    },
+    "patient_data": {
+      "age": 72,
+      "gender": "male",
+      "chronic_conditions": [
+        "diabetes",
+        "heart_disease",
+        "copd"
+      ],
+      "allergies": [
+        "sulfa",
+        "shellfish"
+      ],
+      "current_medications": [
+        "metformin",
+        "lisinopril",
+        "albuterol",
+        "atorvastatin"
+      ]
+    },
+    "ai_prediction": {
+      "timestamp": "2025-08-18T09:24:36.905076",
+      "analysis": {
+        "primary_diagnosis": {
+          "condition": "COVID-19",
+          "confidence": 0.6683333333333333,
+          "explanation": "Based on the presented symptoms, the AI model predicts COVID-19 with 66.8% confidence."
+        },
+        "differential_diagnoses": [
+          {
+            "condition": "Pneumonia",
+            "probability": 0.1716666666666667,
+            "explanation": "Alternative consideration with 17.2% probability"
+          }
+        ],
+        "input_symptoms": {
+          "fever": 1,
+          "cough": 1,
+          "shortness_of_breath": 1,
+          "fatigue": 1,
+          "headache": 0,
+          "sore_throat": 0
+        },
+        "symptom_analysis": {
+          "present_symptoms": [
+            "fever",
+            "cough",
+            "shortness_of_breath",
+            "fatigue"
+          ],
+          "symptom_count": 4
+        }
+      },
+      "recommendations": {
+        "medications": [
+          {
+            "name": "Paxlovid (if eligible)",
+            "dosage": "As prescribed",
+            "duration": "5 days",
+            "type": "antiviral"
+          },
+          {
+            "name": "Acetaminophen",
+            "dosage": "650mg every 6 hours",
+            "duration": "as needed",
+            "type": "symptom relief"
+          },
+          {
+            "name": "Dextromethorphan",
+            "dosage": "15-30mg every 4 hours",
+            "duration": "as needed",
+            "type": "cough suppressant"
+          }
+        ],
+        "treatments": [
+          "Isolate for at least 5 days from symptom onset",
+          "Rest and adequate sleep",
+          "Monitor oxygen saturation if available",
+          "Increase fluid intake",
+          "Prone positioning if breathing difficulties"
+        ],
+        "warnings": [
+          "URGENT: Seek immediate care for difficulty breathing",
+          "Monitor for persistent chest pain",
+          "Watch for confusion or inability to stay awake",
+          "Check oxygen levels if pulse oximeter available"
+        ],
+        "lifestyle_advice": [
+          "Follow up with your healthcare provider",
+          "Monitor symptoms and seek care if worsening",
+          "Maintain good hygiene practices",
+          "Stay hydrated and get adequate rest"
+        ]
+      },
+      "patient_insights": {
+        "personalization_applied": true,
+        "history_analyzed": true,
+        "pattern_analysis": {
+          "common_symptoms": {
+            "shortness_of_breath": 1,
+            "cough": 2,
+            "fatigue": 1,
+            "fever": 1
+          },
+          "diagnosis_history": [
+            "COPD exacerbation",
+            "Bronchitis"
+          ],
+          "total_visits": 2
+        },
+        "risk_factors": [
+          "Advanced age increases risk for complications",
+          "Chronic diabetes increases complication risk",
+          "Chronic heart_disease increases complication risk",
+          "Chronic copd increases complication risk",
+          "Breathing difficulties require prompt medical attention"
+        ]
+      },
+      "medical_disclaimer": {
+        "important_notice": [
+          "\ud83d\udea8 MEDICAL DISCLAIMER: This AI system is a decision-support tool only and NOT a replacement for professional medical advice.",
+          "\ud83d\udc68\u200d\u2695\ufe0f FINAL DECISIONS must be confirmed by a licensed healthcare provider.",
+          "\ud83c\udfe5 For emergency symptoms, seek immediate medical attention or call emergency services.",
+          "\ud83d\udc8a Do not start, stop, or change medications without consulting your doctor.",
+          "\ud83d\udccb This recommendation is based on symptoms only and may not account for all medical factors.",
+          "\u2696\ufe0f Healthcare providers should use their clinical judgment and consider complete patient history."
+        ],
+        "emergency_signs": [
+          "Difficulty breathing or shortness of breath",
+          "Chest pain or pressure",
+          "Severe or persistent vomiting",
+          "High fever (>103\u00b0F/39.4\u00b0C)",
+          "Signs of severe dehydration",
+          "Sudden severe headache",
+          "Confusion or altered mental state"
+        ]
+      },
+      "confidence_interpretation": {
+        "level": "Moderate",
+        "interpretation": "The AI model has moderate confidence. Consider differential diagnoses.",
+        "recommendation": "Medical evaluation recommended to confirm diagnosis."
+      },
+      "next_steps": [
+        "Seek medical attention promptly",
+        "Monitor symptoms closely and seek emergency care if worsening",
+        "Consider more frequent monitoring due to age-related risk factors",
+        "Follow medication instructions carefully if prescribed",
+        "Keep a symptom diary to track progress",
+        "Schedule follow-up appointment as recommended",
+        "Seek immediate care if emergency symptoms develop"
+      ],
+      "ai_learning": {
+        "data_collected": true,
+        "session_id": null,
+        "feedback_encouraged": "Healthcare providers can provide feedback to improve AI accuracy"
+      }
+    },
+    "user_feedback": null,
+    "confidence": 0,
+    "session_id": "session_20250818_092436"
+  },
+  {
+    "timestamp": "2025-08-18T09:24:57.627792",
+    "symptoms": {
+      "fever": 1,
+      "cough": 1,
+      "fatigue": 1,
+      "shortness_of_breath": 0,
+      "headache": 1,
+      "sore_throat": 1
+    },
+    "patient_data": {
+      "age": 35,
+      "chronic_conditions": [
+        "asthma"
+      ],
+      "allergies": [
+        "penicillin"
+      ]
+    },
+    "ai_prediction": {
+      "timestamp": "2025-08-18T09:24:57.627759",
+      "analysis": {
+        "primary_diagnosis": {
+          "condition": "Flu",
+          "confidence": 0.84,
+          "explanation": "Based on the presented symptoms, the AI model predicts Flu with 84.0% confidence."
+        },
+        "differential_diagnoses": [
+          {
+            "condition": "Tonsillitis",
+            "probability": 0.11,
+            "explanation": "Alternative consideration with 11.0% probability"
+          }
+        ],
+        "input_symptoms": {
+          "fever": 1,
+          "cough": 1,
+          "fatigue": 1,
+          "shortness_of_breath": 0,
+          "headache": 1,
+          "sore_throat": 1
+        },
+        "symptom_analysis": {
+          "present_symptoms": [
+            "fever",
+            "cough",
+            "fatigue",
+            "headache",
+            "sore_throat"
+          ],
+          "symptom_count": 5
+        }
+      },
+      "recommendations": {
+        "medications": [
+          {
+            "name": "Oseltamivir (Tamiflu)",
+            "dosage": "75mg twice daily",
+            "duration": "5 days",
+            "type": "antiviral"
+          },
+          {
+            "name": "Acetaminophen",
+            "dosage": "650mg every 6 hours",
+            "duration": "as needed",
+            "type": "symptom relief"
+          },
+          {
+            "name": "Ibuprofen",
+            "dosage": "400mg every 6-8 hours",
+            "duration": "as needed",
+            "type": "anti-inflammatory"
+          }
+        ],
+        "treatments": [
+          "Rest and adequate sleep (8-10 hours)",
+          "Increase fluid intake (8-10 glasses water daily)",
+          "Use humidifier or steam inhalation",
+          "Warm salt water gargling for sore throat",
+          "Avoid contact with others for 24 hours after fever breaks"
+        ],
+        "warnings": [
+          "Seek immediate care if difficulty breathing",
+          "Monitor for high fever (>103\u00b0F) persisting >3 days",
+          "Watch for signs of dehydration"
+        ],
+        "lifestyle_advice": [
+          "Follow up with your healthcare provider",
+          "Monitor symptoms and seek care if worsening",
+          "Maintain good hygiene practices",
+          "Stay hydrated and get adequate rest"
+        ]
+      },
+      "patient_insights": {
+        "personalization_applied": true,
+        "history_analyzed": false,
+        "pattern_analysis": null,
+        "risk_factors": [
+          "Fever with headache needs medical evaluation"
+        ]
+      },
+      "medical_disclaimer": {
+        "important_notice": [
+          "\ud83d\udea8 MEDICAL DISCLAIMER: This AI system is a decision-support tool only and NOT a replacement for professional medical advice.",
+          "\ud83d\udc68\u200d\u2695\ufe0f FINAL DECISIONS must be confirmed by a licensed healthcare provider.",
+          "\ud83c\udfe5 For emergency symptoms, seek immediate medical attention or call emergency services.",
+          "\ud83d\udc8a Do not start, stop, or change medications without consulting your doctor.",
+          "\ud83d\udccb This recommendation is based on symptoms only and may not account for all medical factors.",
+          "\u2696\ufe0f Healthcare providers should use their clinical judgment and consider complete patient history."
+        ],
+        "emergency_signs": [
+          "Difficulty breathing or shortness of breath",
+          "Chest pain or pressure",
+          "Severe or persistent vomiting",
+          "High fever (>103\u00b0F/39.4\u00b0C)",
+          "Signs of severe dehydration",
+          "Sudden severe headache",
+          "Confusion or altered mental state"
+        ]
+      },
+      "confidence_interpretation": {
+        "level": "High",
+        "interpretation": "The AI model is highly confident in this diagnosis based on the symptom pattern.",
+        "recommendation": "Proceed with recommended actions but confirm with healthcare provider."
+      },
+      "next_steps": [
+        "Follow medication instructions carefully if prescribed",
+        "Keep a symptom diary to track progress",
+        "Schedule follow-up appointment as recommended",
+        "Seek immediate care if emergency symptoms develop"
+      ],
+      "ai_learning": {
+        "data_collected": true,
+        "session_id": null,
+        "feedback_encouraged": "Healthcare providers can provide feedback to improve AI accuracy"
+      }
+    },
+    "user_feedback": null,
+    "confidence": 0,
+    "session_id": "session_20250818_092457"
+  },
+  {
+    "timestamp": "2025-08-18T09:26:32.165013",
+    "symptoms": {
+      "fever": 1,
+      "cough": 1,
+      "fatigue": 1,
+      "shortness_of_breath": 1,
+      "headache": 0,
+      "sore_throat": 0
+    },
+    "patient_data": {
+      "age": 65,
+      "chronic_conditions": [
+        "diabetes"
+      ]
+    },
+    "ai_prediction": {
+      "analysis": {
+        "primary_diagnosis": {
+          "condition": "Pneumonia"
+        }
+      },
+      "confidence": 1.0
+    },
+    "user_feedback": null,
+    "confidence": 1.0,
+    "session_id": "session_20250818_092632"
+  },
+  {
+    "timestamp": "2025-08-18T09:26:32.169696",
+    "symptoms": {
+      "fever": 0,
+      "cough": 1,
+      "fatigue": 0,
+      "shortness_of_breath": 0,
+      "headache": 1,
+      "sore_throat": 1
+    },
+    "patient_data": {
+      "age": 30
+    },
+    "ai_prediction": {
+      "analysis": {
+        "primary_diagnosis": {
+          "condition": "Sinusitis"
+        }
+      },
+      "confidence": 1.0
+    },
+    "user_feedback": null,
+    "confidence": 1.0,
+    "session_id": "session_20250818_092632"
+  },
+  {
+    "timestamp": "2025-08-18T09:26:32.173649",
+    "symptoms": {
+      "fever": 1,
+      "cough": 0,
+      "fatigue": 1,
+      "shortness_of_breath": 0,
+      "headache": 1,
+      "sore_throat": 1
+    },
+    "patient_data": {
+      "age": 12
+    },
+    "ai_prediction": {
+      "analysis": {
+        "primary_diagnosis": {
+          "condition": "Strep Throat"
+        }
+      },
+      "confidence": 1.0
+    },
+    "user_feedback": null,
+    "confidence": 1.0,
+    "session_id": "session_20250818_092632"
+  },
+  {
+    "timestamp": "2025-08-18T10:23:34.237765",
+    "symptoms": "fever, cough, headache",
+    "patient_data": {
+      "age": 35,
+      "gender": "Male",
+      "patient_id": "test_001",
+      "name": "Test Patient"
+    },
+    "ai_prediction": {
+      "timestamp": "2025-08-18T10:23:34.237633",
+      "analysis": {
+        "primary_diagnosis": {
+          "condition": "Migraine",
+          "confidence": 0.73,
+          "explanation": "Based on the presented symptoms, the AI model predicts Migraine with 73.0% confidence."
+        },
+        "differential_diagnoses": [
+          {
+            "condition": "Tonsillitis",
+            "probability": 0.11,
+            "explanation": "Alternative consideration with 11.0% probability"
+          }
+        ],
+        "input_symptoms": {
+          "fever": 1,
+          "cough": 1,
+          "fatigue": 0,
+          "shortness_of_breath": 0,
+          "headache": 1,
+          "sore_throat": 0
+        },
+        "symptom_analysis": {
+          "present_symptoms": [
+            "fever",
+            "cough",
+            "headache"
+          ],
+          "symptom_count": 3
+        }
+      },
+      "recommendations": {
+        "medications": [
+          {
+            "name": "Sumatriptan",
+            "dosage": "50-100mg at onset",
+            "duration": "single dose",
+            "type": "triptan"
+          },
+          {
+            "name": "Acetaminophen + Caffeine",
+            "dosage": "2 tablets at onset",
+            "duration": "single dose",
+            "type": "combination analgesic"
+          },
+          {
+            "name": "Topiramate",
+            "dosage": "25-100mg daily",
+            "duration": "preventive",
+            "type": "anticonvulsant"
+          }
+        ],
+        "treatments": [
+          "Rest in quiet, dark room immediately",
+          "Apply cold compress to forehead",
+          "Stay hydrated but avoid triggers",
+          "Practice stress management",
+          "Maintain consistent sleep schedule"
+        ],
+        "warnings": [
+          "Track triggers and patterns",
+          "See neurologist for frequent migraines",
+          "Watch for changes in migraine pattern",
+          "Avoid overuse of pain medications"
+        ],
+        "lifestyle_advice": [
+          "Follow up with your healthcare provider",
+          "Monitor symptoms and seek care if worsening",
+          "Maintain good hygiene practices",
+          "Stay hydrated and get adequate rest"
+        ]
+      },
+      "patient_insights": {
+        "personalization_applied": true,
+        "history_analyzed": false,
+        "pattern_analysis": null,
+        "risk_factors": [
+          "Fever with headache needs medical evaluation"
+        ]
+      },
+      "medical_disclaimer": {
+        "important_notice": [
+          "\ud83d\udea8 MEDICAL DISCLAIMER: This AI system is a decision-support tool only and NOT a replacement for professional medical advice.",
+          "\ud83d\udc68\u200d\u2695\ufe0f FINAL DECISIONS must be confirmed by a licensed healthcare provider.",
+          "\ud83c\udfe5 For emergency symptoms, seek immediate medical attention or call emergency services.",
+          "\ud83d\udc8a Do not start, stop, or change medications without consulting your doctor.",
+          "\ud83d\udccb This recommendation is based on symptoms only and may not account for all medical factors.",
+          "\u2696\ufe0f Healthcare providers should use their clinical judgment and consider complete patient history."
+        ],
+        "emergency_signs": [
+          "Difficulty breathing or shortness of breath",
+          "Chest pain or pressure",
+          "Severe or persistent vomiting",
+          "High fever (>103\u00b0F/39.4\u00b0C)",
+          "Signs of severe dehydration",
+          "Sudden severe headache",
+          "Confusion or altered mental state"
+        ]
+      },
+      "confidence_interpretation": {
+        "level": "Moderate",
+        "interpretation": "The AI model has moderate confidence. Consider differential diagnoses.",
+        "recommendation": "Medical evaluation recommended to confirm diagnosis."
+      },
+      "next_steps": [
+        "Follow medication instructions carefully if prescribed",
+        "Keep a symptom diary to track progress",
+        "Schedule follow-up appointment as recommended",
+        "Seek immediate care if emergency symptoms develop"
+      ],
+      "ai_learning": {
+        "data_collected": true,
+        "session_id": null,
+        "feedback_encouraged": "Healthcare providers can provide feedback to improve AI accuracy"
+      }
+    },
+    "user_feedback": null,
+    "confidence": 0,
+    "session_id": "session_20250818_102334"
+  },
+  {
+    "timestamp": "2025-08-18T10:23:34.332532",
+    "symptoms": "fever, cough, headache",
+    "patient_data": {
+      "age": 35,
+      "gender": "Male",
+      "patient_id": "test_001",
+      "name": "Test Patient"
+    },
+    "ai_prediction": {
+      "timestamp": "2025-08-18T10:23:34.332502",
+      "analysis": {
+        "primary_diagnosis": {
+          "condition": "Migraine",
+          "confidence": 0.73,
+          "explanation": "Based on the presented symptoms, the AI model predicts Migraine with 73.0% confidence."
+        },
+        "differential_diagnoses": [
+          {
+            "condition": "Tonsillitis",
+            "probability": 0.11,
+            "explanation": "Alternative consideration with 11.0% probability"
+          }
+        ],
+        "input_symptoms": {
+          "fever": 1,
+          "cough": 1,
+          "fatigue": 0,
+          "shortness_of_breath": 0,
+          "headache": 1,
+          "sore_throat": 0
+        },
+        "symptom_analysis": {
+          "present_symptoms": [
+            "fever",
+            "cough",
+            "headache"
+          ],
+          "symptom_count": 3
+        }
+      },
+      "recommendations": {
+        "medications": [
+          {
+            "name": "Sumatriptan",
+            "dosage": "50-100mg at onset",
+            "duration": "single dose",
+            "type": "triptan"
+          },
+          {
+            "name": "Acetaminophen + Caffeine",
+            "dosage": "2 tablets at onset",
+            "duration": "single dose",
+            "type": "combination analgesic"
+          },
+          {
+            "name": "Topiramate",
+            "dosage": "25-100mg daily",
+            "duration": "preventive",
+            "type": "anticonvulsant"
+          }
+        ],
+        "treatments": [
+          "Rest in quiet, dark room immediately",
+          "Apply cold compress to forehead",
+          "Stay hydrated but avoid triggers",
+          "Practice stress management",
+          "Maintain consistent sleep schedule"
+        ],
+        "warnings": [
+          "Track triggers and patterns",
+          "See neurologist for frequent migraines",
+          "Watch for changes in migraine pattern",
+          "Avoid overuse of pain medications"
+        ],
+        "lifestyle_advice": [
+          "Follow up with your healthcare provider",
+          "Monitor symptoms and seek care if worsening",
+          "Maintain good hygiene practices",
+          "Stay hydrated and get adequate rest"
+        ]
+      },
+      "patient_insights": {
+        "personalization_applied": true,
+        "history_analyzed": false,
+        "pattern_analysis": null,
+        "risk_factors": [
+          "Fever with headache needs medical evaluation"
+        ]
+      },
+      "medical_disclaimer": {
+        "important_notice": [
+          "\ud83d\udea8 MEDICAL DISCLAIMER: This AI system is a decision-support tool only and NOT a replacement for professional medical advice.",
+          "\ud83d\udc68\u200d\u2695\ufe0f FINAL DECISIONS must be confirmed by a licensed healthcare provider.",
+          "\ud83c\udfe5 For emergency symptoms, seek immediate medical attention or call emergency services.",
+          "\ud83d\udc8a Do not start, stop, or change medications without consulting your doctor.",
+          "\ud83d\udccb This recommendation is based on symptoms only and may not account for all medical factors.",
+          "\u2696\ufe0f Healthcare providers should use their clinical judgment and consider complete patient history."
+        ],
+        "emergency_signs": [
+          "Difficulty breathing or shortness of breath",
+          "Chest pain or pressure",
+          "Severe or persistent vomiting",
+          "High fever (>103\u00b0F/39.4\u00b0C)",
+          "Signs of severe dehydration",
+          "Sudden severe headache",
+          "Confusion or altered mental state"
+        ]
+      },
+      "confidence_interpretation": {
+        "level": "Moderate",
+        "interpretation": "The AI model has moderate confidence. Consider differential diagnoses.",
+        "recommendation": "Medical evaluation recommended to confirm diagnosis."
+      },
+      "next_steps": [
+        "Follow medication instructions carefully if prescribed",
+        "Keep a symptom diary to track progress",
+        "Schedule follow-up appointment as recommended",
+        "Seek immediate care if emergency symptoms develop"
+      ],
+      "ai_learning": {
+        "data_collected": true,
+        "session_id": null,
+        "feedback_encouraged": "Healthcare providers can provide feedback to improve AI accuracy"
+      }
+    },
+    "user_feedback": null,
+    "confidence": 0,
+    "session_id": "session_20250818_102334"
+  },
+  {
+    "timestamp": "2025-08-18T10:24:14.752622",
+    "symptoms": "fever, cough, headache",
+    "patient_data": {
+      "age": 35,
+      "gender": "Male",
+      "patient_id": "test_001",
+      "name": "Test Patient"
+    },
+    "ai_prediction": {
+      "timestamp": "2025-08-18T10:24:14.752593",
+      "analysis": {
+        "primary_diagnosis": {
+          "condition": "Migraine",
+          "confidence": 0.73,
+          "explanation": "Based on the presented symptoms, the AI model predicts Migraine with 73.0% confidence."
+        },
+        "differential_diagnoses": [
+          {
+            "condition": "Tonsillitis",
+            "probability": 0.11,
+            "explanation": "Alternative consideration with 11.0% probability"
+          }
+        ],
+        "input_symptoms": {
+          "fever": 1,
+          "cough": 1,
+          "fatigue": 0,
+          "shortness_of_breath": 0,
+          "headache": 1,
+          "sore_throat": 0
+        },
+        "symptom_analysis": {
+          "present_symptoms": [
+            "fever",
+            "cough",
+            "headache"
+          ],
+          "symptom_count": 3
+        }
+      },
+      "recommendations": {
+        "medications": [
+          {
+            "name": "Sumatriptan",
+            "dosage": "50-100mg at onset",
+            "duration": "single dose",
+            "type": "triptan"
+          },
+          {
+            "name": "Acetaminophen + Caffeine",
+            "dosage": "2 tablets at onset",
+            "duration": "single dose",
+            "type": "combination analgesic"
+          },
+          {
+            "name": "Topiramate",
+            "dosage": "25-100mg daily",
+            "duration": "preventive",
+            "type": "anticonvulsant"
+          }
+        ],
+        "treatments": [
+          "Rest in quiet, dark room immediately",
+          "Apply cold compress to forehead",
+          "Stay hydrated but avoid triggers",
+          "Practice stress management",
+          "Maintain consistent sleep schedule"
+        ],
+        "warnings": [
+          "Track triggers and patterns",
+          "See neurologist for frequent migraines",
+          "Watch for changes in migraine pattern",
+          "Avoid overuse of pain medications"
+        ],
+        "lifestyle_advice": [
+          "Follow up with your healthcare provider",
+          "Monitor symptoms and seek care if worsening",
+          "Maintain good hygiene practices",
+          "Stay hydrated and get adequate rest"
+        ]
+      },
+      "patient_insights": {
+        "personalization_applied": true,
+        "history_analyzed": false,
+        "pattern_analysis": null,
+        "risk_factors": [
+          "Fever with headache needs medical evaluation"
+        ]
+      },
+      "medical_disclaimer": {
+        "important_notice": [
+          "\ud83d\udea8 MEDICAL DISCLAIMER: This AI system is a decision-support tool only and NOT a replacement for professional medical advice.",
+          "\ud83d\udc68\u200d\u2695\ufe0f FINAL DECISIONS must be confirmed by a licensed healthcare provider.",
+          "\ud83c\udfe5 For emergency symptoms, seek immediate medical attention or call emergency services.",
+          "\ud83d\udc8a Do not start, stop, or change medications without consulting your doctor.",
+          "\ud83d\udccb This recommendation is based on symptoms only and may not account for all medical factors.",
+          "\u2696\ufe0f Healthcare providers should use their clinical judgment and consider complete patient history."
+        ],
+        "emergency_signs": [
+          "Difficulty breathing or shortness of breath",
+          "Chest pain or pressure",
+          "Severe or persistent vomiting",
+          "High fever (>103\u00b0F/39.4\u00b0C)",
+          "Signs of severe dehydration",
+          "Sudden severe headache",
+          "Confusion or altered mental state"
+        ]
+      },
+      "confidence_interpretation": {
+        "level": "Moderate",
+        "interpretation": "The AI model has moderate confidence. Consider differential diagnoses.",
+        "recommendation": "Medical evaluation recommended to confirm diagnosis."
+      },
+      "next_steps": [
+        "Follow medication instructions carefully if prescribed",
+        "Keep a symptom diary to track progress",
+        "Schedule follow-up appointment as recommended",
+        "Seek immediate care if emergency symptoms develop"
+      ],
+      "ai_learning": {
+        "data_collected": true,
+        "session_id": null,
+        "feedback_encouraged": "Healthcare providers can provide feedback to improve AI accuracy"
+      }
+    },
+    "user_feedback": null,
+    "confidence": 0,
+    "session_id": "session_20250818_102414"
+  },
+  {
+    "timestamp": "2025-08-18T10:24:14.820933",
+    "symptoms": "fever, cough, headache",
+    "patient_data": {
+      "age": 35,
+      "gender": "Male",
+      "patient_id": "test_001",
+      "name": "Test Patient"
+    },
+    "ai_prediction": {
+      "timestamp": "2025-08-18T10:24:14.820902",
+      "analysis": {
+        "primary_diagnosis": {
+          "condition": "Migraine",
+          "confidence": 0.73,
+          "explanation": "Based on the presented symptoms, the AI model predicts Migraine with 73.0% confidence."
+        },
+        "differential_diagnoses": [
+          {
+            "condition": "Tonsillitis",
+            "probability": 0.11,
+            "explanation": "Alternative consideration with 11.0% probability"
+          }
+        ],
+        "input_symptoms": {
+          "fever": 1,
+          "cough": 1,
+          "fatigue": 0,
+          "shortness_of_breath": 0,
+          "headache": 1,
+          "sore_throat": 0
+        },
+        "symptom_analysis": {
+          "present_symptoms": [
+            "fever",
+            "cough",
+            "headache"
+          ],
+          "symptom_count": 3
+        }
+      },
+      "recommendations": {
+        "medications": [
+          {
+            "name": "Sumatriptan",
+            "dosage": "50-100mg at onset",
+            "duration": "single dose",
+            "type": "triptan"
+          },
+          {
+            "name": "Acetaminophen + Caffeine",
+            "dosage": "2 tablets at onset",
+            "duration": "single dose",
+            "type": "combination analgesic"
+          },
+          {
+            "name": "Topiramate",
+            "dosage": "25-100mg daily",
+            "duration": "preventive",
+            "type": "anticonvulsant"
+          }
+        ],
+        "treatments": [
+          "Rest in quiet, dark room immediately",
+          "Apply cold compress to forehead",
+          "Stay hydrated but avoid triggers",
+          "Practice stress management",
+          "Maintain consistent sleep schedule"
+        ],
+        "warnings": [
+          "Track triggers and patterns",
+          "See neurologist for frequent migraines",
+          "Watch for changes in migraine pattern",
+          "Avoid overuse of pain medications"
+        ],
+        "lifestyle_advice": [
+          "Follow up with your healthcare provider",
+          "Monitor symptoms and seek care if worsening",
+          "Maintain good hygiene practices",
+          "Stay hydrated and get adequate rest"
+        ]
+      },
+      "patient_insights": {
+        "personalization_applied": true,
+        "history_analyzed": false,
+        "pattern_analysis": null,
+        "risk_factors": [
+          "Fever with headache needs medical evaluation"
+        ]
+      },
+      "medical_disclaimer": {
+        "important_notice": [
+          "\ud83d\udea8 MEDICAL DISCLAIMER: This AI system is a decision-support tool only and NOT a replacement for professional medical advice.",
+          "\ud83d\udc68\u200d\u2695\ufe0f FINAL DECISIONS must be confirmed by a licensed healthcare provider.",
+          "\ud83c\udfe5 For emergency symptoms, seek immediate medical attention or call emergency services.",
+          "\ud83d\udc8a Do not start, stop, or change medications without consulting your doctor.",
+          "\ud83d\udccb This recommendation is based on symptoms only and may not account for all medical factors.",
+          "\u2696\ufe0f Healthcare providers should use their clinical judgment and consider complete patient history."
+        ],
+        "emergency_signs": [
+          "Difficulty breathing or shortness of breath",
+          "Chest pain or pressure",
+          "Severe or persistent vomiting",
+          "High fever (>103\u00b0F/39.4\u00b0C)",
+          "Signs of severe dehydration",
+          "Sudden severe headache",
+          "Confusion or altered mental state"
+        ]
+      },
+      "confidence_interpretation": {
+        "level": "Moderate",
+        "interpretation": "The AI model has moderate confidence. Consider differential diagnoses.",
+        "recommendation": "Medical evaluation recommended to confirm diagnosis."
+      },
+      "next_steps": [
+        "Follow medication instructions carefully if prescribed",
+        "Keep a symptom diary to track progress",
+        "Schedule follow-up appointment as recommended",
+        "Seek immediate care if emergency symptoms develop"
+      ],
+      "ai_learning": {
+        "data_collected": true,
+        "session_id": null,
+        "feedback_encouraged": "Healthcare providers can provide feedback to improve AI accuracy"
+      }
+    },
+    "user_feedback": null,
+    "confidence": 0,
+    "session_id": "session_20250818_102414"
+  },
+  {
+    "timestamp": "2025-08-18T10:27:36.466282",
+    "symptoms": "fever, cough, headache",
+    "patient_data": {
+      "age": 35,
+      "gender": "Male"
+    },
+    "ai_prediction": {
+      "timestamp": "2025-08-18T10:27:36.466193",
+      "analysis": {
+        "primary_diagnosis": {
+          "condition": "Migraine",
+          "confidence": 0.73,
+          "explanation": "Based on the presented symptoms, the AI model predicts Migraine with 73.0% confidence."
+        },
+        "differential_diagnoses": [
+          {
+            "condition": "Tonsillitis",
+            "probability": 0.11,
+            "explanation": "Alternative consideration with 11.0% probability"
+          }
+        ],
+        "input_symptoms": {
+          "fever": 1,
+          "cough": 1,
+          "fatigue": 0,
+          "shortness_of_breath": 0,
+          "headache": 1,
+          "sore_throat": 0
+        },
+        "symptom_analysis": {
+          "present_symptoms": [
+            "fever",
+            "cough",
+            "headache"
+          ],
+          "symptom_count": 3
+        }
+      },
+      "recommendations": {
+        "medications": [
+          {
+            "name": "Sumatriptan",
+            "dosage": "50-100mg at onset",
+            "duration": "single dose",
+            "type": "triptan"
+          },
+          {
+            "name": "Acetaminophen + Caffeine",
+            "dosage": "2 tablets at onset",
+            "duration": "single dose",
+            "type": "combination analgesic"
+          },
+          {
+            "name": "Topiramate",
+            "dosage": "25-100mg daily",
+            "duration": "preventive",
+            "type": "anticonvulsant"
+          }
+        ],
+        "treatments": [
+          "Rest in quiet, dark room immediately",
+          "Apply cold compress to forehead",
+          "Stay hydrated but avoid triggers",
+          "Practice stress management",
+          "Maintain consistent sleep schedule"
+        ],
+        "warnings": [
+          "Track triggers and patterns",
+          "See neurologist for frequent migraines",
+          "Watch for changes in migraine pattern",
+          "Avoid overuse of pain medications"
+        ],
+        "lifestyle_advice": [
+          "Follow up with your healthcare provider",
+          "Monitor symptoms and seek care if worsening",
+          "Maintain good hygiene practices",
+          "Stay hydrated and get adequate rest"
+        ]
+      },
+      "patient_insights": {
+        "personalization_applied": true,
+        "history_analyzed": false,
+        "pattern_analysis": null,
+        "risk_factors": [
+          "Fever with headache needs medical evaluation"
+        ]
+      },
+      "medical_disclaimer": {
+        "important_notice": [
+          "\ud83d\udea8 MEDICAL DISCLAIMER: This AI system is a decision-support tool only and NOT a replacement for professional medical advice.",
+          "\ud83d\udc68\u200d\u2695\ufe0f FINAL DECISIONS must be confirmed by a licensed healthcare provider.",
+          "\ud83c\udfe5 For emergency symptoms, seek immediate medical attention or call emergency services.",
+          "\ud83d\udc8a Do not start, stop, or change medications without consulting your doctor.",
+          "\ud83d\udccb This recommendation is based on symptoms only and may not account for all medical factors.",
+          "\u2696\ufe0f Healthcare providers should use their clinical judgment and consider complete patient history."
+        ],
+        "emergency_signs": [
+          "Difficulty breathing or shortness of breath",
+          "Chest pain or pressure",
+          "Severe or persistent vomiting",
+          "High fever (>103\u00b0F/39.4\u00b0C)",
+          "Signs of severe dehydration",
+          "Sudden severe headache",
+          "Confusion or altered mental state"
+        ]
+      },
+      "confidence_interpretation": {
+        "level": "Moderate",
+        "interpretation": "The AI model has moderate confidence. Consider differential diagnoses.",
+        "recommendation": "Medical evaluation recommended to confirm diagnosis."
+      },
+      "next_steps": [
+        "Follow medication instructions carefully if prescribed",
+        "Keep a symptom diary to track progress",
+        "Schedule follow-up appointment as recommended",
+        "Seek immediate care if emergency symptoms develop"
+      ],
+      "ai_learning": {
+        "data_collected": true,
+        "session_id": null,
+        "feedback_encouraged": "Healthcare providers can provide feedback to improve AI accuracy"
+      }
+    },
+    "user_feedback": null,
+    "confidence": 0,
+    "session_id": "session_20250818_102736"
+  },
+  {
+    "timestamp": "2025-08-18T10:27:44.666952",
+    "symptoms": "fever, cough, headache",
+    "patient_data": {
+      "age": 35,
+      "gender": "Male"
+    },
+    "ai_prediction": {
+      "timestamp": "2025-08-18T10:27:44.666904",
+      "analysis": {
+        "primary_diagnosis": {
+          "condition": "Migraine",
+          "confidence": 0.73,
+          "explanation": "Based on the presented symptoms, the AI model predicts Migraine with 73.0% confidence."
+        },
+        "differential_diagnoses": [
+          {
+            "condition": "Tonsillitis",
+            "probability": 0.11,
+            "explanation": "Alternative consideration with 11.0% probability"
+          }
+        ],
+        "input_symptoms": {
+          "fever": 1,
+          "cough": 1,
+          "fatigue": 0,
+          "shortness_of_breath": 0,
+          "headache": 1,
+          "sore_throat": 0
+        },
+        "symptom_analysis": {
+          "present_symptoms": [
+            "fever",
+            "cough",
+            "headache"
+          ],
+          "symptom_count": 3
+        }
+      },
+      "recommendations": {
+        "medications": [
+          {
+            "name": "Sumatriptan",
+            "dosage": "50-100mg at onset",
+            "duration": "single dose",
+            "type": "triptan"
+          },
+          {
+            "name": "Acetaminophen + Caffeine",
+            "dosage": "2 tablets at onset",
+            "duration": "single dose",
+            "type": "combination analgesic"
+          },
+          {
+            "name": "Topiramate",
+            "dosage": "25-100mg daily",
+            "duration": "preventive",
+            "type": "anticonvulsant"
+          }
+        ],
+        "treatments": [
+          "Rest in quiet, dark room immediately",
+          "Apply cold compress to forehead",
+          "Stay hydrated but avoid triggers",
+          "Practice stress management",
+          "Maintain consistent sleep schedule"
+        ],
+        "warnings": [
+          "Track triggers and patterns",
+          "See neurologist for frequent migraines",
+          "Watch for changes in migraine pattern",
+          "Avoid overuse of pain medications"
+        ],
+        "lifestyle_advice": [
+          "Follow up with your healthcare provider",
+          "Monitor symptoms and seek care if worsening",
+          "Maintain good hygiene practices",
+          "Stay hydrated and get adequate rest"
+        ]
+      },
+      "patient_insights": {
+        "personalization_applied": true,
+        "history_analyzed": false,
+        "pattern_analysis": null,
+        "risk_factors": [
+          "Fever with headache needs medical evaluation"
+        ]
+      },
+      "medical_disclaimer": {
+        "important_notice": [
+          "\ud83d\udea8 MEDICAL DISCLAIMER: This AI system is a decision-support tool only and NOT a replacement for professional medical advice.",
+          "\ud83d\udc68\u200d\u2695\ufe0f FINAL DECISIONS must be confirmed by a licensed healthcare provider.",
+          "\ud83c\udfe5 For emergency symptoms, seek immediate medical attention or call emergency services.",
+          "\ud83d\udc8a Do not start, stop, or change medications without consulting your doctor.",
+          "\ud83d\udccb This recommendation is based on symptoms only and may not account for all medical factors.",
+          "\u2696\ufe0f Healthcare providers should use their clinical judgment and consider complete patient history."
+        ],
+        "emergency_signs": [
+          "Difficulty breathing or shortness of breath",
+          "Chest pain or pressure",
+          "Severe or persistent vomiting",
+          "High fever (>103\u00b0F/39.4\u00b0C)",
+          "Signs of severe dehydration",
+          "Sudden severe headache",
+          "Confusion or altered mental state"
+        ]
+      },
+      "confidence_interpretation": {
+        "level": "Moderate",
+        "interpretation": "The AI model has moderate confidence. Consider differential diagnoses.",
+        "recommendation": "Medical evaluation recommended to confirm diagnosis."
+      },
+      "next_steps": [
+        "Follow medication instructions carefully if prescribed",
+        "Keep a symptom diary to track progress",
+        "Schedule follow-up appointment as recommended",
+        "Seek immediate care if emergency symptoms develop"
+      ],
+      "ai_learning": {
+        "data_collected": true,
+        "session_id": null,
+        "feedback_encouraged": "Healthcare providers can provide feedback to improve AI accuracy"
+      }
+    },
+    "user_feedback": null,
+    "confidence": 0,
+    "session_id": "session_20250818_102744"
+  },
+  {
+    "timestamp": "2025-08-18T10:28:28.060692",
+    "symptoms": "fever, cough, headache",
+    "patient_data": {
+      "age": 35,
+      "gender": "Male",
+      "patient_id": "temp_1723944729123",
+      "name": "Patient"
+    },
+    "ai_prediction": {
+      "timestamp": "2025-08-18T10:28:28.060664",
+      "analysis": {
+        "primary_diagnosis": {
+          "condition": "Migraine",
+          "confidence": 0.73,
+          "explanation": "Based on the presented symptoms, the AI model predicts Migraine with 73.0% confidence."
+        },
+        "differential_diagnoses": [
+          {
+            "condition": "Tonsillitis",
+            "probability": 0.11,
+            "explanation": "Alternative consideration with 11.0% probability"
+          }
+        ],
+        "input_symptoms": {
+          "fever": 1,
+          "cough": 1,
+          "fatigue": 0,
+          "shortness_of_breath": 0,
+          "headache": 1,
+          "sore_throat": 0
+        },
+        "symptom_analysis": {
+          "present_symptoms": [
+            "fever",
+            "cough",
+            "headache"
+          ],
+          "symptom_count": 3
+        }
+      },
+      "recommendations": {
+        "medications": [
+          {
+            "name": "Sumatriptan",
+            "dosage": "50-100mg at onset",
+            "duration": "single dose",
+            "type": "triptan"
+          },
+          {
+            "name": "Acetaminophen + Caffeine",
+            "dosage": "2 tablets at onset",
+            "duration": "single dose",
+            "type": "combination analgesic"
+          },
+          {
+            "name": "Topiramate",
+            "dosage": "25-100mg daily",
+            "duration": "preventive",
+            "type": "anticonvulsant"
+          }
+        ],
+        "treatments": [
+          "Rest in quiet, dark room immediately",
+          "Apply cold compress to forehead",
+          "Stay hydrated but avoid triggers",
+          "Practice stress management",
+          "Maintain consistent sleep schedule"
+        ],
+        "warnings": [
+          "Track triggers and patterns",
+          "See neurologist for frequent migraines",
+          "Watch for changes in migraine pattern",
+          "Avoid overuse of pain medications"
+        ],
+        "lifestyle_advice": [
+          "Follow up with your healthcare provider",
+          "Monitor symptoms and seek care if worsening",
+          "Maintain good hygiene practices",
+          "Stay hydrated and get adequate rest"
+        ]
+      },
+      "patient_insights": {
+        "personalization_applied": true,
+        "history_analyzed": false,
+        "pattern_analysis": null,
+        "risk_factors": [
+          "Fever with headache needs medical evaluation"
+        ]
+      },
+      "medical_disclaimer": {
+        "important_notice": [
+          "\ud83d\udea8 MEDICAL DISCLAIMER: This AI system is a decision-support tool only and NOT a replacement for professional medical advice.",
+          "\ud83d\udc68\u200d\u2695\ufe0f FINAL DECISIONS must be confirmed by a licensed healthcare provider.",
+          "\ud83c\udfe5 For emergency symptoms, seek immediate medical attention or call emergency services.",
+          "\ud83d\udc8a Do not start, stop, or change medications without consulting your doctor.",
+          "\ud83d\udccb This recommendation is based on symptoms only and may not account for all medical factors.",
+          "\u2696\ufe0f Healthcare providers should use their clinical judgment and consider complete patient history."
+        ],
+        "emergency_signs": [
+          "Difficulty breathing or shortness of breath",
+          "Chest pain or pressure",
+          "Severe or persistent vomiting",
+          "High fever (>103\u00b0F/39.4\u00b0C)",
+          "Signs of severe dehydration",
+          "Sudden severe headache",
+          "Confusion or altered mental state"
+        ]
+      },
+      "confidence_interpretation": {
+        "level": "Moderate",
+        "interpretation": "The AI model has moderate confidence. Consider differential diagnoses.",
+        "recommendation": "Medical evaluation recommended to confirm diagnosis."
+      },
+      "next_steps": [
+        "Follow medication instructions carefully if prescribed",
+        "Keep a symptom diary to track progress",
+        "Schedule follow-up appointment as recommended",
+        "Seek immediate care if emergency symptoms develop"
+      ],
+      "ai_learning": {
+        "data_collected": true,
+        "session_id": null,
+        "feedback_encouraged": "Healthcare providers can provide feedback to improve AI accuracy"
+      }
+    },
+    "user_feedback": null,
+    "confidence": 0,
+    "session_id": "session_20250818_102828"
+  },
+  {
+    "timestamp": "2025-08-18T10:30:07.507109",
+    "symptoms": "fever, cough, headache",
+    "patient_data": {
+      "age": 35,
+      "gender": "Male",
+      "patient_id": "temp_1723944729123",
+      "name": "Patient"
+    },
+    "ai_prediction": {
+      "timestamp": "2025-08-18T10:30:07.507076",
+      "analysis": {
+        "primary_diagnosis": {
+          "condition": "Migraine",
+          "confidence": 0.73,
+          "explanation": "Based on the presented symptoms, the AI model predicts Migraine with 73.0% confidence."
+        },
+        "differential_diagnoses": [
+          {
+            "condition": "Tonsillitis",
+            "probability": 0.11,
+            "explanation": "Alternative consideration with 11.0% probability"
+          }
+        ],
+        "input_symptoms": {
+          "fever": 1,
+          "cough": 1,
+          "fatigue": 0,
+          "shortness_of_breath": 0,
+          "headache": 1,
+          "sore_throat": 0
+        },
+        "symptom_analysis": {
+          "present_symptoms": [
+            "fever",
+            "cough",
+            "headache"
+          ],
+          "symptom_count": 3
+        }
+      },
+      "recommendations": {
+        "medications": [
+          {
+            "name": "Sumatriptan",
+            "dosage": "50-100mg at onset",
+            "duration": "single dose",
+            "type": "triptan"
+          },
+          {
+            "name": "Acetaminophen + Caffeine",
+            "dosage": "2 tablets at onset",
+            "duration": "single dose",
+            "type": "combination analgesic"
+          },
+          {
+            "name": "Topiramate",
+            "dosage": "25-100mg daily",
+            "duration": "preventive",
+            "type": "anticonvulsant"
+          }
+        ],
+        "treatments": [
+          "Rest in quiet, dark room immediately",
+          "Apply cold compress to forehead",
+          "Stay hydrated but avoid triggers",
+          "Practice stress management",
+          "Maintain consistent sleep schedule"
+        ],
+        "warnings": [
+          "Track triggers and patterns",
+          "See neurologist for frequent migraines",
+          "Watch for changes in migraine pattern",
+          "Avoid overuse of pain medications"
+        ],
+        "lifestyle_advice": [
+          "Follow up with your healthcare provider",
+          "Monitor symptoms and seek care if worsening",
+          "Maintain good hygiene practices",
+          "Stay hydrated and get adequate rest"
+        ]
+      },
+      "patient_insights": {
+        "personalization_applied": true,
+        "history_analyzed": false,
+        "pattern_analysis": null,
+        "risk_factors": [
+          "Fever with headache needs medical evaluation"
+        ]
+      },
+      "medical_disclaimer": {
+        "important_notice": [
+          "\ud83d\udea8 MEDICAL DISCLAIMER: This AI system is a decision-support tool only and NOT a replacement for professional medical advice.",
+          "\ud83d\udc68\u200d\u2695\ufe0f FINAL DECISIONS must be confirmed by a licensed healthcare provider.",
+          "\ud83c\udfe5 For emergency symptoms, seek immediate medical attention or call emergency services.",
+          "\ud83d\udc8a Do not start, stop, or change medications without consulting your doctor.",
+          "\ud83d\udccb This recommendation is based on symptoms only and may not account for all medical factors.",
+          "\u2696\ufe0f Healthcare providers should use their clinical judgment and consider complete patient history."
+        ],
+        "emergency_signs": [
+          "Difficulty breathing or shortness of breath",
+          "Chest pain or pressure",
+          "Severe or persistent vomiting",
+          "High fever (>103\u00b0F/39.4\u00b0C)",
+          "Signs of severe dehydration",
+          "Sudden severe headache",
+          "Confusion or altered mental state"
+        ]
+      },
+      "confidence_interpretation": {
+        "level": "Moderate",
+        "interpretation": "The AI model has moderate confidence. Consider differential diagnoses.",
+        "recommendation": "Medical evaluation recommended to confirm diagnosis."
+      },
+      "next_steps": [
+        "Follow medication instructions carefully if prescribed",
+        "Keep a symptom diary to track progress",
+        "Schedule follow-up appointment as recommended",
+        "Seek immediate care if emergency symptoms develop"
+      ],
+      "ai_learning": {
+        "data_collected": true,
+        "session_id": null,
+        "feedback_encouraged": "Healthcare providers can provide feedback to improve AI accuracy"
+      }
+    },
+    "user_feedback": null,
+    "confidence": 0,
+    "session_id": "session_20250818_103007"
+  },
+  {
+    "timestamp": "2025-08-18T10:33:07.154670",
+    "symptoms": "fever, cough, headache",
+    "patient_data": {
+      "age": 35,
+      "gender": "Male",
+      "patient_id": "temp_1723944729123",
+      "name": "Patient"
+    },
+    "ai_prediction": {
+      "timestamp": "2025-08-18T10:33:07.154636",
+      "analysis": {
+        "primary_diagnosis": {
+          "condition": "Migraine",
+          "confidence": 0.73,
+          "explanation": "Based on the presented symptoms, the AI model predicts Migraine with 73.0% confidence."
+        },
+        "differential_diagnoses": [
+          {
+            "condition": "Tonsillitis",
+            "probability": 0.11,
+            "explanation": "Alternative consideration with 11.0% probability"
+          }
+        ],
+        "input_symptoms": {
+          "fever": 1,
+          "cough": 1,
+          "fatigue": 0,
+          "shortness_of_breath": 0,
+          "headache": 1,
+          "sore_throat": 0
+        },
+        "symptom_analysis": {
+          "present_symptoms": [
+            "fever",
+            "cough",
+            "headache"
+          ],
+          "symptom_count": 3
+        }
+      },
+      "recommendations": {
+        "medications": [
+          {
+            "name": "Sumatriptan",
+            "dosage": "50-100mg at onset",
+            "duration": "single dose",
+            "type": "triptan"
+          },
+          {
+            "name": "Acetaminophen + Caffeine",
+            "dosage": "2 tablets at onset",
+            "duration": "single dose",
+            "type": "combination analgesic"
+          },
+          {
+            "name": "Topiramate",
+            "dosage": "25-100mg daily",
+            "duration": "preventive",
+            "type": "anticonvulsant"
+          }
+        ],
+        "treatments": [
+          "Rest in quiet, dark room immediately",
+          "Apply cold compress to forehead",
+          "Stay hydrated but avoid triggers",
+          "Practice stress management",
+          "Maintain consistent sleep schedule"
+        ],
+        "warnings": [
+          "Track triggers and patterns",
+          "See neurologist for frequent migraines",
+          "Watch for changes in migraine pattern",
+          "Avoid overuse of pain medications"
+        ],
+        "lifestyle_advice": [
+          "Follow up with your healthcare provider",
+          "Monitor symptoms and seek care if worsening",
+          "Maintain good hygiene practices",
+          "Stay hydrated and get adequate rest"
+        ]
+      },
+      "patient_insights": {
+        "personalization_applied": true,
+        "history_analyzed": false,
+        "pattern_analysis": null,
+        "risk_factors": [
+          "Fever with headache needs medical evaluation"
+        ]
+      },
+      "medical_disclaimer": {
+        "important_notice": [
+          "\ud83d\udea8 MEDICAL DISCLAIMER: This AI system is a decision-support tool only and NOT a replacement for professional medical advice.",
+          "\ud83d\udc68\u200d\u2695\ufe0f FINAL DECISIONS must be confirmed by a licensed healthcare provider.",
+          "\ud83c\udfe5 For emergency symptoms, seek immediate medical attention or call emergency services.",
+          "\ud83d\udc8a Do not start, stop, or change medications without consulting your doctor.",
+          "\ud83d\udccb This recommendation is based on symptoms only and may not account for all medical factors.",
+          "\u2696\ufe0f Healthcare providers should use their clinical judgment and consider complete patient history."
+        ],
+        "emergency_signs": [
+          "Difficulty breathing or shortness of breath",
+          "Chest pain or pressure",
+          "Severe or persistent vomiting",
+          "High fever (>103\u00b0F/39.4\u00b0C)",
+          "Signs of severe dehydration",
+          "Sudden severe headache",
+          "Confusion or altered mental state"
+        ]
+      },
+      "confidence_interpretation": {
+        "level": "Moderate",
+        "interpretation": "The AI model has moderate confidence. Consider differential diagnoses.",
+        "recommendation": "Medical evaluation recommended to confirm diagnosis."
+      },
+      "next_steps": [
+        "Follow medication instructions carefully if prescribed",
+        "Keep a symptom diary to track progress",
+        "Schedule follow-up appointment as recommended",
+        "Seek immediate care if emergency symptoms develop"
+      ],
+      "ai_learning": {
+        "data_collected": true,
+        "session_id": null,
+        "feedback_encouraged": "Healthcare providers can provide feedback to improve AI accuracy"
+      }
+    },
+    "user_feedback": null,
+    "confidence": 0,
+    "session_id": "session_20250818_103307"
+  },
+  {
+    "timestamp": "2025-08-18T10:38:03.947212",
+    "symptoms": "fever, cough, headache",
+    "patient_data": {
+      "age": 35,
+      "gender": "Male",
+      "patient_id": "temp_1723944729123",
+      "name": "Patient"
+    },
+    "ai_prediction": {
+      "timestamp": "2025-08-18T10:38:03.947168",
+      "analysis": {
+        "primary_diagnosis": {
+          "condition": "Migraine",
+          "confidence": 0.73,
+          "explanation": "Based on the presented symptoms, the AI model predicts Migraine with 73.0% confidence."
+        },
+        "differential_diagnoses": [
+          {
+            "condition": "Tonsillitis",
+            "probability": 0.11,
+            "explanation": "Alternative consideration with 11.0% probability"
+          }
+        ],
+        "input_symptoms": {
+          "fever": 1,
+          "cough": 1,
+          "fatigue": 0,
+          "shortness_of_breath": 0,
+          "headache": 1,
+          "sore_throat": 0
+        },
+        "symptom_analysis": {
+          "present_symptoms": [
+            "fever",
+            "cough",
+            "headache"
+          ],
+          "symptom_count": 3
+        }
+      },
+      "recommendations": {
+        "medications": [
+          {
+            "name": "Sumatriptan",
+            "dosage": "50-100mg at onset",
+            "duration": "single dose",
+            "type": "triptan"
+          },
+          {
+            "name": "Acetaminophen + Caffeine",
+            "dosage": "2 tablets at onset",
+            "duration": "single dose",
+            "type": "combination analgesic"
+          },
+          {
+            "name": "Topiramate",
+            "dosage": "25-100mg daily",
+            "duration": "preventive",
+            "type": "anticonvulsant"
+          }
+        ],
+        "treatments": [
+          "Rest in quiet, dark room immediately",
+          "Apply cold compress to forehead",
+          "Stay hydrated but avoid triggers",
+          "Practice stress management",
+          "Maintain consistent sleep schedule"
+        ],
+        "warnings": [
+          "Track triggers and patterns",
+          "See neurologist for frequent migraines",
+          "Watch for changes in migraine pattern",
+          "Avoid overuse of pain medications"
+        ],
+        "lifestyle_advice": [
+          "Follow up with your healthcare provider",
+          "Monitor symptoms and seek care if worsening",
+          "Maintain good hygiene practices",
+          "Stay hydrated and get adequate rest"
+        ]
+      },
+      "patient_insights": {
+        "personalization_applied": true,
+        "history_analyzed": false,
+        "pattern_analysis": null,
+        "risk_factors": [
+          "Fever with headache needs medical evaluation"
+        ]
+      },
+      "medical_disclaimer": {
+        "important_notice": [
+          "\ud83d\udea8 MEDICAL DISCLAIMER: This AI system is a decision-support tool only and NOT a replacement for professional medical advice.",
+          "\ud83d\udc68\u200d\u2695\ufe0f FINAL DECISIONS must be confirmed by a licensed healthcare provider.",
+          "\ud83c\udfe5 For emergency symptoms, seek immediate medical attention or call emergency services.",
+          "\ud83d\udc8a Do not start, stop, or change medications without consulting your doctor.",
+          "\ud83d\udccb This recommendation is based on symptoms only and may not account for all medical factors.",
+          "\u2696\ufe0f Healthcare providers should use their clinical judgment and consider complete patient history."
+        ],
+        "emergency_signs": [
+          "Difficulty breathing or shortness of breath",
+          "Chest pain or pressure",
+          "Severe or persistent vomiting",
+          "High fever (>103\u00b0F/39.4\u00b0C)",
+          "Signs of severe dehydration",
+          "Sudden severe headache",
+          "Confusion or altered mental state"
+        ]
+      },
+      "confidence_interpretation": {
+        "level": "Moderate",
+        "interpretation": "The AI model has moderate confidence. Consider differential diagnoses.",
+        "recommendation": "Medical evaluation recommended to confirm diagnosis."
+      },
+      "next_steps": [
+        "Follow medication instructions carefully if prescribed",
+        "Keep a symptom diary to track progress",
+        "Schedule follow-up appointment as recommended",
+        "Seek immediate care if emergency symptoms develop"
+      ],
+      "ai_learning": {
+        "data_collected": true,
+        "session_id": null,
+        "feedback_encouraged": "Healthcare providers can provide feedback to improve AI accuracy"
+      }
+    },
+    "user_feedback": null,
+    "confidence": 0,
+    "session_id": "session_20250818_103803"
+  },
+  {
+    "timestamp": "2025-08-18T10:46:22.436459",
+    "symptoms": "fever, cough, headache",
+    "patient_data": {
+      "age": 35,
+      "gender": "Male",
+      "patient_id": "temp_1723944729123",
+      "name": "Patient"
+    },
+    "ai_prediction": {
+      "timestamp": "2025-08-18T10:46:22.436416",
+      "analysis": {
+        "primary_diagnosis": {
+          "condition": "Migraine",
+          "confidence": 0.73,
+          "explanation": "Based on the presented symptoms, the AI model predicts Migraine with 73.0% confidence."
+        },
+        "differential_diagnoses": [
+          {
+            "condition": "Tonsillitis",
+            "probability": 0.11,
+            "explanation": "Alternative consideration with 11.0% probability"
+          }
+        ],
+        "input_symptoms": {
+          "fever": 1,
+          "cough": 1,
+          "fatigue": 0,
+          "shortness_of_breath": 0,
+          "headache": 1,
+          "sore_throat": 0
+        },
+        "symptom_analysis": {
+          "present_symptoms": [
+            "fever",
+            "cough",
+            "headache"
+          ],
+          "symptom_count": 3
+        }
+      },
+      "recommendations": {
+        "medications": [
+          {
+            "name": "Sumatriptan",
+            "dosage": "50-100mg at onset",
+            "duration": "single dose",
+            "type": "triptan"
+          },
+          {
+            "name": "Acetaminophen + Caffeine",
+            "dosage": "2 tablets at onset",
+            "duration": "single dose",
+            "type": "combination analgesic"
+          },
+          {
+            "name": "Topiramate",
+            "dosage": "25-100mg daily",
+            "duration": "preventive",
+            "type": "anticonvulsant"
+          }
+        ],
+        "treatments": [
+          "Rest in quiet, dark room immediately",
+          "Apply cold compress to forehead",
+          "Stay hydrated but avoid triggers",
+          "Practice stress management",
+          "Maintain consistent sleep schedule"
+        ],
+        "warnings": [
+          "Track triggers and patterns",
+          "See neurologist for frequent migraines",
+          "Watch for changes in migraine pattern",
+          "Avoid overuse of pain medications"
+        ],
+        "lifestyle_advice": [
+          "Follow up with your healthcare provider",
+          "Monitor symptoms and seek care if worsening",
+          "Maintain good hygiene practices",
+          "Stay hydrated and get adequate rest"
+        ]
+      },
+      "patient_insights": {
+        "personalization_applied": true,
+        "history_analyzed": false,
+        "pattern_analysis": null,
+        "risk_factors": [
+          "Fever with headache needs medical evaluation"
+        ]
+      },
+      "medical_disclaimer": {
+        "important_notice": [
+          "\ud83d\udea8 MEDICAL DISCLAIMER: This AI system is a decision-support tool only and NOT a replacement for professional medical advice.",
+          "\ud83d\udc68\u200d\u2695\ufe0f FINAL DECISIONS must be confirmed by a licensed healthcare provider.",
+          "\ud83c\udfe5 For emergency symptoms, seek immediate medical attention or call emergency services.",
+          "\ud83d\udc8a Do not start, stop, or change medications without consulting your doctor.",
+          "\ud83d\udccb This recommendation is based on symptoms only and may not account for all medical factors.",
+          "\u2696\ufe0f Healthcare providers should use their clinical judgment and consider complete patient history."
+        ],
+        "emergency_signs": [
+          "Difficulty breathing or shortness of breath",
+          "Chest pain or pressure",
+          "Severe or persistent vomiting",
+          "High fever (>103\u00b0F/39.4\u00b0C)",
+          "Signs of severe dehydration",
+          "Sudden severe headache",
+          "Confusion or altered mental state"
+        ]
+      },
+      "confidence_interpretation": {
+        "level": "Moderate",
+        "interpretation": "The AI model has moderate confidence. Consider differential diagnoses.",
+        "recommendation": "Medical evaluation recommended to confirm diagnosis."
+      },
+      "next_steps": [
+        "Follow medication instructions carefully if prescribed",
+        "Keep a symptom diary to track progress",
+        "Schedule follow-up appointment as recommended",
+        "Seek immediate care if emergency symptoms develop"
+      ],
+      "ai_learning": {
+        "data_collected": true,
+        "session_id": null,
+        "feedback_encouraged": "Healthcare providers can provide feedback to improve AI accuracy"
+      }
+    },
+    "user_feedback": null,
+    "confidence": 0,
+    "session_id": "session_20250818_104622"
+  },
+  {
+    "timestamp": "2025-08-18T10:51:55.840866",
+    "symptoms": "cough, sore throat, fatigue",
+    "patient_data": {
+      "age": 35,
+      "gender": "Male",
+      "patient_id": "temp_1755485515470",
+      "name": "Patient"
+    },
+    "ai_prediction": {
+      "timestamp": "2025-08-18T10:51:55.840835",
+      "analysis": {
+        "primary_diagnosis": {
+          "condition": "Bronchitis",
+          "confidence": 0.7648333333333334,
+          "explanation": "Based on the presented symptoms, the AI model predicts Bronchitis with 76.5% confidence."
+        },
+        "differential_diagnoses": [
+          {
+            "condition": "Flu",
+            "probability": 0.12,
+            "explanation": "Alternative consideration with 12.0% probability"
+          },
+          {
+            "condition": "Common Cold",
+            "probability": 0.10516666666666666,
+            "explanation": "Alternative consideration with 10.5% probability"
+          }
+        ],
+        "input_symptoms": {
+          "fever": 0,
+          "cough": 1,
+          "fatigue": 1,
+          "shortness_of_breath": 0,
+          "headache": 0,
+          "sore_throat": 1
+        },
+        "symptom_analysis": {
+          "present_symptoms": [
+            "cough",
+            "fatigue",
+            "sore_throat"
+          ],
+          "symptom_count": 3
+        }
+      },
+      "recommendations": {
+        "medications": [
+          {
+            "name": "Guaifenesin",
+            "dosage": "400mg every 4 hours",
+            "duration": "7-10 days",
+            "type": "expectorant"
+          },
+          {
+            "name": "Dextromethorphan",
+            "dosage": "15-30mg every 4 hours",
+            "duration": "as needed",
+            "type": "cough suppressant"
+          },
+          {
+            "name": "Ibuprofen",
+            "dosage": "400mg every 6-8 hours",
+            "duration": "as needed",
+            "type": "anti-inflammatory"
+          }
+        ],
+        "treatments": [
+          "Rest and avoid smoking/irritants",
+          "Use humidifier or steam inhalation",
+          "Drink warm liquids (tea, broth)",
+          "Honey for cough relief",
+          "Avoid cough suppressants if producing mucus"
+        ],
+        "warnings": [
+          "See doctor if cough persists >3 weeks",
+          "Watch for blood in sputum",
+          "Monitor for high fever or difficulty breathing"
+        ],
+        "lifestyle_advice": [
+          "Follow up with your healthcare provider",
+          "Monitor symptoms and seek care if worsening",
+          "Maintain good hygiene practices",
+          "Stay hydrated and get adequate rest"
+        ]
+      },
+      "patient_insights": {
+        "personalization_applied": true,
+        "history_analyzed": false,
+        "pattern_analysis": null,
+        "risk_factors": []
+      },
+      "medical_disclaimer": {
+        "important_notice": [
+          "\ud83d\udea8 MEDICAL DISCLAIMER: This AI system is a decision-support tool only and NOT a replacement for professional medical advice.",
+          "\ud83d\udc68\u200d\u2695\ufe0f FINAL DECISIONS must be confirmed by a licensed healthcare provider.",
+          "\ud83c\udfe5 For emergency symptoms, seek immediate medical attention or call emergency services.",
+          "\ud83d\udc8a Do not start, stop, or change medications without consulting your doctor.",
+          "\ud83d\udccb This recommendation is based on symptoms only and may not account for all medical factors.",
+          "\u2696\ufe0f Healthcare providers should use their clinical judgment and consider complete patient history."
+        ],
+        "emergency_signs": [
+          "Difficulty breathing or shortness of breath",
+          "Chest pain or pressure",
+          "Severe or persistent vomiting",
+          "High fever (>103\u00b0F/39.4\u00b0C)",
+          "Signs of severe dehydration",
+          "Sudden severe headache",
+          "Confusion or altered mental state"
+        ]
+      },
+      "confidence_interpretation": {
+        "level": "Moderate",
+        "interpretation": "The AI model has moderate confidence. Consider differential diagnoses.",
+        "recommendation": "Medical evaluation recommended to confirm diagnosis."
+      },
+      "next_steps": [
+        "Follow medication instructions carefully if prescribed",
+        "Keep a symptom diary to track progress",
+        "Schedule follow-up appointment as recommended",
+        "Seek immediate care if emergency symptoms develop"
+      ],
+      "ai_learning": {
+        "data_collected": true,
+        "session_id": null,
+        "feedback_encouraged": "Healthcare providers can provide feedback to improve AI accuracy"
+      }
+    },
+    "user_feedback": null,
+    "confidence": 0,
+    "session_id": "session_20250818_105155"
+  },
+  {
+    "timestamp": "2025-08-18T11:01:21.380964",
+    "symptoms": "Fever",
+    "patient_data": {},
+    "ai_prediction": {
+      "timestamp": "2025-08-18T11:01:21.380932",
+      "analysis": {
+        "primary_diagnosis": {
+          "condition": "Fever",
+          "confidence": 1.0,
+          "explanation": "Based on the presented symptoms, the AI model predicts Fever with 100.0% confidence."
+        },
+        "differential_diagnoses": [],
+        "input_symptoms": {
+          "fever": 1,
+          "cough": 0,
+          "fatigue": 0,
+          "shortness_of_breath": 0,
+          "headache": 0,
+          "sore_throat": 0
+        },
+        "symptom_analysis": {
+          "present_symptoms": [
+            "fever"
+          ],
+          "symptom_count": 1
+        }
+      },
+      "recommendations": {
+        "medications": [],
+        "treatments": [
+          "Consult with healthcare provider for appropriate treatment"
+        ],
+        "warnings": [
+          "This condition requires professional medical evaluation"
+        ],
+        "lifestyle_advice": [
+          "Follow up with your healthcare provider",
+          "Monitor symptoms and seek care if worsening",
+          "Maintain good hygiene practices",
+          "Stay hydrated and get adequate rest"
+        ]
+      },
+      "patient_insights": {
+        "personalization_applied": false,
+        "history_analyzed": false,
+        "pattern_analysis": null,
+        "risk_factors": null
+      },
+      "medical_disclaimer": {
+        "important_notice": [
+          "\ud83d\udea8 MEDICAL DISCLAIMER: This AI system is a decision-support tool only and NOT a replacement for professional medical advice.",
+          "\ud83d\udc68\u200d\u2695\ufe0f FINAL DECISIONS must be confirmed by a licensed healthcare provider.",
+          "\ud83c\udfe5 For emergency symptoms, seek immediate medical attention or call emergency services.",
+          "\ud83d\udc8a Do not start, stop, or change medications without consulting your doctor.",
+          "\ud83d\udccb This recommendation is based on symptoms only and may not account for all medical factors.",
+          "\u2696\ufe0f Healthcare providers should use their clinical judgment and consider complete patient history."
+        ],
+        "emergency_signs": [
+          "Difficulty breathing or shortness of breath",
+          "Chest pain or pressure",
+          "Severe or persistent vomiting",
+          "High fever (>103\u00b0F/39.4\u00b0C)",
+          "Signs of severe dehydration",
+          "Sudden severe headache",
+          "Confusion or altered mental state"
+        ]
+      },
+      "confidence_interpretation": {
+        "level": "High",
+        "interpretation": "The AI model is highly confident in this diagnosis based on the symptom pattern.",
+        "recommendation": "Proceed with recommended actions but confirm with healthcare provider."
+      },
+      "next_steps": [
+        "Consider more frequent monitoring due to age-related risk factors",
+        "Follow medication instructions carefully if prescribed",
+        "Keep a symptom diary to track progress",
+        "Schedule follow-up appointment as recommended",
+        "Seek immediate care if emergency symptoms develop"
+      ],
+      "ai_learning": {
+        "data_collected": true,
+        "session_id": null,
+        "feedback_encouraged": "Healthcare providers can provide feedback to improve AI accuracy"
+      }
+    },
+    "user_feedback": null,
+    "confidence": 0,
+    "session_id": "session_20250818_110121"
+  },
+  {
+    "timestamp": "2025-08-18T11:01:23.493361",
+    "symptoms": "Cough",
+    "patient_data": {},
+    "ai_prediction": {
+      "timestamp": "2025-08-18T11:01:23.493329",
+      "analysis": {
+        "primary_diagnosis": {
+          "condition": "Cough",
+          "confidence": 0.98,
+          "explanation": "Based on the presented symptoms, the AI model predicts Cough with 98.0% confidence."
+        },
+        "differential_diagnoses": [],
+        "input_symptoms": {
+          "fever": 0,
+          "cough": 1,
+          "fatigue": 0,
+          "shortness_of_breath": 0,
+          "headache": 0,
+          "sore_throat": 0
+        },
+        "symptom_analysis": {
+          "present_symptoms": [
+            "cough"
+          ],
+          "symptom_count": 1
+        }
+      },
+      "recommendations": {
+        "medications": [],
+        "treatments": [
+          "Consult with healthcare provider for appropriate treatment"
+        ],
+        "warnings": [
+          "This condition requires professional medical evaluation"
+        ],
+        "lifestyle_advice": [
+          "Follow up with your healthcare provider",
+          "Monitor symptoms and seek care if worsening",
+          "Maintain good hygiene practices",
+          "Stay hydrated and get adequate rest"
+        ]
+      },
+      "patient_insights": {
+        "personalization_applied": false,
+        "history_analyzed": false,
+        "pattern_analysis": null,
+        "risk_factors": null
+      },
+      "medical_disclaimer": {
+        "important_notice": [
+          "\ud83d\udea8 MEDICAL DISCLAIMER: This AI system is a decision-support tool only and NOT a replacement for professional medical advice.",
+          "\ud83d\udc68\u200d\u2695\ufe0f FINAL DECISIONS must be confirmed by a licensed healthcare provider.",
+          "\ud83c\udfe5 For emergency symptoms, seek immediate medical attention or call emergency services.",
+          "\ud83d\udc8a Do not start, stop, or change medications without consulting your doctor.",
+          "\ud83d\udccb This recommendation is based on symptoms only and may not account for all medical factors.",
+          "\u2696\ufe0f Healthcare providers should use their clinical judgment and consider complete patient history."
+        ],
+        "emergency_signs": [
+          "Difficulty breathing or shortness of breath",
+          "Chest pain or pressure",
+          "Severe or persistent vomiting",
+          "High fever (>103\u00b0F/39.4\u00b0C)",
+          "Signs of severe dehydration",
+          "Sudden severe headache",
+          "Confusion or altered mental state"
+        ]
+      },
+      "confidence_interpretation": {
+        "level": "High",
+        "interpretation": "The AI model is highly confident in this diagnosis based on the symptom pattern.",
+        "recommendation": "Proceed with recommended actions but confirm with healthcare provider."
+      },
+      "next_steps": [
+        "Consider more frequent monitoring due to age-related risk factors",
+        "Follow medication instructions carefully if prescribed",
+        "Keep a symptom diary to track progress",
+        "Schedule follow-up appointment as recommended",
+        "Seek immediate care if emergency symptoms develop"
+      ],
+      "ai_learning": {
+        "data_collected": true,
+        "session_id": null,
+        "feedback_encouraged": "Healthcare providers can provide feedback to improve AI accuracy"
+      }
+    },
+    "user_feedback": null,
+    "confidence": 0,
+    "session_id": "session_20250818_110123"
+  },
+  {
+    "timestamp": "2025-08-18T11:01:25.631364",
+    "symptoms": "Headache",
+    "patient_data": {},
+    "ai_prediction": {
+      "timestamp": "2025-08-18T11:01:25.631324",
+      "analysis": {
+        "primary_diagnosis": {
+          "condition": "Headache",
+          "confidence": 1.0,
+          "explanation": "Based on the presented symptoms, the AI model predicts Headache with 100.0% confidence."
+        },
+        "differential_diagnoses": [],
+        "input_symptoms": {
+          "fever": 0,
+          "cough": 0,
+          "fatigue": 0,
+          "shortness_of_breath": 0,
+          "headache": 1,
+          "sore_throat": 0
+        },
+        "symptom_analysis": {
+          "present_symptoms": [
+            "headache"
+          ],
+          "symptom_count": 1
+        }
+      },
+      "recommendations": {
+        "medications": [
+          {
+            "name": "Acetaminophen",
+            "dosage": "650mg every 6 hours",
+            "duration": "as needed",
+            "type": "analgesic"
+          },
+          {
+            "name": "Ibuprofen",
+            "dosage": "400mg every 6-8 hours",
+            "duration": "as needed",
+            "type": "anti-inflammatory"
+          },
+          {
+            "name": "Aspirin",
+            "dosage": "325-650mg every 4 hours",
+            "duration": "as needed",
+            "type": "analgesic"
+          }
+        ],
+        "treatments": [
+          "Rest in quiet, dark room",
+          "Apply cold or warm compress to head/neck",
+          "Stay hydrated",
+          "Practice relaxation techniques",
+          "Maintain regular sleep schedule"
+        ],
+        "warnings": [
+          "URGENT: Sudden severe headache unlike any before",
+          "Headache with fever, stiff neck, or rash",
+          "Headache with vision changes or weakness",
+          "See doctor for frequent or worsening headaches"
+        ],
+        "lifestyle_advice": [
+          "Follow up with your healthcare provider",
+          "Monitor symptoms and seek care if worsening",
+          "Maintain good hygiene practices",
+          "Stay hydrated and get adequate rest"
+        ]
+      },
+      "patient_insights": {
+        "personalization_applied": false,
+        "history_analyzed": false,
+        "pattern_analysis": null,
+        "risk_factors": null
+      },
+      "medical_disclaimer": {
+        "important_notice": [
+          "\ud83d\udea8 MEDICAL DISCLAIMER: This AI system is a decision-support tool only and NOT a replacement for professional medical advice.",
+          "\ud83d\udc68\u200d\u2695\ufe0f FINAL DECISIONS must be confirmed by a licensed healthcare provider.",
+          "\ud83c\udfe5 For emergency symptoms, seek immediate medical attention or call emergency services.",
+          "\ud83d\udc8a Do not start, stop, or change medications without consulting your doctor.",
+          "\ud83d\udccb This recommendation is based on symptoms only and may not account for all medical factors.",
+          "\u2696\ufe0f Healthcare providers should use their clinical judgment and consider complete patient history."
+        ],
+        "emergency_signs": [
+          "Difficulty breathing or shortness of breath",
+          "Chest pain or pressure",
+          "Severe or persistent vomiting",
+          "High fever (>103\u00b0F/39.4\u00b0C)",
+          "Signs of severe dehydration",
+          "Sudden severe headache",
+          "Confusion or altered mental state"
+        ]
+      },
+      "confidence_interpretation": {
+        "level": "High",
+        "interpretation": "The AI model is highly confident in this diagnosis based on the symptom pattern.",
+        "recommendation": "Proceed with recommended actions but confirm with healthcare provider."
+      },
+      "next_steps": [
+        "Consider more frequent monitoring due to age-related risk factors",
+        "Follow medication instructions carefully if prescribed",
+        "Keep a symptom diary to track progress",
+        "Schedule follow-up appointment as recommended",
+        "Seek immediate care if emergency symptoms develop"
+      ],
+      "ai_learning": {
+        "data_collected": true,
+        "session_id": null,
+        "feedback_encouraged": "Healthcare providers can provide feedback to improve AI accuracy"
+      }
+    },
+    "user_feedback": null,
+    "confidence": 0,
+    "session_id": "session_20250818_110125"
+  },
+  {
+    "timestamp": "2025-08-18T11:01:29.884535",
+    "symptoms": "Sore throat",
+    "patient_data": {},
+    "ai_prediction": {
+      "timestamp": "2025-08-18T11:01:29.884508",
+      "analysis": {
+        "primary_diagnosis": {
+          "condition": "Sore Throat",
+          "confidence": 1.0,
+          "explanation": "Based on the presented symptoms, the AI model predicts Sore Throat with 100.0% confidence."
+        },
+        "differential_diagnoses": [],
+        "input_symptoms": {
+          "fever": 0,
+          "cough": 0,
+          "fatigue": 0,
+          "shortness_of_breath": 0,
+          "headache": 0,
+          "sore_throat": 1
+        },
+        "symptom_analysis": {
+          "present_symptoms": [
+            "sore_throat"
+          ],
+          "symptom_count": 1
+        }
+      },
+      "recommendations": {
+        "medications": [],
+        "treatments": [
+          "Consult with healthcare provider for appropriate treatment"
+        ],
+        "warnings": [
+          "This condition requires professional medical evaluation"
+        ],
+        "lifestyle_advice": [
+          "Follow up with your healthcare provider",
+          "Monitor symptoms and seek care if worsening",
+          "Maintain good hygiene practices",
+          "Stay hydrated and get adequate rest"
+        ]
+      },
+      "patient_insights": {
+        "personalization_applied": false,
+        "history_analyzed": false,
+        "pattern_analysis": null,
+        "risk_factors": null
+      },
+      "medical_disclaimer": {
+        "important_notice": [
+          "\ud83d\udea8 MEDICAL DISCLAIMER: This AI system is a decision-support tool only and NOT a replacement for professional medical advice.",
+          "\ud83d\udc68\u200d\u2695\ufe0f FINAL DECISIONS must be confirmed by a licensed healthcare provider.",
+          "\ud83c\udfe5 For emergency symptoms, seek immediate medical attention or call emergency services.",
+          "\ud83d\udc8a Do not start, stop, or change medications without consulting your doctor.",
+          "\ud83d\udccb This recommendation is based on symptoms only and may not account for all medical factors.",
+          "\u2696\ufe0f Healthcare providers should use their clinical judgment and consider complete patient history."
+        ],
+        "emergency_signs": [
+          "Difficulty breathing or shortness of breath",
+          "Chest pain or pressure",
+          "Severe or persistent vomiting",
+          "High fever (>103\u00b0F/39.4\u00b0C)",
+          "Signs of severe dehydration",
+          "Sudden severe headache",
+          "Confusion or altered mental state"
+        ]
+      },
+      "confidence_interpretation": {
+        "level": "High",
+        "interpretation": "The AI model is highly confident in this diagnosis based on the symptom pattern.",
+        "recommendation": "Proceed with recommended actions but confirm with healthcare provider."
+      },
+      "next_steps": [
+        "Consider more frequent monitoring due to age-related risk factors",
+        "Follow medication instructions carefully if prescribed",
+        "Keep a symptom diary to track progress",
+        "Schedule follow-up appointment as recommended",
+        "Seek immediate care if emergency symptoms develop"
+      ],
+      "ai_learning": {
+        "data_collected": true,
+        "session_id": null,
+        "feedback_encouraged": "Healthcare providers can provide feedback to improve AI accuracy"
+      }
+    },
+    "user_feedback": null,
+    "confidence": 0,
+    "session_id": "session_20250818_110129"
+  },
+  {
+    "timestamp": "2025-08-18T11:01:32.071214",
+    "symptoms": "Shortness of breath",
+    "patient_data": {},
+    "ai_prediction": {
+      "timestamp": "2025-08-18T11:01:32.071164",
+      "analysis": {
+        "primary_diagnosis": {
+          "condition": "Shortness of Breath",
+          "confidence": 0.98,
+          "explanation": "Based on the presented symptoms, the AI model predicts Shortness of Breath with 98.0% confidence."
+        },
+        "differential_diagnoses": [],
+        "input_symptoms": {
+          "fever": 0,
+          "cough": 0,
+          "fatigue": 0,
+          "shortness_of_breath": 1,
+          "headache": 0,
+          "sore_throat": 0
+        },
+        "symptom_analysis": {
+          "present_symptoms": [
+            "shortness_of_breath"
+          ],
+          "symptom_count": 1
+        }
+      },
+      "recommendations": {
+        "medications": [],
+        "treatments": [
+          "Consult with healthcare provider for appropriate treatment"
+        ],
+        "warnings": [
+          "This condition requires professional medical evaluation"
+        ],
+        "lifestyle_advice": [
+          "Follow up with your healthcare provider",
+          "Monitor symptoms and seek care if worsening",
+          "Maintain good hygiene practices",
+          "Stay hydrated and get adequate rest"
+        ]
+      },
+      "patient_insights": {
+        "personalization_applied": false,
+        "history_analyzed": false,
+        "pattern_analysis": null,
+        "risk_factors": null
+      },
+      "medical_disclaimer": {
+        "important_notice": [
+          "\ud83d\udea8 MEDICAL DISCLAIMER: This AI system is a decision-support tool only and NOT a replacement for professional medical advice.",
+          "\ud83d\udc68\u200d\u2695\ufe0f FINAL DECISIONS must be confirmed by a licensed healthcare provider.",
+          "\ud83c\udfe5 For emergency symptoms, seek immediate medical attention or call emergency services.",
+          "\ud83d\udc8a Do not start, stop, or change medications without consulting your doctor.",
+          "\ud83d\udccb This recommendation is based on symptoms only and may not account for all medical factors.",
+          "\u2696\ufe0f Healthcare providers should use their clinical judgment and consider complete patient history."
+        ],
+        "emergency_signs": [
+          "Difficulty breathing or shortness of breath",
+          "Chest pain or pressure",
+          "Severe or persistent vomiting",
+          "High fever (>103\u00b0F/39.4\u00b0C)",
+          "Signs of severe dehydration",
+          "Sudden severe headache",
+          "Confusion or altered mental state"
+        ]
+      },
+      "confidence_interpretation": {
+        "level": "High",
+        "interpretation": "The AI model is highly confident in this diagnosis based on the symptom pattern.",
+        "recommendation": "Proceed with recommended actions but confirm with healthcare provider."
+      },
+      "next_steps": [
+        "Consider more frequent monitoring due to age-related risk factors",
+        "Follow medication instructions carefully if prescribed",
+        "Keep a symptom diary to track progress",
+        "Schedule follow-up appointment as recommended",
+        "Seek immediate care if emergency symptoms develop"
+      ],
+      "ai_learning": {
+        "data_collected": true,
+        "session_id": null,
+        "feedback_encouraged": "Healthcare providers can provide feedback to improve AI accuracy"
+      }
+    },
+    "user_feedback": null,
+    "confidence": 0,
+    "session_id": "session_20250818_110132"
+  },
+  {
+    "timestamp": "2025-08-18T11:01:34.193916",
+    "symptoms": "Fatigue",
+    "patient_data": {},
+    "ai_prediction": {
+      "timestamp": "2025-08-18T11:01:34.193881",
+      "analysis": {
+        "primary_diagnosis": {
+          "condition": "Fatigue",
+          "confidence": 1.0,
+          "explanation": "Based on the presented symptoms, the AI model predicts Fatigue with 100.0% confidence."
+        },
+        "differential_diagnoses": [],
+        "input_symptoms": {
+          "fever": 0,
+          "cough": 0,
+          "fatigue": 1,
+          "shortness_of_breath": 0,
+          "headache": 0,
+          "sore_throat": 0
+        },
+        "symptom_analysis": {
+          "present_symptoms": [
+            "fatigue"
+          ],
+          "symptom_count": 1
+        }
+      },
+      "recommendations": {
+        "medications": [],
+        "treatments": [
+          "Consult with healthcare provider for appropriate treatment"
+        ],
+        "warnings": [
+          "This condition requires professional medical evaluation"
+        ],
+        "lifestyle_advice": [
+          "Follow up with your healthcare provider",
+          "Monitor symptoms and seek care if worsening",
+          "Maintain good hygiene practices",
+          "Stay hydrated and get adequate rest"
+        ]
+      },
+      "patient_insights": {
+        "personalization_applied": false,
+        "history_analyzed": false,
+        "pattern_analysis": null,
+        "risk_factors": null
+      },
+      "medical_disclaimer": {
+        "important_notice": [
+          "\ud83d\udea8 MEDICAL DISCLAIMER: This AI system is a decision-support tool only and NOT a replacement for professional medical advice.",
+          "\ud83d\udc68\u200d\u2695\ufe0f FINAL DECISIONS must be confirmed by a licensed healthcare provider.",
+          "\ud83c\udfe5 For emergency symptoms, seek immediate medical attention or call emergency services.",
+          "\ud83d\udc8a Do not start, stop, or change medications without consulting your doctor.",
+          "\ud83d\udccb This recommendation is based on symptoms only and may not account for all medical factors.",
+          "\u2696\ufe0f Healthcare providers should use their clinical judgment and consider complete patient history."
+        ],
+        "emergency_signs": [
+          "Difficulty breathing or shortness of breath",
+          "Chest pain or pressure",
+          "Severe or persistent vomiting",
+          "High fever (>103\u00b0F/39.4\u00b0C)",
+          "Signs of severe dehydration",
+          "Sudden severe headache",
+          "Confusion or altered mental state"
+        ]
+      },
+      "confidence_interpretation": {
+        "level": "High",
+        "interpretation": "The AI model is highly confident in this diagnosis based on the symptom pattern.",
+        "recommendation": "Proceed with recommended actions but confirm with healthcare provider."
+      },
+      "next_steps": [
+        "Consider more frequent monitoring due to age-related risk factors",
+        "Follow medication instructions carefully if prescribed",
+        "Keep a symptom diary to track progress",
+        "Schedule follow-up appointment as recommended",
+        "Seek immediate care if emergency symptoms develop"
+      ],
+      "ai_learning": {
+        "data_collected": true,
+        "session_id": null,
+        "feedback_encouraged": "Healthcare providers can provide feedback to improve AI accuracy"
+      }
+    },
+    "user_feedback": null,
+    "confidence": 0,
+    "session_id": "session_20250818_110134"
+  },
+  {
+    "timestamp": "2025-08-18T11:01:36.363229",
+    "symptoms": "Fever, headache, and fatigue",
+    "patient_data": {},
+    "ai_prediction": {
+      "timestamp": "2025-08-18T11:01:36.363199",
+      "analysis": {
+        "primary_diagnosis": {
+          "condition": "Viral Syndrome",
+          "confidence": 1.0,
+          "explanation": "Based on the presented symptoms, the AI model predicts Viral Syndrome with 100.0% confidence."
+        },
+        "differential_diagnoses": [],
+        "input_symptoms": {
+          "fever": 1,
+          "cough": 0,
+          "fatigue": 1,
+          "shortness_of_breath": 0,
+          "headache": 1,
+          "sore_throat": 0
+        },
+        "symptom_analysis": {
+          "present_symptoms": [
+            "fever",
+            "fatigue",
+            "headache"
+          ],
+          "symptom_count": 3
+        }
+      },
+      "recommendations": {
+        "medications": [],
+        "treatments": [
+          "Consult with healthcare provider for appropriate treatment"
+        ],
+        "warnings": [
+          "This condition requires professional medical evaluation"
+        ],
+        "lifestyle_advice": [
+          "Follow up with your healthcare provider",
+          "Monitor symptoms and seek care if worsening",
+          "Maintain good hygiene practices",
+          "Stay hydrated and get adequate rest"
+        ]
+      },
+      "patient_insights": {
+        "personalization_applied": false,
+        "history_analyzed": false,
+        "pattern_analysis": null,
+        "risk_factors": null
+      },
+      "medical_disclaimer": {
+        "important_notice": [
+          "\ud83d\udea8 MEDICAL DISCLAIMER: This AI system is a decision-support tool only and NOT a replacement for professional medical advice.",
+          "\ud83d\udc68\u200d\u2695\ufe0f FINAL DECISIONS must be confirmed by a licensed healthcare provider.",
+          "\ud83c\udfe5 For emergency symptoms, seek immediate medical attention or call emergency services.",
+          "\ud83d\udc8a Do not start, stop, or change medications without consulting your doctor.",
+          "\ud83d\udccb This recommendation is based on symptoms only and may not account for all medical factors.",
+          "\u2696\ufe0f Healthcare providers should use their clinical judgment and consider complete patient history."
+        ],
+        "emergency_signs": [
+          "Difficulty breathing or shortness of breath",
+          "Chest pain or pressure",
+          "Severe or persistent vomiting",
+          "High fever (>103\u00b0F/39.4\u00b0C)",
+          "Signs of severe dehydration",
+          "Sudden severe headache",
+          "Confusion or altered mental state"
+        ]
+      },
+      "confidence_interpretation": {
+        "level": "High",
+        "interpretation": "The AI model is highly confident in this diagnosis based on the symptom pattern.",
+        "recommendation": "Proceed with recommended actions but confirm with healthcare provider."
+      },
+      "next_steps": [
+        "Consider more frequent monitoring due to age-related risk factors",
+        "Follow medication instructions carefully if prescribed",
+        "Keep a symptom diary to track progress",
+        "Schedule follow-up appointment as recommended",
+        "Seek immediate care if emergency symptoms develop"
+      ],
+      "ai_learning": {
+        "data_collected": true,
+        "session_id": null,
+        "feedback_encouraged": "Healthcare providers can provide feedback to improve AI accuracy"
+      }
+    },
+    "user_feedback": null,
+    "confidence": 0,
+    "session_id": "session_20250818_110136"
+  },
+  {
+    "timestamp": "2025-08-18T11:06:15.939011",
+    "symptoms": "Fever",
+    "patient_data": {},
+    "ai_prediction": {
+      "timestamp": "2025-08-18T11:06:15.938956",
+      "analysis": {
+        "primary_diagnosis": {
+          "condition": "Fever",
+          "confidence": 1.0,
+          "explanation": "Based on the presented symptoms, the AI model predicts Fever with 100.0% confidence."
+        },
+        "differential_diagnoses": [],
+        "input_symptoms": {
+          "fever": 1,
+          "cough": 0,
+          "fatigue": 0,
+          "shortness_of_breath": 0,
+          "headache": 0,
+          "sore_throat": 0
+        },
+        "symptom_analysis": {
+          "present_symptoms": [
+            "fever"
+          ],
+          "symptom_count": 1
+        }
+      },
+      "recommendations": {
+        "medications": [],
+        "treatments": [
+          "Consult with healthcare provider for appropriate treatment"
+        ],
+        "warnings": [
+          "This condition requires professional medical evaluation"
+        ],
+        "lifestyle_advice": [
+          "Follow up with your healthcare provider",
+          "Monitor symptoms and seek care if worsening",
+          "Maintain good hygiene practices",
+          "Stay hydrated and get adequate rest"
+        ]
+      },
+      "patient_insights": {
+        "personalization_applied": false,
+        "history_analyzed": false,
+        "pattern_analysis": null,
+        "risk_factors": null
+      },
+      "medical_disclaimer": {
+        "important_notice": [
+          "\ud83d\udea8 MEDICAL DISCLAIMER: This AI system is a decision-support tool only and NOT a replacement for professional medical advice.",
+          "\ud83d\udc68\u200d\u2695\ufe0f FINAL DECISIONS must be confirmed by a licensed healthcare provider.",
+          "\ud83c\udfe5 For emergency symptoms, seek immediate medical attention or call emergency services.",
+          "\ud83d\udc8a Do not start, stop, or change medications without consulting your doctor.",
+          "\ud83d\udccb This recommendation is based on symptoms only and may not account for all medical factors.",
+          "\u2696\ufe0f Healthcare providers should use their clinical judgment and consider complete patient history."
+        ],
+        "emergency_signs": [
+          "Difficulty breathing or shortness of breath",
+          "Chest pain or pressure",
+          "Severe or persistent vomiting",
+          "High fever (>103\u00b0F/39.4\u00b0C)",
+          "Signs of severe dehydration",
+          "Sudden severe headache",
+          "Confusion or altered mental state"
+        ]
+      },
+      "confidence_interpretation": {
+        "level": "High",
+        "interpretation": "The AI model is highly confident in this diagnosis based on the symptom pattern.",
+        "recommendation": "Proceed with recommended actions but confirm with healthcare provider."
+      },
+      "next_steps": [
+        "Consider more frequent monitoring due to age-related risk factors",
+        "Follow medication instructions carefully if prescribed",
+        "Keep a symptom diary to track progress",
+        "Schedule follow-up appointment as recommended",
+        "Seek immediate care if emergency symptoms develop"
+      ],
+      "ai_learning": {
+        "data_collected": true,
+        "session_id": null,
+        "feedback_encouraged": "Healthcare providers can provide feedback to improve AI accuracy"
+      }
+    },
+    "user_feedback": null,
+    "confidence": 0,
+    "session_id": "session_20250818_110615"
+  },
+  {
+    "timestamp": "2025-08-18T11:06:18.128480",
+    "symptoms": "Cough",
+    "patient_data": {},
+    "ai_prediction": {
+      "timestamp": "2025-08-18T11:06:18.128446",
+      "analysis": {
+        "primary_diagnosis": {
+          "condition": "Cough",
+          "confidence": 0.98,
+          "explanation": "Based on the presented symptoms, the AI model predicts Cough with 98.0% confidence."
+        },
+        "differential_diagnoses": [],
+        "input_symptoms": {
+          "fever": 0,
+          "cough": 1,
+          "fatigue": 0,
+          "shortness_of_breath": 0,
+          "headache": 0,
+          "sore_throat": 0
+        },
+        "symptom_analysis": {
+          "present_symptoms": [
+            "cough"
+          ],
+          "symptom_count": 1
+        }
+      },
+      "recommendations": {
+        "medications": [],
+        "treatments": [
+          "Consult with healthcare provider for appropriate treatment"
+        ],
+        "warnings": [
+          "This condition requires professional medical evaluation"
+        ],
+        "lifestyle_advice": [
+          "Follow up with your healthcare provider",
+          "Monitor symptoms and seek care if worsening",
+          "Maintain good hygiene practices",
+          "Stay hydrated and get adequate rest"
+        ]
+      },
+      "patient_insights": {
+        "personalization_applied": false,
+        "history_analyzed": false,
+        "pattern_analysis": null,
+        "risk_factors": null
+      },
+      "medical_disclaimer": {
+        "important_notice": [
+          "\ud83d\udea8 MEDICAL DISCLAIMER: This AI system is a decision-support tool only and NOT a replacement for professional medical advice.",
+          "\ud83d\udc68\u200d\u2695\ufe0f FINAL DECISIONS must be confirmed by a licensed healthcare provider.",
+          "\ud83c\udfe5 For emergency symptoms, seek immediate medical attention or call emergency services.",
+          "\ud83d\udc8a Do not start, stop, or change medications without consulting your doctor.",
+          "\ud83d\udccb This recommendation is based on symptoms only and may not account for all medical factors.",
+          "\u2696\ufe0f Healthcare providers should use their clinical judgment and consider complete patient history."
+        ],
+        "emergency_signs": [
+          "Difficulty breathing or shortness of breath",
+          "Chest pain or pressure",
+          "Severe or persistent vomiting",
+          "High fever (>103\u00b0F/39.4\u00b0C)",
+          "Signs of severe dehydration",
+          "Sudden severe headache",
+          "Confusion or altered mental state"
+        ]
+      },
+      "confidence_interpretation": {
+        "level": "High",
+        "interpretation": "The AI model is highly confident in this diagnosis based on the symptom pattern.",
+        "recommendation": "Proceed with recommended actions but confirm with healthcare provider."
+      },
+      "next_steps": [
+        "Consider more frequent monitoring due to age-related risk factors",
+        "Follow medication instructions carefully if prescribed",
+        "Keep a symptom diary to track progress",
+        "Schedule follow-up appointment as recommended",
+        "Seek immediate care if emergency symptoms develop"
+      ],
+      "ai_learning": {
+        "data_collected": true,
+        "session_id": null,
+        "feedback_encouraged": "Healthcare providers can provide feedback to improve AI accuracy"
+      }
+    },
+    "user_feedback": null,
+    "confidence": 0,
+    "session_id": "session_20250818_110618"
+  },
+  {
+    "timestamp": "2025-08-18T11:06:20.258185",
+    "symptoms": "Headache",
+    "patient_data": {},
+    "ai_prediction": {
+      "timestamp": "2025-08-18T11:06:20.258160",
+      "analysis": {
+        "primary_diagnosis": {
+          "condition": "Headache",
+          "confidence": 1.0,
+          "explanation": "Based on the presented symptoms, the AI model predicts Headache with 100.0% confidence."
+        },
+        "differential_diagnoses": [],
+        "input_symptoms": {
+          "fever": 0,
+          "cough": 0,
+          "fatigue": 0,
+          "shortness_of_breath": 0,
+          "headache": 1,
+          "sore_throat": 0
+        },
+        "symptom_analysis": {
+          "present_symptoms": [
+            "headache"
+          ],
+          "symptom_count": 1
+        }
+      },
+      "recommendations": {
+        "medications": [
+          {
+            "name": "Acetaminophen",
+            "dosage": "650mg every 6 hours",
+            "duration": "as needed",
+            "type": "analgesic"
+          },
+          {
+            "name": "Ibuprofen",
+            "dosage": "400mg every 6-8 hours",
+            "duration": "as needed",
+            "type": "anti-inflammatory"
+          },
+          {
+            "name": "Aspirin",
+            "dosage": "325-650mg every 4 hours",
+            "duration": "as needed",
+            "type": "analgesic"
+          }
+        ],
+        "treatments": [
+          "Rest in quiet, dark room",
+          "Apply cold or warm compress to head/neck",
+          "Stay hydrated",
+          "Practice relaxation techniques",
+          "Maintain regular sleep schedule"
+        ],
+        "warnings": [
+          "URGENT: Sudden severe headache unlike any before",
+          "Headache with fever, stiff neck, or rash",
+          "Headache with vision changes or weakness",
+          "See doctor for frequent or worsening headaches"
+        ],
+        "lifestyle_advice": [
+          "Follow up with your healthcare provider",
+          "Monitor symptoms and seek care if worsening",
+          "Maintain good hygiene practices",
+          "Stay hydrated and get adequate rest"
+        ]
+      },
+      "patient_insights": {
+        "personalization_applied": false,
+        "history_analyzed": false,
+        "pattern_analysis": null,
+        "risk_factors": null
+      },
+      "medical_disclaimer": {
+        "important_notice": [
+          "\ud83d\udea8 MEDICAL DISCLAIMER: This AI system is a decision-support tool only and NOT a replacement for professional medical advice.",
+          "\ud83d\udc68\u200d\u2695\ufe0f FINAL DECISIONS must be confirmed by a licensed healthcare provider.",
+          "\ud83c\udfe5 For emergency symptoms, seek immediate medical attention or call emergency services.",
+          "\ud83d\udc8a Do not start, stop, or change medications without consulting your doctor.",
+          "\ud83d\udccb This recommendation is based on symptoms only and may not account for all medical factors.",
+          "\u2696\ufe0f Healthcare providers should use their clinical judgment and consider complete patient history."
+        ],
+        "emergency_signs": [
+          "Difficulty breathing or shortness of breath",
+          "Chest pain or pressure",
+          "Severe or persistent vomiting",
+          "High fever (>103\u00b0F/39.4\u00b0C)",
+          "Signs of severe dehydration",
+          "Sudden severe headache",
+          "Confusion or altered mental state"
+        ]
+      },
+      "confidence_interpretation": {
+        "level": "High",
+        "interpretation": "The AI model is highly confident in this diagnosis based on the symptom pattern.",
+        "recommendation": "Proceed with recommended actions but confirm with healthcare provider."
+      },
+      "next_steps": [
+        "Consider more frequent monitoring due to age-related risk factors",
+        "Follow medication instructions carefully if prescribed",
+        "Keep a symptom diary to track progress",
+        "Schedule follow-up appointment as recommended",
+        "Seek immediate care if emergency symptoms develop"
+      ],
+      "ai_learning": {
+        "data_collected": true,
+        "session_id": null,
+        "feedback_encouraged": "Healthcare providers can provide feedback to improve AI accuracy"
+      }
+    },
+    "user_feedback": null,
+    "confidence": 0,
+    "session_id": "session_20250818_110620"
+  },
+  {
+    "timestamp": "2025-08-18T11:06:24.490960",
+    "symptoms": "Sore throat",
+    "patient_data": {},
+    "ai_prediction": {
+      "timestamp": "2025-08-18T11:06:24.490922",
+      "analysis": {
+        "primary_diagnosis": {
+          "condition": "Sore Throat",
+          "confidence": 1.0,
+          "explanation": "Based on the presented symptoms, the AI model predicts Sore Throat with 100.0% confidence."
+        },
+        "differential_diagnoses": [],
+        "input_symptoms": {
+          "fever": 0,
+          "cough": 0,
+          "fatigue": 0,
+          "shortness_of_breath": 0,
+          "headache": 0,
+          "sore_throat": 1
+        },
+        "symptom_analysis": {
+          "present_symptoms": [
+            "sore_throat"
+          ],
+          "symptom_count": 1
+        }
+      },
+      "recommendations": {
+        "medications": [],
+        "treatments": [
+          "Consult with healthcare provider for appropriate treatment"
+        ],
+        "warnings": [
+          "This condition requires professional medical evaluation"
+        ],
+        "lifestyle_advice": [
+          "Follow up with your healthcare provider",
+          "Monitor symptoms and seek care if worsening",
+          "Maintain good hygiene practices",
+          "Stay hydrated and get adequate rest"
+        ]
+      },
+      "patient_insights": {
+        "personalization_applied": false,
+        "history_analyzed": false,
+        "pattern_analysis": null,
+        "risk_factors": null
+      },
+      "medical_disclaimer": {
+        "important_notice": [
+          "\ud83d\udea8 MEDICAL DISCLAIMER: This AI system is a decision-support tool only and NOT a replacement for professional medical advice.",
+          "\ud83d\udc68\u200d\u2695\ufe0f FINAL DECISIONS must be confirmed by a licensed healthcare provider.",
+          "\ud83c\udfe5 For emergency symptoms, seek immediate medical attention or call emergency services.",
+          "\ud83d\udc8a Do not start, stop, or change medications without consulting your doctor.",
+          "\ud83d\udccb This recommendation is based on symptoms only and may not account for all medical factors.",
+          "\u2696\ufe0f Healthcare providers should use their clinical judgment and consider complete patient history."
+        ],
+        "emergency_signs": [
+          "Difficulty breathing or shortness of breath",
+          "Chest pain or pressure",
+          "Severe or persistent vomiting",
+          "High fever (>103\u00b0F/39.4\u00b0C)",
+          "Signs of severe dehydration",
+          "Sudden severe headache",
+          "Confusion or altered mental state"
+        ]
+      },
+      "confidence_interpretation": {
+        "level": "High",
+        "interpretation": "The AI model is highly confident in this diagnosis based on the symptom pattern.",
+        "recommendation": "Proceed with recommended actions but confirm with healthcare provider."
+      },
+      "next_steps": [
+        "Consider more frequent monitoring due to age-related risk factors",
+        "Follow medication instructions carefully if prescribed",
+        "Keep a symptom diary to track progress",
+        "Schedule follow-up appointment as recommended",
+        "Seek immediate care if emergency symptoms develop"
+      ],
+      "ai_learning": {
+        "data_collected": true,
+        "session_id": null,
+        "feedback_encouraged": "Healthcare providers can provide feedback to improve AI accuracy"
+      }
+    },
+    "user_feedback": null,
+    "confidence": 0,
+    "session_id": "session_20250818_110624"
+  },
+  {
+    "timestamp": "2025-08-18T11:06:26.632362",
+    "symptoms": "Shortness of breath",
+    "patient_data": {},
+    "ai_prediction": {
+      "timestamp": "2025-08-18T11:06:26.632330",
+      "analysis": {
+        "primary_diagnosis": {
+          "condition": "Shortness of Breath",
+          "confidence": 0.98,
+          "explanation": "Based on the presented symptoms, the AI model predicts Shortness of Breath with 98.0% confidence."
+        },
+        "differential_diagnoses": [],
+        "input_symptoms": {
+          "fever": 0,
+          "cough": 0,
+          "fatigue": 0,
+          "shortness_of_breath": 1,
+          "headache": 0,
+          "sore_throat": 0
+        },
+        "symptom_analysis": {
+          "present_symptoms": [
+            "shortness_of_breath"
+          ],
+          "symptom_count": 1
+        }
+      },
+      "recommendations": {
+        "medications": [],
+        "treatments": [
+          "Consult with healthcare provider for appropriate treatment"
+        ],
+        "warnings": [
+          "This condition requires professional medical evaluation"
+        ],
+        "lifestyle_advice": [
+          "Follow up with your healthcare provider",
+          "Monitor symptoms and seek care if worsening",
+          "Maintain good hygiene practices",
+          "Stay hydrated and get adequate rest"
+        ]
+      },
+      "patient_insights": {
+        "personalization_applied": false,
+        "history_analyzed": false,
+        "pattern_analysis": null,
+        "risk_factors": null
+      },
+      "medical_disclaimer": {
+        "important_notice": [
+          "\ud83d\udea8 MEDICAL DISCLAIMER: This AI system is a decision-support tool only and NOT a replacement for professional medical advice.",
+          "\ud83d\udc68\u200d\u2695\ufe0f FINAL DECISIONS must be confirmed by a licensed healthcare provider.",
+          "\ud83c\udfe5 For emergency symptoms, seek immediate medical attention or call emergency services.",
+          "\ud83d\udc8a Do not start, stop, or change medications without consulting your doctor.",
+          "\ud83d\udccb This recommendation is based on symptoms only and may not account for all medical factors.",
+          "\u2696\ufe0f Healthcare providers should use their clinical judgment and consider complete patient history."
+        ],
+        "emergency_signs": [
+          "Difficulty breathing or shortness of breath",
+          "Chest pain or pressure",
+          "Severe or persistent vomiting",
+          "High fever (>103\u00b0F/39.4\u00b0C)",
+          "Signs of severe dehydration",
+          "Sudden severe headache",
+          "Confusion or altered mental state"
+        ]
+      },
+      "confidence_interpretation": {
+        "level": "High",
+        "interpretation": "The AI model is highly confident in this diagnosis based on the symptom pattern.",
+        "recommendation": "Proceed with recommended actions but confirm with healthcare provider."
+      },
+      "next_steps": [
+        "Consider more frequent monitoring due to age-related risk factors",
+        "Follow medication instructions carefully if prescribed",
+        "Keep a symptom diary to track progress",
+        "Schedule follow-up appointment as recommended",
+        "Seek immediate care if emergency symptoms develop"
+      ],
+      "ai_learning": {
+        "data_collected": true,
+        "session_id": null,
+        "feedback_encouraged": "Healthcare providers can provide feedback to improve AI accuracy"
+      }
+    },
+    "user_feedback": null,
+    "confidence": 0,
+    "session_id": "session_20250818_110626"
+  },
+  {
+    "timestamp": "2025-08-18T11:06:28.735710",
+    "symptoms": "Fatigue",
+    "patient_data": {},
+    "ai_prediction": {
+      "timestamp": "2025-08-18T11:06:28.735686",
+      "analysis": {
+        "primary_diagnosis": {
+          "condition": "Fatigue",
+          "confidence": 1.0,
+          "explanation": "Based on the presented symptoms, the AI model predicts Fatigue with 100.0% confidence."
+        },
+        "differential_diagnoses": [],
+        "input_symptoms": {
+          "fever": 0,
+          "cough": 0,
+          "fatigue": 1,
+          "shortness_of_breath": 0,
+          "headache": 0,
+          "sore_throat": 0
+        },
+        "symptom_analysis": {
+          "present_symptoms": [
+            "fatigue"
+          ],
+          "symptom_count": 1
+        }
+      },
+      "recommendations": {
+        "medications": [],
+        "treatments": [
+          "Consult with healthcare provider for appropriate treatment"
+        ],
+        "warnings": [
+          "This condition requires professional medical evaluation"
+        ],
+        "lifestyle_advice": [
+          "Follow up with your healthcare provider",
+          "Monitor symptoms and seek care if worsening",
+          "Maintain good hygiene practices",
+          "Stay hydrated and get adequate rest"
+        ]
+      },
+      "patient_insights": {
+        "personalization_applied": false,
+        "history_analyzed": false,
+        "pattern_analysis": null,
+        "risk_factors": null
+      },
+      "medical_disclaimer": {
+        "important_notice": [
+          "\ud83d\udea8 MEDICAL DISCLAIMER: This AI system is a decision-support tool only and NOT a replacement for professional medical advice.",
+          "\ud83d\udc68\u200d\u2695\ufe0f FINAL DECISIONS must be confirmed by a licensed healthcare provider.",
+          "\ud83c\udfe5 For emergency symptoms, seek immediate medical attention or call emergency services.",
+          "\ud83d\udc8a Do not start, stop, or change medications without consulting your doctor.",
+          "\ud83d\udccb This recommendation is based on symptoms only and may not account for all medical factors.",
+          "\u2696\ufe0f Healthcare providers should use their clinical judgment and consider complete patient history."
+        ],
+        "emergency_signs": [
+          "Difficulty breathing or shortness of breath",
+          "Chest pain or pressure",
+          "Severe or persistent vomiting",
+          "High fever (>103\u00b0F/39.4\u00b0C)",
+          "Signs of severe dehydration",
+          "Sudden severe headache",
+          "Confusion or altered mental state"
+        ]
+      },
+      "confidence_interpretation": {
+        "level": "High",
+        "interpretation": "The AI model is highly confident in this diagnosis based on the symptom pattern.",
+        "recommendation": "Proceed with recommended actions but confirm with healthcare provider."
+      },
+      "next_steps": [
+        "Consider more frequent monitoring due to age-related risk factors",
+        "Follow medication instructions carefully if prescribed",
+        "Keep a symptom diary to track progress",
+        "Schedule follow-up appointment as recommended",
+        "Seek immediate care if emergency symptoms develop"
+      ],
+      "ai_learning": {
+        "data_collected": true,
+        "session_id": null,
+        "feedback_encouraged": "Healthcare providers can provide feedback to improve AI accuracy"
+      }
+    },
+    "user_feedback": null,
+    "confidence": 0,
+    "session_id": "session_20250818_110628"
+  },
+  {
+    "timestamp": "2025-08-18T11:06:30.844813",
+    "symptoms": "Fever, headache, and fatigue",
+    "patient_data": {},
+    "ai_prediction": {
+      "timestamp": "2025-08-18T11:06:30.844791",
+      "analysis": {
+        "primary_diagnosis": {
+          "condition": "Viral Syndrome",
+          "confidence": 1.0,
+          "explanation": "Based on the presented symptoms, the AI model predicts Viral Syndrome with 100.0% confidence."
+        },
+        "differential_diagnoses": [],
+        "input_symptoms": {
+          "fever": 1,
+          "cough": 0,
+          "fatigue": 1,
+          "shortness_of_breath": 0,
+          "headache": 1,
+          "sore_throat": 0
+        },
+        "symptom_analysis": {
+          "present_symptoms": [
+            "fever",
+            "fatigue",
+            "headache"
+          ],
+          "symptom_count": 3
+        }
+      },
+      "recommendations": {
+        "medications": [],
+        "treatments": [
+          "Consult with healthcare provider for appropriate treatment"
+        ],
+        "warnings": [
+          "This condition requires professional medical evaluation"
+        ],
+        "lifestyle_advice": [
+          "Follow up with your healthcare provider",
+          "Monitor symptoms and seek care if worsening",
+          "Maintain good hygiene practices",
+          "Stay hydrated and get adequate rest"
+        ]
+      },
+      "patient_insights": {
+        "personalization_applied": false,
+        "history_analyzed": false,
+        "pattern_analysis": null,
+        "risk_factors": null
+      },
+      "medical_disclaimer": {
+        "important_notice": [
+          "\ud83d\udea8 MEDICAL DISCLAIMER: This AI system is a decision-support tool only and NOT a replacement for professional medical advice.",
+          "\ud83d\udc68\u200d\u2695\ufe0f FINAL DECISIONS must be confirmed by a licensed healthcare provider.",
+          "\ud83c\udfe5 For emergency symptoms, seek immediate medical attention or call emergency services.",
+          "\ud83d\udc8a Do not start, stop, or change medications without consulting your doctor.",
+          "\ud83d\udccb This recommendation is based on symptoms only and may not account for all medical factors.",
+          "\u2696\ufe0f Healthcare providers should use their clinical judgment and consider complete patient history."
+        ],
+        "emergency_signs": [
+          "Difficulty breathing or shortness of breath",
+          "Chest pain or pressure",
+          "Severe or persistent vomiting",
+          "High fever (>103\u00b0F/39.4\u00b0C)",
+          "Signs of severe dehydration",
+          "Sudden severe headache",
+          "Confusion or altered mental state"
+        ]
+      },
+      "confidence_interpretation": {
+        "level": "High",
+        "interpretation": "The AI model is highly confident in this diagnosis based on the symptom pattern.",
+        "recommendation": "Proceed with recommended actions but confirm with healthcare provider."
+      },
+      "next_steps": [
+        "Consider more frequent monitoring due to age-related risk factors",
+        "Follow medication instructions carefully if prescribed",
+        "Keep a symptom diary to track progress",
+        "Schedule follow-up appointment as recommended",
+        "Seek immediate care if emergency symptoms develop"
+      ],
+      "ai_learning": {
+        "data_collected": true,
+        "session_id": null,
+        "feedback_encouraged": "Healthcare providers can provide feedback to improve AI accuracy"
+      }
+    },
+    "user_feedback": null,
+    "confidence": 0,
+    "session_id": "session_20250818_110630"
+  },
+  {
+    "timestamp": "2025-08-18T11:10:52.816892",
+    "symptoms": "Fever and cough",
+    "patient_data": {},
+    "ai_prediction": {
+      "timestamp": "2025-08-18T11:10:52.816833",
+      "analysis": {
+        "primary_diagnosis": {
+          "condition": "Common Cold",
+          "confidence": 0.88,
+          "explanation": "Based on the presented symptoms, the AI model predicts Common Cold with 88.0% confidence."
+        },
+        "differential_diagnoses": [],
+        "input_symptoms": {
+          "fever": 1,
+          "cough": 1,
+          "fatigue": 0,
+          "shortness_of_breath": 0,
+          "headache": 0,
+          "sore_throat": 0
+        },
+        "symptom_analysis": {
+          "present_symptoms": [
+            "fever",
+            "cough"
+          ],
+          "symptom_count": 2
+        }
+      },
+      "recommendations": {
+        "medications": [
+          {
+            "name": "Acetaminophen",
+            "dosage": "650mg every 6 hours",
+            "duration": "as needed",
+            "type": "symptom relief"
+          },
+          {
+            "name": "Pseudoephedrine",
+            "dosage": "60mg every 6 hours",
+            "duration": "3-5 days",
+            "type": "decongestant"
+          },
+          {
+            "name": "Zinc lozenges",
+            "dosage": "1 lozenge every 2 hours",
+            "duration": "7 days",
+            "type": "immune support"
+          }
+        ],
+        "treatments": [
+          "Rest and adequate sleep",
+          "Increase fluid intake, especially warm liquids",
+          "Use saline nasal spray or rinse",
+          "Honey for cough relief (not for children under 1 year)",
+          "Warm compress for sinus pressure"
+        ],
+        "warnings": [
+          "See doctor if symptoms worsen after 7 days",
+          "Watch for high fever (>101.5\u00b0F)",
+          "Monitor for severe headache or sinus pain"
+        ],
+        "lifestyle_advice": [
+          "Follow up with your healthcare provider",
+          "Monitor symptoms and seek care if worsening",
+          "Maintain good hygiene practices",
+          "Stay hydrated and get adequate rest"
+        ]
+      },
+      "patient_insights": {
+        "personalization_applied": false,
+        "history_analyzed": false,
+        "pattern_analysis": null,
+        "risk_factors": null
+      },
+      "medical_disclaimer": {
+        "important_notice": [
+          "\ud83d\udea8 MEDICAL DISCLAIMER: This AI system is a decision-support tool only and NOT a replacement for professional medical advice.",
+          "\ud83d\udc68\u200d\u2695\ufe0f FINAL DECISIONS must be confirmed by a licensed healthcare provider.",
+          "\ud83c\udfe5 For emergency symptoms, seek immediate medical attention or call emergency services.",
+          "\ud83d\udc8a Do not start, stop, or change medications without consulting your doctor.",
+          "\ud83d\udccb This recommendation is based on symptoms only and may not account for all medical factors.",
+          "\u2696\ufe0f Healthcare providers should use their clinical judgment and consider complete patient history."
+        ],
+        "emergency_signs": [
+          "Difficulty breathing or shortness of breath",
+          "Chest pain or pressure",
+          "Severe or persistent vomiting",
+          "High fever (>103\u00b0F/39.4\u00b0C)",
+          "Signs of severe dehydration",
+          "Sudden severe headache",
+          "Confusion or altered mental state"
+        ]
+      },
+      "confidence_interpretation": {
+        "level": "High",
+        "interpretation": "The AI model is highly confident in this diagnosis based on the symptom pattern.",
+        "recommendation": "Proceed with recommended actions but confirm with healthcare provider."
+      },
+      "next_steps": [
+        "Consider more frequent monitoring due to age-related risk factors",
+        "Follow medication instructions carefully if prescribed",
+        "Keep a symptom diary to track progress",
+        "Schedule follow-up appointment as recommended",
+        "Seek immediate care if emergency symptoms develop"
+      ],
+      "ai_learning": {
+        "data_collected": true,
+        "session_id": null,
+        "feedback_encouraged": "Healthcare providers can provide feedback to improve AI accuracy"
+      }
+    },
+    "user_feedback": null,
+    "confidence": 0,
+    "session_id": "session_20250818_111052"
+  },
+  {
+    "timestamp": "2025-08-18T11:11:21.681906",
+    "symptoms": "common cold",
+    "patient_data": {
+      "age": 16,
+      "gender": "Male",
+      "patient_id": "temp_1755486681165",
+      "name": "Patient"
+    },
+    "ai_prediction": {
+      "timestamp": "2025-08-18T11:11:21.681866",
+      "analysis": {
+        "primary_diagnosis": {
+          "condition": "Fatigue",
+          "confidence": 0.23,
+          "explanation": "Based on the presented symptoms, the AI model predicts Fatigue with 23.0% confidence."
+        },
+        "differential_diagnoses": [
+          {
+            "condition": "Headache",
+            "probability": 0.2,
+            "explanation": "Alternative consideration with 20.0% probability"
+          },
+          {
+            "condition": "Fever",
+            "probability": 0.19,
+            "explanation": "Alternative consideration with 19.0% probability"
+          }
+        ],
+        "input_symptoms": {
+          "fever": 0,
+          "cough": 0,
+          "fatigue": 0,
+          "shortness_of_breath": 0,
+          "headache": 0,
+          "sore_throat": 0
+        },
+        "symptom_analysis": {
+          "present_symptoms": [],
+          "symptom_count": 0
+        }
+      },
+      "recommendations": {
+        "medications": [],
+        "treatments": [
+          "Consult with healthcare provider for appropriate treatment"
+        ],
+        "warnings": [
+          "This condition requires professional medical evaluation"
+        ],
+        "lifestyle_advice": [
+          "Follow up with your healthcare provider",
+          "Monitor symptoms and seek care if worsening",
+          "Maintain good hygiene practices",
+          "Stay hydrated and get adequate rest"
+        ]
+      },
+      "patient_insights": {
+        "personalization_applied": true,
+        "history_analyzed": false,
+        "pattern_analysis": null,
+        "risk_factors": []
+      },
+      "medical_disclaimer": {
+        "important_notice": [
+          "\ud83d\udea8 MEDICAL DISCLAIMER: This AI system is a decision-support tool only and NOT a replacement for professional medical advice.",
+          "\ud83d\udc68\u200d\u2695\ufe0f FINAL DECISIONS must be confirmed by a licensed healthcare provider.",
+          "\ud83c\udfe5 For emergency symptoms, seek immediate medical attention or call emergency services.",
+          "\ud83d\udc8a Do not start, stop, or change medications without consulting your doctor.",
+          "\ud83d\udccb This recommendation is based on symptoms only and may not account for all medical factors.",
+          "\u2696\ufe0f Healthcare providers should use their clinical judgment and consider complete patient history."
+        ],
+        "emergency_signs": [
+          "Difficulty breathing or shortness of breath",
+          "Chest pain or pressure",
+          "Severe or persistent vomiting",
+          "High fever (>103\u00b0F/39.4\u00b0C)",
+          "Signs of severe dehydration",
+          "Sudden severe headache",
+          "Confusion or altered mental state"
+        ]
+      },
+      "confidence_interpretation": {
+        "level": "Low",
+        "interpretation": "The AI model has low confidence. Multiple conditions possible.",
+        "recommendation": "Professional medical evaluation strongly recommended for proper diagnosis."
+      },
+      "next_steps": [
+        "Schedule appointment with healthcare provider for proper evaluation",
+        "Consider additional diagnostic tests as recommended by doctor",
+        "Follow medication instructions carefully if prescribed",
+        "Keep a symptom diary to track progress",
+        "Schedule follow-up appointment as recommended",
+        "Seek immediate care if emergency symptoms develop"
+      ],
+      "ai_learning": {
+        "data_collected": true,
+        "session_id": null,
+        "feedback_encouraged": "Healthcare providers can provide feedback to improve AI accuracy"
+      }
+    },
+    "user_feedback": null,
+    "confidence": 0,
+    "session_id": "session_20250818_111121"
+  },
+  {
+    "timestamp": "2025-08-18T11:11:39.995517",
+    "symptoms": "cold",
+    "patient_data": {
+      "age": 15,
+      "gender": "Male",
+      "patient_id": "temp_1755486699360",
+      "name": "Patient"
+    },
+    "ai_prediction": {
+      "timestamp": "2025-08-18T11:11:39.995485",
+      "analysis": {
+        "primary_diagnosis": {
+          "condition": "Fatigue",
+          "confidence": 0.23,
+          "explanation": "Based on the presented symptoms, the AI model predicts Fatigue with 23.0% confidence."
+        },
+        "differential_diagnoses": [
+          {
+            "condition": "Headache",
+            "probability": 0.2,
+            "explanation": "Alternative consideration with 20.0% probability"
+          },
+          {
+            "condition": "Fever",
+            "probability": 0.19,
+            "explanation": "Alternative consideration with 19.0% probability"
+          }
+        ],
+        "input_symptoms": {
+          "fever": 0,
+          "cough": 0,
+          "fatigue": 0,
+          "shortness_of_breath": 0,
+          "headache": 0,
+          "sore_throat": 0
+        },
+        "symptom_analysis": {
+          "present_symptoms": [],
+          "symptom_count": 0
+        }
+      },
+      "recommendations": {
+        "medications": [],
+        "treatments": [
+          "Consult with healthcare provider for appropriate treatment"
+        ],
+        "warnings": [
+          "This condition requires professional medical evaluation"
+        ],
+        "lifestyle_advice": [
+          "Follow up with your healthcare provider",
+          "Monitor symptoms and seek care if worsening",
+          "Maintain good hygiene practices",
+          "Stay hydrated and get adequate rest"
+        ]
+      },
+      "patient_insights": {
+        "personalization_applied": true,
+        "history_analyzed": false,
+        "pattern_analysis": null,
+        "risk_factors": []
+      },
+      "medical_disclaimer": {
+        "important_notice": [
+          "\ud83d\udea8 MEDICAL DISCLAIMER: This AI system is a decision-support tool only and NOT a replacement for professional medical advice.",
+          "\ud83d\udc68\u200d\u2695\ufe0f FINAL DECISIONS must be confirmed by a licensed healthcare provider.",
+          "\ud83c\udfe5 For emergency symptoms, seek immediate medical attention or call emergency services.",
+          "\ud83d\udc8a Do not start, stop, or change medications without consulting your doctor.",
+          "\ud83d\udccb This recommendation is based on symptoms only and may not account for all medical factors.",
+          "\u2696\ufe0f Healthcare providers should use their clinical judgment and consider complete patient history."
+        ],
+        "emergency_signs": [
+          "Difficulty breathing or shortness of breath",
+          "Chest pain or pressure",
+          "Severe or persistent vomiting",
+          "High fever (>103\u00b0F/39.4\u00b0C)",
+          "Signs of severe dehydration",
+          "Sudden severe headache",
+          "Confusion or altered mental state"
+        ]
+      },
+      "confidence_interpretation": {
+        "level": "Low",
+        "interpretation": "The AI model has low confidence. Multiple conditions possible.",
+        "recommendation": "Professional medical evaluation strongly recommended for proper diagnosis."
+      },
+      "next_steps": [
+        "Schedule appointment with healthcare provider for proper evaluation",
+        "Consider additional diagnostic tests as recommended by doctor",
+        "Follow medication instructions carefully if prescribed",
+        "Keep a symptom diary to track progress",
+        "Schedule follow-up appointment as recommended",
+        "Seek immediate care if emergency symptoms develop"
+      ],
+      "ai_learning": {
+        "data_collected": true,
+        "session_id": null,
+        "feedback_encouraged": "Healthcare providers can provide feedback to improve AI accuracy"
+      }
+    },
+    "user_feedback": null,
+    "confidence": 0,
+    "session_id": "session_20250818_111139"
+  },
+  {
+    "timestamp": "2025-08-18T11:12:04.189112",
+    "symptoms": "fever",
+    "patient_data": {
+      "age": 15,
+      "gender": "Male",
+      "patient_id": "temp_1755486723557",
+      "name": "Patient"
+    },
+    "ai_prediction": {
+      "timestamp": "2025-08-18T11:12:04.189082",
+      "analysis": {
+        "primary_diagnosis": {
+          "condition": "Fever",
+          "confidence": 1.0,
+          "explanation": "Based on the presented symptoms, the AI model predicts Fever with 100.0% confidence."
+        },
+        "differential_diagnoses": [],
+        "input_symptoms": {
+          "fever": 1,
+          "cough": 0,
+          "fatigue": 0,
+          "shortness_of_breath": 0,
+          "headache": 0,
+          "sore_throat": 0
+        },
+        "symptom_analysis": {
+          "present_symptoms": [
+            "fever"
+          ],
+          "symptom_count": 1
+        }
+      },
+      "recommendations": {
+        "medications": [],
+        "treatments": [
+          "Consult with healthcare provider for appropriate treatment"
+        ],
+        "warnings": [
+          "This condition requires professional medical evaluation"
+        ],
+        "lifestyle_advice": [
+          "Follow up with your healthcare provider",
+          "Monitor symptoms and seek care if worsening",
+          "Maintain good hygiene practices",
+          "Stay hydrated and get adequate rest"
+        ]
+      },
+      "patient_insights": {
+        "personalization_applied": true,
+        "history_analyzed": false,
+        "pattern_analysis": null,
+        "risk_factors": []
+      },
+      "medical_disclaimer": {
+        "important_notice": [
+          "\ud83d\udea8 MEDICAL DISCLAIMER: This AI system is a decision-support tool only and NOT a replacement for professional medical advice.",
+          "\ud83d\udc68\u200d\u2695\ufe0f FINAL DECISIONS must be confirmed by a licensed healthcare provider.",
+          "\ud83c\udfe5 For emergency symptoms, seek immediate medical attention or call emergency services.",
+          "\ud83d\udc8a Do not start, stop, or change medications without consulting your doctor.",
+          "\ud83d\udccb This recommendation is based on symptoms only and may not account for all medical factors.",
+          "\u2696\ufe0f Healthcare providers should use their clinical judgment and consider complete patient history."
+        ],
+        "emergency_signs": [
+          "Difficulty breathing or shortness of breath",
+          "Chest pain or pressure",
+          "Severe or persistent vomiting",
+          "High fever (>103\u00b0F/39.4\u00b0C)",
+          "Signs of severe dehydration",
+          "Sudden severe headache",
+          "Confusion or altered mental state"
+        ]
+      },
+      "confidence_interpretation": {
+        "level": "High",
+        "interpretation": "The AI model is highly confident in this diagnosis based on the symptom pattern.",
+        "recommendation": "Proceed with recommended actions but confirm with healthcare provider."
+      },
+      "next_steps": [
+        "Follow medication instructions carefully if prescribed",
+        "Keep a symptom diary to track progress",
+        "Schedule follow-up appointment as recommended",
+        "Seek immediate care if emergency symptoms develop"
+      ],
+      "ai_learning": {
+        "data_collected": true,
+        "session_id": null,
+        "feedback_encouraged": "Healthcare providers can provide feedback to improve AI accuracy"
+      }
+    },
+    "user_feedback": null,
+    "confidence": 0,
+    "session_id": "session_20250818_111204"
+  },
+  {
+    "timestamp": "2025-08-18T11:12:28.086910",
+    "symptoms": "COVID-19",
+    "patient_data": {
+      "age": 15,
+      "gender": "Male",
+      "patient_id": "temp_1755486747708",
+      "name": "Patient"
+    },
+    "ai_prediction": {
+      "timestamp": "2025-08-18T11:12:28.086881",
+      "analysis": {
+        "primary_diagnosis": {
+          "condition": "Fatigue",
+          "confidence": 0.23,
+          "explanation": "Based on the presented symptoms, the AI model predicts Fatigue with 23.0% confidence."
+        },
+        "differential_diagnoses": [
+          {
+            "condition": "Headache",
+            "probability": 0.2,
+            "explanation": "Alternative consideration with 20.0% probability"
+          },
+          {
+            "condition": "Fever",
+            "probability": 0.19,
+            "explanation": "Alternative consideration with 19.0% probability"
+          }
+        ],
+        "input_symptoms": {
+          "fever": 0,
+          "cough": 0,
+          "fatigue": 0,
+          "shortness_of_breath": 0,
+          "headache": 0,
+          "sore_throat": 0
+        },
+        "symptom_analysis": {
+          "present_symptoms": [],
+          "symptom_count": 0
+        }
+      },
+      "recommendations": {
+        "medications": [],
+        "treatments": [
+          "Consult with healthcare provider for appropriate treatment"
+        ],
+        "warnings": [
+          "This condition requires professional medical evaluation"
+        ],
+        "lifestyle_advice": [
+          "Follow up with your healthcare provider",
+          "Monitor symptoms and seek care if worsening",
+          "Maintain good hygiene practices",
+          "Stay hydrated and get adequate rest"
+        ]
+      },
+      "patient_insights": {
+        "personalization_applied": true,
+        "history_analyzed": false,
+        "pattern_analysis": null,
+        "risk_factors": []
+      },
+      "medical_disclaimer": {
+        "important_notice": [
+          "\ud83d\udea8 MEDICAL DISCLAIMER: This AI system is a decision-support tool only and NOT a replacement for professional medical advice.",
+          "\ud83d\udc68\u200d\u2695\ufe0f FINAL DECISIONS must be confirmed by a licensed healthcare provider.",
+          "\ud83c\udfe5 For emergency symptoms, seek immediate medical attention or call emergency services.",
+          "\ud83d\udc8a Do not start, stop, or change medications without consulting your doctor.",
+          "\ud83d\udccb This recommendation is based on symptoms only and may not account for all medical factors.",
+          "\u2696\ufe0f Healthcare providers should use their clinical judgment and consider complete patient history."
+        ],
+        "emergency_signs": [
+          "Difficulty breathing or shortness of breath",
+          "Chest pain or pressure",
+          "Severe or persistent vomiting",
+          "High fever (>103\u00b0F/39.4\u00b0C)",
+          "Signs of severe dehydration",
+          "Sudden severe headache",
+          "Confusion or altered mental state"
+        ]
+      },
+      "confidence_interpretation": {
+        "level": "Low",
+        "interpretation": "The AI model has low confidence. Multiple conditions possible.",
+        "recommendation": "Professional medical evaluation strongly recommended for proper diagnosis."
+      },
+      "next_steps": [
+        "Schedule appointment with healthcare provider for proper evaluation",
+        "Consider additional diagnostic tests as recommended by doctor",
+        "Follow medication instructions carefully if prescribed",
+        "Keep a symptom diary to track progress",
+        "Schedule follow-up appointment as recommended",
+        "Seek immediate care if emergency symptoms develop"
+      ],
+      "ai_learning": {
+        "data_collected": true,
+        "session_id": null,
+        "feedback_encouraged": "Healthcare providers can provide feedback to improve AI accuracy"
+      }
+    },
+    "user_feedback": null,
+    "confidence": 0,
+    "session_id": "session_20250818_111228"
+  },
+  {
+    "timestamp": "2025-08-18T11:12:40.874632",
+    "symptoms": "cough",
+    "patient_data": {
+      "age": 15,
+      "gender": "Male",
+      "patient_id": "temp_1755486760238",
+      "name": "Patient"
+    },
+    "ai_prediction": {
+      "timestamp": "2025-08-18T11:12:40.874605",
+      "analysis": {
+        "primary_diagnosis": {
+          "condition": "Cough",
+          "confidence": 0.99,
+          "explanation": "Based on the presented symptoms, the AI model predicts Cough with 99.0% confidence."
+        },
+        "differential_diagnoses": [],
+        "input_symptoms": {
+          "fever": 0,
+          "cough": 1,
+          "fatigue": 0,
+          "shortness_of_breath": 0,
+          "headache": 0,
+          "sore_throat": 0
+        },
+        "symptom_analysis": {
+          "present_symptoms": [
+            "cough"
+          ],
+          "symptom_count": 1
+        }
+      },
+      "recommendations": {
+        "medications": [],
+        "treatments": [
+          "Consult with healthcare provider for appropriate treatment"
+        ],
+        "warnings": [
+          "This condition requires professional medical evaluation"
+        ],
+        "lifestyle_advice": [
+          "Follow up with your healthcare provider",
+          "Monitor symptoms and seek care if worsening",
+          "Maintain good hygiene practices",
+          "Stay hydrated and get adequate rest"
+        ]
+      },
+      "patient_insights": {
+        "personalization_applied": true,
+        "history_analyzed": false,
+        "pattern_analysis": null,
+        "risk_factors": []
+      },
+      "medical_disclaimer": {
+        "important_notice": [
+          "\ud83d\udea8 MEDICAL DISCLAIMER: This AI system is a decision-support tool only and NOT a replacement for professional medical advice.",
+          "\ud83d\udc68\u200d\u2695\ufe0f FINAL DECISIONS must be confirmed by a licensed healthcare provider.",
+          "\ud83c\udfe5 For emergency symptoms, seek immediate medical attention or call emergency services.",
+          "\ud83d\udc8a Do not start, stop, or change medications without consulting your doctor.",
+          "\ud83d\udccb This recommendation is based on symptoms only and may not account for all medical factors.",
+          "\u2696\ufe0f Healthcare providers should use their clinical judgment and consider complete patient history."
+        ],
+        "emergency_signs": [
+          "Difficulty breathing or shortness of breath",
+          "Chest pain or pressure",
+          "Severe or persistent vomiting",
+          "High fever (>103\u00b0F/39.4\u00b0C)",
+          "Signs of severe dehydration",
+          "Sudden severe headache",
+          "Confusion or altered mental state"
+        ]
+      },
+      "confidence_interpretation": {
+        "level": "High",
+        "interpretation": "The AI model is highly confident in this diagnosis based on the symptom pattern.",
+        "recommendation": "Proceed with recommended actions but confirm with healthcare provider."
+      },
+      "next_steps": [
+        "Follow medication instructions carefully if prescribed",
+        "Keep a symptom diary to track progress",
+        "Schedule follow-up appointment as recommended",
+        "Seek immediate care if emergency symptoms develop"
+      ],
+      "ai_learning": {
+        "data_collected": true,
+        "session_id": null,
+        "feedback_encouraged": "Healthcare providers can provide feedback to improve AI accuracy"
+      }
+    },
+    "user_feedback": null,
+    "confidence": 0,
+    "session_id": "session_20250818_111240"
+  },
+  {
+    "timestamp": "2025-08-18T11:16:21.597186",
+    "symptoms": "cough",
+    "patient_data": {},
+    "ai_prediction": {
+      "timestamp": "2025-08-18T11:16:21.597134",
+      "analysis": {
+        "primary_diagnosis": {
+          "condition": "Cough",
+          "confidence": 100.0,
+          "explanation": "Based on the presented symptoms, the AI model predicts Cough with 100.0% confidence."
+        },
+        "differential_diagnoses": [],
+        "input_symptoms": {
+          "fever": 0,
+          "cough": 1,
+          "fatigue": 0,
+          "shortness_of_breath": 0,
+          "headache": 0,
+          "sore_throat": 0
+        },
+        "symptom_analysis": {
+          "present_symptoms": [
+            "cough"
+          ],
+          "symptom_count": 1
+        }
+      },
+      "recommendations": {
+        "medications": [],
+        "treatments": [
+          "Consult with healthcare provider for appropriate treatment"
+        ],
+        "warnings": [
+          "This condition requires professional medical evaluation"
+        ],
+        "lifestyle_advice": [
+          "Follow up with your healthcare provider",
+          "Monitor symptoms and seek care if worsening",
+          "Maintain good hygiene practices",
+          "Stay hydrated and get adequate rest"
+        ]
+      },
+      "patient_insights": {
+        "personalization_applied": false,
+        "history_analyzed": false,
+        "pattern_analysis": null,
+        "risk_factors": null
+      },
+      "medical_disclaimer": {
+        "important_notice": [
+          "\ud83d\udea8 MEDICAL DISCLAIMER: This AI system is a decision-support tool only and NOT a replacement for professional medical advice.",
+          "\ud83d\udc68\u200d\u2695\ufe0f FINAL DECISIONS must be confirmed by a licensed healthcare provider.",
+          "\ud83c\udfe5 For emergency symptoms, seek immediate medical attention or call emergency services.",
+          "\ud83d\udc8a Do not start, stop, or change medications without consulting your doctor.",
+          "\ud83d\udccb This recommendation is based on symptoms only and may not account for all medical factors.",
+          "\u2696\ufe0f Healthcare providers should use their clinical judgment and consider complete patient history."
+        ],
+        "emergency_signs": [
+          "Difficulty breathing or shortness of breath",
+          "Chest pain or pressure",
+          "Severe or persistent vomiting",
+          "High fever (>103\u00b0F/39.4\u00b0C)",
+          "Signs of severe dehydration",
+          "Sudden severe headache",
+          "Confusion or altered mental state"
+        ]
+      },
+      "confidence_interpretation": {
+        "level": "High",
+        "interpretation": "The AI model is highly confident in this diagnosis based on the symptom pattern.",
+        "recommendation": "Proceed with recommended actions but confirm with healthcare provider."
+      },
+      "next_steps": [
+        "Consider more frequent monitoring due to age-related risk factors",
+        "Follow medication instructions carefully if prescribed",
+        "Keep a symptom diary to track progress",
+        "Schedule follow-up appointment as recommended",
+        "Seek immediate care if emergency symptoms develop"
+      ],
+      "ai_learning": {
+        "data_collected": true,
+        "session_id": null,
+        "feedback_encouraged": "Healthcare providers can provide feedback to improve AI accuracy"
+      }
+    },
+    "user_feedback": null,
+    "confidence": 0,
+    "session_id": "session_20250818_111621"
+  }
+]

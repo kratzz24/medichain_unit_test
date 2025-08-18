@@ -10,6 +10,7 @@ const api = axios.create({
   headers: {
     'Content-Type': 'application/json',
   },
+  // Remove timeout for faster response - let the backend handle timing
 });
 
 // Add token to requests if available
@@ -70,7 +71,7 @@ export const AuthProvider = ({ children }) => {
     };
 
     checkAuthState();
-  }, []);
+  }, []); // Empty dependency array is correct here - we only want this to run once on mount
 
   const clearAuthData = () => {
     localStorage.removeItem('token');
@@ -121,47 +122,43 @@ export const AuthProvider = ({ children }) => {
       }
     } catch (error) {
       let errorMessage = 'Login failed. Please try again.';
+      let requiresVerification = false;
       
       if (error.isNetworkError) {
         errorMessage = 'Cannot connect to server. Please check if the backend is running.';
       } else if (error.response?.data?.error) {
         errorMessage = error.response.data.error;
+        requiresVerification = error.response.data.requires_verification || false;
       } else if (error.message && !error.isNetworkError) {
         errorMessage = error.message;
       }
       
       setError(errorMessage);
-      return { success: false, message: errorMessage };
+      return { success: false, message: errorMessage, requiresVerification };
     } finally {
       setLoading(false);
     }
   };
 
-  const signup = async (email, password, firstName, lastName, role) => {
+  const signup = async (email, password, fullName, role) => {
     try {
       setError(null);
       setLoading(true);
       
-      const requestData = {
+      const response = await api.post('/api/auth/signup', {
         email,
         password,
-        first_name: firstName,
-        last_name: lastName,
+        full_name: fullName,
         role,
-      };
-      
-      console.log('DEBUG: Sending signup request:', requestData);
-      
-      const response = await api.post('/api/auth/signup', requestData);
+      });
 
       if (response.data.success) {
-        // Automatically log in the user after successful signup
-        const { user, token } = response.data.data;
-        localStorage.setItem('token', token);
-        localStorage.setItem('medichain_user', JSON.stringify(user));
-        setUser(user);
-        setIsAuthenticated(true);
-        return { success: true, message: response.data.message };
+        // Don't set user or token yet - email verification required
+        return { 
+          success: true, 
+          requiresVerification: response.data.data?.requires_verification || false,
+          message: response.data.message 
+        };
       } else {
         throw new Error(response.data.error || 'Signup failed');
       }
@@ -185,25 +182,74 @@ export const AuthProvider = ({ children }) => {
 
   const logout = () => {
     clearAuthData();
-    return Promise.resolve();
+  };
+
+  const resendVerification = async (email) => {
+    try {
+      setError(null);
+      setLoading(true);
+      
+      const response = await api.post('/api/auth/resend-verification', { email });
+      
+      if (response.data.success) {
+        return { success: true, message: response.data.message };
+      } else {
+        throw new Error(response.data.error || 'Failed to resend verification email');
+      }
+    } catch (error) {
+      let errorMessage = 'Failed to resend verification email. Please try again.';
+      
+      if (error.response?.data?.error) {
+        errorMessage = error.response.data.error;
+      } else if (error.message) {
+        errorMessage = error.message;
+      }
+      
+      setError(errorMessage);
+      return { success: false, error: errorMessage };
+    } finally {
+      setLoading(false);
+    }
+  };
+
+  const checkEmailVerification = async (email) => {
+    try {
+      const response = await api.get(`/api/auth/verify-email?email=${encodeURIComponent(email)}`);
+      
+      if (response.data.success) {
+        return { success: true, verified: response.data.email_verified };
+      } else {
+        return { success: false, verified: false };
+      }
+    } catch (error) {
+      console.error('Check email verification error:', error);
+      return { success: false, verified: false };
+    }
+  };
+
+  const updateUser = (updatedData) => {
+    const updatedUser = { ...user, ...updatedData };
+    setUser(updatedUser);
+    localStorage.setItem('medichain_user', JSON.stringify(updatedUser));
+  };
+
+  const clearError = () => {
+    setError(null);
   };
 
   const value = {
     user,
-    login,
-    signup,
-    logout,
     loading,
     error,
     isAuthenticated,
-    setError,
+    login,
+    signup,
+    logout,
+    updateUser,
+    clearError,
+    resendVerification,
+    checkEmailVerification,
   };
 
-  return (
-    <AuthContext.Provider value={value}>
-      {children}
-    </AuthContext.Provider>
-  );
+  return <AuthContext.Provider value={value}>{children}</AuthContext.Provider>;
 };
-
-export default AuthContext;
