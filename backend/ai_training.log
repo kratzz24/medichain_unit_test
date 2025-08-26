@@ -570,3 +570,106 @@
 2025-08-18 11:16:10,877 - INFO -  * Debugger PIN: 125-383-087
 2025-08-18 11:16:21,614 - INFO - Collected learning data: session_20250818_111621
 2025-08-18 11:16:21,615 - INFO - 127.0.0.1 - - [18/Aug/2025 11:16:21] "POST /predict HTTP/1.1" 200 -
+2025-08-20 21:35:16,185 - INFO - Existing model loaded successfully
+2025-08-20 21:35:16,250 - INFO - [31m[1mWARNING: This is a development server. Do not use it in a production deployment. Use a production WSGI server instead.[0m
+ * Running on http://127.0.0.1:5001
+2025-08-20 21:35:16,251 - INFO - [33mPress CTRL+C to quit[0m
+2025-08-20 21:35:16,252 - INFO -  * Restarting with stat
+2025-08-20 21:35:17,382 - INFO - Existing model loaded successfully
+2025-08-20 21:35:17,409 - WARNING -  * Debugger is active!
+2025-08-20 21:35:17,411 - INFO -  * Debugger PIN: 364-057-687
+2025-08-20 21:35:53,077 - INFO - 127.0.0.1 - - [20/Aug/2025 21:35:53] "GET /health HTTP/1.1" 200 -
+2025-08-20 21:35:53,222 - INFO - 127.0.0.1 - - [20/Aug/2025 21:35:53] "GET /learning-stats HTTP/1.1" 200 -
+2025-08-20 21:35:53,299 - INFO - 127.0.0.1 - - [20/Aug/2025 21:35:53] "GET /health HTTP/1.1" 200 -
+2025-08-20 21:35:53,409 - INFO - 127.0.0.1 - - [20/Aug/2025 21:35:53] "GET /learning-stats HTTP/1.1" 200 -
+2025-08-20 21:36:16,852 - INFO - 127.0.0.1 - - [20/Aug/2025 21:36:16] "OPTIONS /predict HTTP/1.1" 200 -
+2025-08-20 21:36:17,529 - INFO - Collected learning data: session_20250820_213617
+2025-08-20 21:36:17,531 - INFO - 127.0.0.1 - - [20/Aug/2025 21:36:17] "POST /predict HTTP/1.1" 200 -
+2025-08-20 21:37:04,656 - INFO - 127.0.0.1 - - [20/Aug/2025 21:37:04] "GET /health HTTP/1.1" 200 -
+2025-08-20 21:37:04,962 - INFO - 127.0.0.1 - - [20/Aug/2025 21:37:04] "GET /health HTTP/1.1" 200 -
+2025-08-20 21:37:04,973 - INFO - 127.0.0.1 - - [20/Aug/2025 21:37:04] "GET /learning-stats HTTP/1.1" 200 -
+2025-08-20 21:37:05,278 - INFO - 127.0.0.1 - - [20/Aug/2025 21:37:05] "GET /learning-stats HTTP/1.1" 200 -
+2025-08-20 21:37:22,177 - INFO - 127.0.0.1 - - [20/Aug/2025 21:37:22] "OPTIONS /predict HTTP/1.1" 200 -
+2025-08-20 21:37:22,539 - INFO - Collected learning data: session_20250820_213722
+2025-08-20 21:37:22,540 - INFO - 127.0.0.1 - - [20/Aug/2025 21:37:22] "POST /predict HTTP/1.1" 200 -
+2025-08-20 21:39:22,399 - INFO - 127.0.0.1 - - [20/Aug/2025 21:39:22] "GET /health HTTP/1.1" 200 -
+2025-08-20 21:39:22,436 - INFO - 127.0.0.1 - - [20/Aug/2025 21:39:22] "GET /learning-stats HTTP/1.1" 200 -
+2025-08-20 21:39:22,656 - INFO - 127.0.0.1 - - [20/Aug/2025 21:39:22] "GET /health HTTP/1.1" 200 -
+2025-08-20 21:39:22,735 - INFO - 127.0.0.1 - - [20/Aug/2025 21:39:22] "GET /learning-stats HTTP/1.1" 200 -
+2025-08-20 21:39:28,491 - INFO - 127.0.0.1 - - [20/Aug/2025 21:39:28] "GET /health HTTP/1.1" 200 -
+2025-08-20 21:39:28,795 - INFO - 127.0.0.1 - - [20/Aug/2025 21:39:28] "GET /learning-stats HTTP/1.1" 200 -
+2025-08-20 21:39:28,797 - INFO - 127.0.0.1 - - [20/Aug/2025 21:39:28] "GET /health HTTP/1.1" 200 -
+2025-08-20 21:39:29,119 - INFO - 127.0.0.1 - - [20/Aug/2025 21:39:29] "GET /learning-stats HTTP/1.1" 200 -
+2025-08-20 21:40:00,320 - INFO - 127.0.0.1 - - [20/Aug/2025 21:40:00] "GET /health HTTP/1.1" 200 -
+2025-08-20 21:40:00,343 - INFO - 127.0.0.1 - - [20/Aug/2025 21:40:00] "GET /learning-stats HTTP/1.1" 200 -
+2025-08-20 21:40:00,570 - INFO - 127.0.0.1 - - [20/Aug/2025 21:40:00] "GET /health HTTP/1.1" 200 -
+2025-08-20 21:40:00,652 - INFO - 127.0.0.1 - - [20/Aug/2025 21:40:00] "GET /learning-stats HTTP/1.1" 200 -
+2025-08-22 18:43:01,558 - INFO - Existing model loaded successfully
+2025-08-22 18:43:01,638 - INFO - [31m[1mWARNING: This is a development server. Do not use it in a production deployment. Use a production WSGI server instead.[0m
+ * Running on http://127.0.0.1:5001
+2025-08-22 18:43:01,638 - INFO - [33mPress CTRL+C to quit[0m
+2025-08-22 18:43:01,640 - INFO -  * Restarting with stat
+2025-08-22 18:43:03,565 - INFO - Existing model loaded successfully
+2025-08-22 18:43:03,607 - WARNING -  * Debugger is active!
+2025-08-22 18:43:03,612 - INFO -  * Debugger PIN: 364-057-687
+2025-08-22 18:45:39,935 - INFO - 127.0.0.1 - - [22/Aug/2025 18:45:39] "GET /health HTTP/1.1" 200 -
+2025-08-22 18:45:40,041 - INFO - 127.0.0.1 - - [22/Aug/2025 18:45:40] "GET /learning-stats HTTP/1.1" 200 -
+2025-08-22 18:45:40,185 - INFO - 127.0.0.1 - - [22/Aug/2025 18:45:40] "GET /health HTTP/1.1" 200 -
+2025-08-22 18:45:40,271 - INFO - 127.0.0.1 - - [22/Aug/2025 18:45:40] "GET /learning-stats HTTP/1.1" 200 -
+2025-08-22 18:46:11,171 - INFO - 127.0.0.1 - - [22/Aug/2025 18:46:11] "OPTIONS /predict HTTP/1.1" 200 -
+2025-08-22 18:46:11,716 - INFO - Collected learning data: session_20250822_184611
+2025-08-22 18:46:11,718 - INFO - 127.0.0.1 - - [22/Aug/2025 18:46:11] "POST /predict HTTP/1.1" 200 -
+2025-08-22 18:46:51,184 - INFO - 127.0.0.1 - - [22/Aug/2025 18:46:51] "GET /health HTTP/1.1" 200 -
+2025-08-22 18:46:51,501 - INFO - 127.0.0.1 - - [22/Aug/2025 18:46:51] "GET /health HTTP/1.1" 200 -
+2025-08-22 18:46:51,547 - INFO - 127.0.0.1 - - [22/Aug/2025 18:46:51] "GET /learning-stats HTTP/1.1" 200 -
+2025-08-22 18:46:51,860 - INFO - 127.0.0.1 - - [22/Aug/2025 18:46:51] "GET /learning-stats HTTP/1.1" 200 -
+2025-08-22 18:47:08,961 - INFO - 127.0.0.1 - - [22/Aug/2025 18:47:08] "OPTIONS /predict HTTP/1.1" 200 -
+2025-08-22 18:47:09,391 - INFO - Collected learning data: session_20250822_184709
+2025-08-22 18:47:09,392 - INFO - 127.0.0.1 - - [22/Aug/2025 18:47:09] "POST /predict HTTP/1.1" 200 -
+2025-08-22 18:48:35,642 - INFO - 127.0.0.1 - - [22/Aug/2025 18:48:35] "OPTIONS /predict HTTP/1.1" 200 -
+2025-08-22 18:48:36,011 - INFO - Collected learning data: session_20250822_184835
+2025-08-22 18:48:36,013 - INFO - 127.0.0.1 - - [22/Aug/2025 18:48:36] "POST /predict HTTP/1.1" 200 -
+2025-08-23 21:33:52,317 - INFO - Existing model loaded successfully
+2025-08-23 21:33:52,357 - INFO - [31m[1mWARNING: This is a development server. Do not use it in a production deployment. Use a production WSGI server instead.[0m
+ * Running on http://127.0.0.1:5001
+2025-08-23 21:33:52,358 - INFO - [33mPress CTRL+C to quit[0m
+2025-08-23 21:33:52,359 - INFO -  * Restarting with stat
+2025-08-23 21:33:53,462 - INFO - Existing model loaded successfully
+2025-08-23 21:33:53,491 - WARNING -  * Debugger is active!
+2025-08-23 21:33:53,496 - INFO -  * Debugger PIN: 364-057-687
+2025-08-23 21:34:53,764 - INFO - 127.0.0.1 - - [23/Aug/2025 21:34:53] "GET /health HTTP/1.1" 200 -
+2025-08-23 21:34:53,781 - INFO - 127.0.0.1 - - [23/Aug/2025 21:34:53] "GET /learning-stats HTTP/1.1" 200 -
+2025-08-23 21:34:54,015 - INFO - 127.0.0.1 - - [23/Aug/2025 21:34:54] "GET /health HTTP/1.1" 200 -
+2025-08-23 21:34:54,078 - INFO - 127.0.0.1 - - [23/Aug/2025 21:34:54] "GET /learning-stats HTTP/1.1" 200 -
+2025-08-23 21:35:18,975 - INFO - 127.0.0.1 - - [23/Aug/2025 21:35:18] "OPTIONS /predict HTTP/1.1" 200 -
+2025-08-23 21:35:19,350 - INFO - Collected learning data: session_20250823_213519
+2025-08-23 21:35:19,351 - INFO - 127.0.0.1 - - [23/Aug/2025 21:35:19] "POST /predict HTTP/1.1" 200 -
+2025-08-26 10:57:50,253 - INFO - Existing model loaded successfully
+2025-08-26 10:57:50,314 - INFO - [31m[1mWARNING: This is a development server. Do not use it in a production deployment. Use a production WSGI server instead.[0m
+ * Running on http://127.0.0.1:5001
+2025-08-26 10:57:50,314 - INFO - [33mPress CTRL+C to quit[0m
+2025-08-26 10:57:50,315 - INFO -  * Restarting with stat
+2025-08-26 10:57:51,505 - INFO - Existing model loaded successfully
+2025-08-26 10:57:51,529 - WARNING -  * Debugger is active!
+2025-08-26 10:57:51,532 - INFO -  * Debugger PIN: 364-057-687
+2025-08-26 10:59:04,646 - INFO - 127.0.0.1 - - [26/Aug/2025 10:59:04] "GET /health HTTP/1.1" 200 -
+2025-08-26 10:59:04,758 - INFO - 127.0.0.1 - - [26/Aug/2025 10:59:04] "GET /learning-stats HTTP/1.1" 200 -
+2025-08-26 10:59:04,893 - INFO - 127.0.0.1 - - [26/Aug/2025 10:59:04] "GET /health HTTP/1.1" 200 -
+2025-08-26 10:59:04,960 - INFO - 127.0.0.1 - - [26/Aug/2025 10:59:04] "GET /learning-stats HTTP/1.1" 200 -
+2025-08-26 10:59:28,051 - INFO - 127.0.0.1 - - [26/Aug/2025 10:59:28] "OPTIONS /predict HTTP/1.1" 200 -
+2025-08-26 10:59:28,601 - INFO - Collected learning data: session_20250826_105928
+2025-08-26 10:59:28,603 - INFO - 127.0.0.1 - - [26/Aug/2025 10:59:28] "POST /predict HTTP/1.1" 200 -
+2025-08-26 11:00:18,174 - INFO - 127.0.0.1 - - [26/Aug/2025 11:00:18] "GET /health HTTP/1.1" 200 -
+2025-08-26 11:00:18,488 - INFO - 127.0.0.1 - - [26/Aug/2025 11:00:18] "GET /health HTTP/1.1" 200 -
+2025-08-26 11:00:18,499 - INFO - 127.0.0.1 - - [26/Aug/2025 11:00:18] "GET /learning-stats HTTP/1.1" 200 -
+2025-08-26 11:00:18,816 - INFO - 127.0.0.1 - - [26/Aug/2025 11:00:18] "GET /learning-stats HTTP/1.1" 200 -
+2025-08-26 11:00:37,288 - INFO - 127.0.0.1 - - [26/Aug/2025 11:00:37] "OPTIONS /predict HTTP/1.1" 200 -
+2025-08-26 11:00:37,651 - INFO - Collected learning data: session_20250826_110037
+2025-08-26 11:00:37,652 - INFO - 127.0.0.1 - - [26/Aug/2025 11:00:37] "POST /predict HTTP/1.1" 200 -
+2025-08-26 11:00:59,968 - INFO - 127.0.0.1 - - [26/Aug/2025 11:00:59] "GET /health HTTP/1.1" 200 -
+2025-08-26 11:01:00,276 - INFO - 127.0.0.1 - - [26/Aug/2025 11:01:00] "GET /learning-stats HTTP/1.1" 200 -
+2025-08-26 11:01:00,281 - INFO - 127.0.0.1 - - [26/Aug/2025 11:01:00] "GET /health HTTP/1.1" 200 -
+2025-08-26 11:01:00,591 - INFO - 127.0.0.1 - - [26/Aug/2025 11:01:00] "GET /learning-stats HTTP/1.1" 200 -
+2025-08-26 11:01:18,367 - INFO - 127.0.0.1 - - [26/Aug/2025 11:01:18] "OPTIONS /predict HTTP/1.1" 200 -
+2025-08-26 11:01:18,693 - INFO - Collected learning data: session_20250826_110118
+2025-08-26 11:01:18,693 - INFO - 127.0.0.1 - - [26/Aug/2025 11:01:18] "POST /predict HTTP/1.1" 200 -
