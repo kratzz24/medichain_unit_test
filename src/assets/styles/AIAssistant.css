@@ -536,3 +536,26 @@
     border: 1px solid #d1d5db;
   }
 }
+
+/* Additional styles for diagnosis display */
+.confidence-score {
+  font-size: 0.9em;
+  color: #6b7280;
+  font-weight: 500;
+}
+
+.diagnosis-description {
+  font-size: 0.85em;
+  color: #6b7280;
+  margin-top: 4px;
+  font-style: italic;
+}
+
+/* Enhanced differential diagnosis styling */
+.ai-output-list li {
+  margin-bottom: 8px;
+}
+
+.ai-output-list li:last-child {
+  margin-bottom: 0;
+}

@@ -2,7 +2,6 @@
 Authentication routes for signup, login, password reset, and user management
 Simple version without email verification - for stable functionality
 """
-print("DEBUG: auth_routes_simple.py is being loaded!")
 from flask import Blueprint, request, jsonify
 from auth.auth_utils import auth_utils
 from db.supabase_client import SupabaseClient
@@ -30,21 +29,15 @@ def signup():
     try:
         data = request.get_json()
         
-        # DEBUG: Print received data
-        print("DEBUG: Received signup data:", data)
-        print("DEBUG: Data keys:", list(data.keys()) if data else "No data")
-        
         # Validate required fields
         required_fields = ['email', 'password', 'first_name', 'last_name', 'role']
         missing_fields = []
         for field in required_fields:
             if not data.get(field):
                 missing_fields.append(field)
-                print(f"DEBUG: Missing field '{field}', value: {data.get(field)}")
         
         if missing_fields:
             error_msg = f"Missing required fields: {', '.join(missing_fields)}"
-            print(f"DEBUG: Returning error: {error_msg}")
             return jsonify({'error': error_msg}), 400
         
         email = data['email'].strip().lower()

@@ -250,5 +250,40 @@
     "reason": "low_confidence",
     "requires_human_review": true,
     "status": "pending"
+  },
+  {
+    "timestamp": "2025-08-27T21:20:42.719493",
+    "symptoms": {
+      "fever": 1,
+      "cough": 1,
+      "fatigue": 1,
+      "shortness_of_breath": 0,
+      "headache": 0,
+      "sore_throat": 0
+    },
+    "patient_data": {
+      "age": 18,
+      "gender": "Female",
+      "patient_id": "temp_1756300841961",
+      "name": "Patient"
+    },
+    "reason": "low_confidence",
+    "requires_human_review": true,
+    "status": "pending"
+  },
+  {
+    "timestamp": "2025-08-27T21:24:09.863419",
+    "symptoms": {
+      "fever": 1,
+      "cough": 0,
+      "fatigue": 0,
+      "shortness_of_breath": 0,
+      "headache": 1,
+      "sore_throat": 0
+    },
+    "patient_data": {},
+    "reason": "low_confidence",
+    "requires_human_review": true,
+    "status": "pending"
   }
 ]

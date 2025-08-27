@@ -673,3 +673,27 @@
 2025-08-26 11:01:18,367 - INFO - 127.0.0.1 - - [26/Aug/2025 11:01:18] "OPTIONS /predict HTTP/1.1" 200 -
 2025-08-26 11:01:18,693 - INFO - Collected learning data: session_20250826_110118
 2025-08-26 11:01:18,693 - INFO - 127.0.0.1 - - [26/Aug/2025 11:01:18] "POST /predict HTTP/1.1" 200 -
+2025-08-27 21:20:07,348 - INFO - Existing model loaded successfully
+2025-08-27 21:20:07,398 - INFO - [31m[1mWARNING: This is a development server. Do not use it in a production deployment. Use a production WSGI server instead.[0m
+ * Running on http://127.0.0.1:5001
+2025-08-27 21:20:07,399 - INFO - [33mPress CTRL+C to quit[0m
+2025-08-27 21:20:07,400 - INFO -  * Restarting with stat
+2025-08-27 21:20:08,437 - INFO - Existing model loaded successfully
+2025-08-27 21:20:08,460 - WARNING -  * Debugger is active!
+2025-08-27 21:20:08,463 - INFO -  * Debugger PIN: 364-057-687
+2025-08-27 21:20:42,273 - INFO - 127.0.0.1 - - [27/Aug/2025 21:20:42] "OPTIONS /predict HTTP/1.1" 200 -
+2025-08-27 21:20:42,757 - INFO - Recorded unknown case for human review
+2025-08-27 21:20:42,759 - INFO - 127.0.0.1 - - [27/Aug/2025 21:20:42] "POST /predict HTTP/1.1" 200 -
+2025-08-27 21:22:13,941 - INFO -  * Detected change in 'D:\\Repositories\\medichain\\medichain\\backend\\app.py', reloading
+2025-08-27 21:22:14,117 - INFO -  * Restarting with stat
+2025-08-27 21:22:15,412 - INFO - Existing model loaded successfully
+2025-08-27 21:22:15,438 - WARNING -  * Debugger is active!
+2025-08-27 21:22:15,440 - INFO -  * Debugger PIN: 364-057-687
+2025-08-27 21:22:23,519 - INFO -  * Detected change in 'D:\\Repositories\\medichain\\medichain\\backend\\app.py', reloading
+2025-08-27 21:22:23,723 - INFO -  * Restarting with stat
+2025-08-27 21:22:25,008 - INFO - Existing model loaded successfully
+2025-08-27 21:22:25,034 - WARNING -  * Debugger is active!
+2025-08-27 21:22:25,036 - INFO -  * Debugger PIN: 364-057-687
+2025-08-27 21:24:09,902 - INFO - Recorded unknown case for human review
+2025-08-27 21:24:09,903 - INFO - 127.0.0.1 - - [27/Aug/2025 21:24:09] "POST /predict HTTP/1.1" 200 -
+2025-08-27 21:25:03,494 - INFO - 127.0.0.1 - - [27/Aug/2025 21:25:03] "[33mPOST /api/ai/diagnose HTTP/1.1[0m" 404 -

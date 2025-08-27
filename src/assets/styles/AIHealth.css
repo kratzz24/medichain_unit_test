@@ -1,0 +1,368 @@
+/* AI Health Component Specific Styles */
+
+/* AI Health Container */
+.ai-health-container {
+  min-height: 100vh;
+  background: linear-gradient(135deg, #e0f2fe 0%, #4dd0e1 100%);
+  position: relative;
+  overflow: hidden;
+}
+
+.ai-health-container::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><defs><pattern id="cross" x="0" y="0" width="20" height="20" patternUnits="userSpaceOnUse"><path d="M10,5 L10,15 M5,10 L15,10" stroke="rgba(255,255,255,0.1)" stroke-width="1" fill="none"/></pattern></defs><rect width="100" height="100" fill="url(%23cross)"/></svg>') repeat;
+  opacity: 0.3;
+  pointer-events: none;
+}
+
+/* AI Health Header */
+.ai-health-header {
+  text-align: center;
+  padding: 3rem 1rem;
+  position: relative;
+  z-index: 10;
+}
+
+.ai-health-title {
+  font-size: 3.5rem;
+  font-weight: 900;
+  color: #333;
+  margin-bottom: 1rem;
+  background: linear-gradient(135deg, #2196f3, #00bcd4);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  text-shadow: 0 4px 20px rgba(33, 150, 243, 0.3);
+}
+
+.ai-health-subtitle {
+  font-size: 1.3rem;
+  color: #555;
+  margin-bottom: 2rem;
+  max-width: 600px;
+  margin-left: auto;
+  margin-right: auto;
+  line-height: 1.6;
+}
+
+/* AI Chat Container */
+.ai-chat-container {
+  max-width: 800px;
+  margin: 0 auto;
+  padding: 2rem;
+  background: linear-gradient(135deg, rgba(255, 255, 255, 0.95), rgba(255, 255, 255, 0.9));
+  border-radius: 25px;
+  box-shadow: 0 20px 60px rgba(0, 0, 0, 0.1);
+  backdrop-filter: blur(20px);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  position: relative;
+  z-index: 10;
+}
+
+/* AI Chat Messages */
+.ai-messages-container {
+  max-height: 400px;
+  overflow-y: auto;
+  margin-bottom: 2rem;
+  padding: 1rem;
+  border-radius: 15px;
+  background: rgba(248, 250, 252, 0.8);
+  border: 1px solid rgba(226, 232, 240, 0.5);
+}
+
+.ai-message {
+  margin-bottom: 1rem;
+  padding: 1rem;
+  border-radius: 12px;
+  position: relative;
+  animation: messageSlideIn 0.3s ease-out;
+}
+
+.ai-message.user {
+  background: linear-gradient(135deg, #4facfe 0%, #00f2fe 100%);
+  color: white;
+  margin-left: 20%;
+  text-align: right;
+}
+
+.ai-message.assistant {
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  color: white;
+  margin-right: 20%;
+}
+
+.ai-message.error {
+  background: linear-gradient(135deg, #ff6b6b 0%, #ff5252 100%);
+  color: white;
+  margin-right: 20%;
+}
+
+@keyframes messageSlideIn {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* AI Input Form */
+.ai-input-form {
+  display: flex;
+  gap: 1rem;
+  margin-bottom: 1.5rem;
+}
+
+.ai-symptom-input {
+  flex: 1;
+  padding: 1rem 1.5rem;
+  border: 2px solid rgba(79, 172, 254, 0.3);
+  border-radius: 15px;
+  font-size: 1rem;
+  background: rgba(255, 255, 255, 0.9);
+  transition: all 0.3s ease;
+  backdrop-filter: blur(10px);
+}
+
+.ai-symptom-input:focus {
+  outline: none;
+  border-color: #4facfe;
+  box-shadow: 0 0 0 3px rgba(79, 172, 254, 0.1);
+  background: white;
+}
+
+.ai-symptom-input::placeholder {
+  color: #94a3b8;
+}
+
+.ai-submit-btn {
+  padding: 1rem 2rem;
+  background: linear-gradient(135deg, #4facfe 0%, #00f2fe 100%);
+  color: white;
+  border: none;
+  border-radius: 15px;
+  font-weight: 700;
+  font-size: 1rem;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  box-shadow: 0 4px 20px rgba(79, 172, 254, 0.3);
+}
+
+.ai-submit-btn:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 8px 30px rgba(79, 172, 254, 0.4);
+  background: linear-gradient(135deg, #00f2fe 0%, #4facfe 100%);
+}
+
+.ai-submit-btn:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+  transform: none;
+  box-shadow: none;
+}
+
+/* Account Creation Prompt */
+.account-prompt {
+  background: linear-gradient(135deg, #fff3cd 0%, #ffeaa7 100%);
+  border: 1px solid #ffd93d;
+  border-radius: 15px;
+  padding: 1.5rem;
+  margin-bottom: 1.5rem;
+  text-align: center;
+  box-shadow: 0 4px 20px rgba(255, 217, 61, 0.2);
+}
+
+.account-prompt h3 {
+  color: #856404;
+  margin-bottom: 0.5rem;
+  font-size: 1.2rem;
+  font-weight: 700;
+}
+
+.account-prompt p {
+  color: #856404;
+  margin-bottom: 1rem;
+  line-height: 1.5;
+}
+
+.account-prompt-actions {
+  display: flex;
+  gap: 1rem;
+  justify-content: center;
+  flex-wrap: wrap;
+}
+
+.account-btn {
+  padding: 0.75rem 1.5rem;
+  border: none;
+  border-radius: 10px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  text-decoration: none;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.account-btn.primary {
+  background: linear-gradient(135deg, #4facfe 0%, #00f2fe 100%);
+  color: white;
+  box-shadow: 0 4px 15px rgba(79, 172, 254, 0.3);
+}
+
+.account-btn.primary:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 6px 20px rgba(79, 172, 254, 0.4);
+}
+
+.account-btn.secondary {
+  background: rgba(255, 255, 255, 0.9);
+  color: #856404;
+  border: 1px solid #ffd93d;
+}
+
+.account-btn.secondary:hover {
+  background: white;
+  transform: translateY(-1px);
+}
+
+/* Loading States */
+.ai-loading {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  padding: 1rem;
+  color: #666;
+  font-style: italic;
+}
+
+.ai-loading::before {
+  content: '';
+  width: 20px;
+  height: 20px;
+  border: 2px solid #e2e8f0;
+  border-top: 2px solid #4facfe;
+  border-radius: 50%;
+  animation: spin 1s linear infinite;
+}
+
+@keyframes spin {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+/* AI Response Styling */
+.ai-diagnosis-result {
+  background: linear-gradient(135deg, #d4edda 0%, #c3e6cb 100%);
+  border: 1px solid #28a745;
+  border-radius: 15px;
+  padding: 1.5rem;
+  margin-top: 1rem;
+  box-shadow: 0 4px 20px rgba(40, 167, 69, 0.2);
+}
+
+.ai-diagnosis-result h4 {
+  color: #155724;
+  margin-bottom: 1rem;
+  font-size: 1.3rem;
+  font-weight: 700;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.ai-diagnosis-result h4::before {
+  content: '🏥';
+  font-size: 1.2rem;
+}
+
+.diagnosis-details {
+  display: grid;
+  gap: 1rem;
+  margin-bottom: 1rem;
+}
+
+.diagnosis-item {
+  background: rgba(255, 255, 255, 0.7);
+  padding: 1rem;
+  border-radius: 10px;
+  border-left: 4px solid #28a745;
+}
+
+.diagnosis-item strong {
+  color: #155724;
+  font-weight: 700;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+  .ai-health-title {
+    font-size: 2.5rem;
+  }
+  
+  .ai-health-subtitle {
+    font-size: 1.1rem;
+  }
+  
+  .ai-chat-container {
+    margin: 1rem;
+    padding: 1.5rem;
+  }
+  
+  .ai-input-form {
+    flex-direction: column;
+  }
+  
+  .ai-submit-btn {
+    align-self: stretch;
+  }
+  
+  .ai-message.user,
+  .ai-message.assistant,
+  .ai-message.error {
+    margin-left: 0;
+    margin-right: 0;
+  }
+  
+  .account-prompt-actions {
+    flex-direction: column;
+    align-items: center;
+  }
+  
+  .account-btn {
+    width: 100%;
+    justify-content: center;
+    max-width: 200px;
+  }
+}
+
+@media (max-width: 480px) {
+  .ai-health-header {
+    padding: 2rem 1rem;
+  }
+  
+  .ai-health-title {
+    font-size: 2rem;
+  }
+  
+  .ai-chat-container {
+    padding: 1rem;
+  }
+  
+  .ai-symptom-input,
+  .ai-submit-btn {
+    padding: 0.875rem 1.25rem;
+  }
+}

@@ -208,9 +208,9 @@ const LandingPage = () => {
             <div className="hero-buttons">
               <button
                 className="btn btn-primary btn-large"
-                onClick={handleGetStarted}
+                onClick={() => navigate('/ai-health')}
               >
-                Start Your Journey
+                Try AI Health Assistant
               </button>
               <button
                 className="btn btn-secondary btn-large"
@@ -231,40 +231,6 @@ const LandingPage = () => {
               <div className="stat">
                 <span className="stat-number">{statsValues.encryption}-bit</span>
                 <span className="stat-label">Encryption</span>
-              </div>
-            </div>
-          </div>
-          <div className="hero-visual">
-            <div className="medical-dashboard">
-              <div className="dashboard-header">
-                <div className="dashboard-icon">+</div>
-                <div>
-                  <h3 className="dashboard-title">Healthcare Professional</h3>
-                  <p className="dashboard-subtitle">AI-Powered Medical Platform</p>
-                </div>
-              </div>
-              <div className="feature-cards">
-                <div className="feature-card">
-                  <div className="feature-icon">🧠</div>
-                  <div className="feature-text">
-                    <h4>AI-Powered Diagnostics</h4>
-                    <p>Advanced machine learning for accurate diagnosis</p>
-                  </div>
-                </div>
-                <div className="feature-card">
-                  <div className="feature-icon">🔒</div>
-                  <div className="feature-text">
-                    <h4>Blockchain Security</h4>
-                    <p>Immutable and secure health record storage</p>
-                  </div>
-                </div>
-                <div className="feature-card">
-                  <div className="feature-icon">🔐</div>
-                  <div className="feature-text">
-                    <h4>End-to-End Encryption</h4>
-                    <p>Military-grade AES & SHA-256 protection</p>
-                  </div>
-                </div>
               </div>
             </div>
           </div>

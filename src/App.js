@@ -4,8 +4,10 @@ import { AuthProvider } from './context/AuthContext';
 import LandingPage from './pages/LandingPage';
 import MedichainLogin from './frontend/MedichainLogin';
 import MedichainSignup from './frontend/MedichainSignup';
-import Dashboard from './pages/Dashboard'; // Use the correct Dashboard component
-import AIAssistant from './pages/AIAssistant'; // Import the real AI Assistant
+import Dashboard from './pages/Dashboard'; // Role-based dashboard router
+import AIHealth from './pages/AIHealth'; // New standalone AI Health page
+import PatientAIHistory from './pages/PatientAIHistory'; // For doctors to view patient AI history
+import HealthRecord from './pages/HealthRecord'; // Patient health record page
 import ProtectedRoute from './components/ProtectedRoute';
 import './App.css';
 
@@ -66,10 +68,24 @@ function App() {
             />
             
             <Route 
-              path="/ai-assistant" 
+              path="/ai-health" 
+              element={<AIHealth />} 
+            />
+            
+            <Route 
+              path="/health-record" 
               element={
                 <ProtectedRoute>
-                  <AIAssistant />
+                  <HealthRecord />
+                </ProtectedRoute>
+              } 
+            />
+            
+            <Route 
+              path="/patient-ai-history" 
+              element={
+                <ProtectedRoute>
+                  <PatientAIHistory />
                 </ProtectedRoute>
               } 
             />

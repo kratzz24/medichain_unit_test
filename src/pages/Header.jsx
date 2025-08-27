@@ -39,13 +39,6 @@ const Header = () => {
           </NavLink>
 
           <NavLink 
-            to="/ai-assistant" 
-            className={({ isActive }) => "nav-link" + (isActive ? " active" : "")}
-          >
-            AI ASSISTANT
-          </NavLink>
-
-          <NavLink 
             to="/prescriptions" 
             className={({ isActive }) => "nav-link" + (isActive ? " active" : "")}
           >
