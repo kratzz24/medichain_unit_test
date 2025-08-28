@@ -1,13 +1,78 @@
 import React, { useState, useEffect } from 'react';
-import { Brain, User, Activity, FileText, AlertCircle, Info, LogIn, UserPlus, Database, Shield } from 'lucide-react';
+import { useAuth } from '../context/AuthContext';
 import { useNavigate } from 'react-router-dom';
+import { aiService } from '../services/aiService';
 import LoadingSpinner from '../components/LoadingSpinner';
 import AIProgressBar from '../components/AIProgressBar';
 import { showToast } from '../components/CustomToast';
-import { aiService } from '../services/aiService';
-import { useAuth } from '../context/AuthContext';
-import '../assets/styles/ModernDashboard.css';
 import '../assets/styles/AIHealth.css';
+
+// Icons
+const HeartIcon = () => (
+  <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z" />
+  </svg>
+);
+
+const ClipboardIcon = () => (
+  <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5H7a2 2 0 00-2 2v10a2 2 0 002 2h8a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2" />
+  </svg>
+);
+
+const UserIcon = () => (
+  <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z" />
+  </svg>
+);
+
+const SparklesIcon = () => (
+  <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 3a2 2 0 00-2 2v2a2 2 0 002 2h2a2 2 0 002-2V5a2 2 0 00-2-2H5zM5 11a2 2 0 00-2 2v2a2 2 0 002 2h2a2 2 0 002-2v-2a2 2 0 00-2-2H5zM11 5a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2h-2a2 2 0 01-2-2V5zM11 13a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2h-2a2 2 0 01-2-2v-2z" />
+  </svg>
+);
+
+const CheckIcon = () => (
+  <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
+  </svg>
+);
+
+const ExclamationIcon = () => (
+  <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-2.5L13.732 4c-.77-.833-1.664-.833-2.464 0L4.35 16.5c-.77.833.192 2.5 1.732 2.5z" />
+  </svg>
+);
+
+const DatabaseIcon = () => (
+  <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 7v10c0 2.21 3.582 4 8 4s8-1.79 8-4V7M4 7c0 2.21 3.582 4 8 4s8-1.79 8-4M4 7c0-2.21 3.582-4 8-4s8 1.79 8 4" />
+  </svg>
+);
+
+const ShieldIcon = () => (
+  <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z" />
+  </svg>
+);
+
+const ActivityIcon = () => (
+  <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z" />
+  </svg>
+);
+
+const LoginIcon = () => (
+  <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M11 16l-4-4m0 0l4-4m-4 4h14m-5 4v1a3 3 0 01-3 3H6a3 3 0 01-3-3V7a3 3 0 013-3h7a3 3 0 013 3v1" />
+  </svg>
+);
+
+const UserPlusIcon = () => (
+  <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M18 9v3m0 0v3m0-3h3m-3 0h-3m-2-5a4 4 0 11-8 0 4 4 0 018 0zM3 20a6 6 0 0112 0v1H3v-1z" />
+  </svg>
+);
 
 const AIHealth = () => {
   const [symptoms, setSymptoms] = useState('');
@@ -214,167 +279,142 @@ const AIHealth = () => {
     <div className="ai-assistant-container">
       {/* Background crosses */}
       <div className="background-crosses">
-        {[...Array(24)].map((_, i) => (
-          <span key={i} className={`cross cross-${i + 1}`}>
-            +
-          </span>
+        {[...Array(12)].map((_, i) => (
+          <span key={i} className="cross">+</span>
         ))}
       </div>
 
-      {/* Simple Header for standalone page */}
-      <header className="ai-health-header">
-        <div className="header-left">
-          <div className="logo-container">
-            <div>MEDICHAIN AI</div>
+      <main className="ai-main-content">
+        {/* Header */}
+        <div className="ai-header">
+          <div className="ai-header-icon">
+            <HeartIcon />
           </div>
+          <h1>MediChain AI Health Assistant</h1>
+          <p>
+            Get instant AI-powered health insights and personalized medical recommendations. 
+            Our advanced system analyzes your symptoms and provides comprehensive treatment guidance.
+          </p>
         </div>
-        <div className="header-right">
-          {!user && (
-            <>
-              <button onClick={handleLogin} className="auth-btn login-btn">
-                <LogIn size={16} /> Login
-              </button>
-              <button onClick={handleSignup} className="auth-btn signup-btn">
-                <UserPlus size={16} /> Sign Up
-              </button>
-            </>
-          )}
-          {user && (
-            <div className="user-info">
-              Welcome, {user.first_name}!
+
+        <div className="ai-grid">
+          {/* Input Section */}
+          <div className="ai-card">
+            <div className="ai-card-header">
+              <ClipboardIcon />
+              Symptom Analysis
             </div>
-          )}
-        </div>
-      </header>
+            
+            <div className="ai-form-group">
+              <label className="ai-label">
+                <UserIcon />
+                Patient Age
+              </label>
+              <input
+                type="number"
+                value={patientAge}
+                onChange={(e) => setPatientAge(e.target.value)}
+                placeholder="Enter age"
+                min="1"
+                max="120"
+                className="ai-select"
+              />
+            </div>
+            
+            <div className="ai-form-group">
+              <label className="ai-label">
+                <UserIcon />
+                Gender
+              </label>
+              <select
+                value={patientGender}
+                onChange={(e) => setPatientGender(e.target.value)}
+                className="ai-select"
+              >
+                <option value="">Select gender</option>
+                <option value="male">Male</option>
+                <option value="female">Female</option>
+                <option value="other">Other</option>
+              </select>
+            </div>
 
-      <main className="ai-assistant-main">
-        <div className="ai-assistant-header">
-          <div className="ai-title-section">
-            <Brain size={32} className="ai-float" />
-            <h1 className="ai-title">MediChain AI Health Assistant</h1>
-            <p className="ai-subtitle">
-              Get instant AI-powered health insights and recommendations
-            </p>
-          </div>
-        </div>
-
-        {/* Data Privacy Notice */}
-        <div className="privacy-notice">
-          <Info size={20} />
-          <div className="privacy-text">
-            <strong>Privacy Information:</strong> Your data is processed securely. 
-            {!user && " For guest users, data is not saved after session ends."}
-            {user && " As a registered user, you can choose to save your consultation history."}
-          </div>
-        </div>
-
-        <div className="ai-assistant-content">
-          <div className="ai-form-container">
-            <div className="symptom-input-section">
-              <h3>
-                <User size={20} />
-                Patient Information
-              </h3>
-              
-              <div className="patient-info-grid">
-                <div className="form-group">
-                  <label>Age</label>
-                  <input
-                    type="number"
-                    value={patientAge}
-                    onChange={(e) => setPatientAge(e.target.value)}
-                    placeholder="Enter age"
-                    min="1"
-                    max="120"
-                    className="form-input"
-                  />
-                </div>
-                
-                <div className="form-group">
-                  <label>Gender</label>
-                  <select
-                    value={patientGender}
-                    onChange={(e) => setPatientGender(e.target.value)}
-                    className="form-input"
-                  >
-                    <option value="">Select gender</option>
-                    <option value="male">Male</option>
-                    <option value="female">Female</option>
-                    <option value="other">Other</option>
-                  </select>
-                </div>
-              </div>
-
-              <div className="form-group">
-                <label>Symptoms</label>
-                <textarea
-                  value={symptoms}
-                  onChange={(e) => setSymptoms(e.target.value)}
-                  placeholder="Please describe your symptoms in detail... (e.g., I have a high fever, severe cough, and feeling tired)"
-                  rows={6}
-                  className="symptoms-textarea"
-                />
-                <div className="symptoms-examples">
-                  <p>Common symptoms you may include:</p>
-                  <div className="example-chips">
-                    {['Fever', 'Cough', 'Headache', 'Fatigue', 'Sore throat', 
-                      'Shortness of breath', 'Nausea', 'Dizziness', 'Body aches', 
-                      'Runny nose'].map((example, idx) => (
-                      <span 
-                        key={idx} 
-                        className="example-chip"
-                        onClick={() => setSymptoms(prev => {
-                          const newText = prev.trim() ? 
-                            `${prev}, ${example.toLowerCase()}` : 
-                            example.toLowerCase();
-                          return newText;
-                        })}
-                      >
-                        + {example}
-                      </span>
-                    ))}
-                  </div>
-                </div>
-              </div>
-
-              {/* Save Data Option */}
-              {user && (
-                <div className="save-data-option">
-                  <label className="checkbox-container">
-                    <input
-                      type="checkbox"
-                      checked={saveData}
-                      onChange={(e) => setSaveData(e.target.checked)}
-                    />
-                    <span className="checkmark"></span>
-                    <span className="checkbox-text">
-                      <Database size={16} />
-                      Save this consultation to my medical record
+            <div className="ai-form-group">
+              <label className="ai-label">
+                <ClipboardIcon />
+                Describe Your Symptoms
+              </label>
+              <textarea
+                value={symptoms}
+                onChange={(e) => setSymptoms(e.target.value)}
+                placeholder="Please describe your symptoms in detail... (e.g., I have a high fever, severe cough, and feeling tired)"
+                className="ai-textarea"
+              />
+              <div className="symptoms-examples">
+                <p>Common symptoms you may include:</p>
+                <div className="example-chips">
+                  {['Fever', 'Cough', 'Headache', 'Fatigue', 'Sore throat', 
+                    'Shortness of breath', 'Nausea', 'Dizziness', 'Body aches', 
+                    'Runny nose'].map((example, idx) => (
+                    <span 
+                      key={idx} 
+                      className="example-chip"
+                      onClick={() => setSymptoms(prev => {
+                        const newText = prev.trim() ? 
+                          `${prev}, ${example.toLowerCase()}` : 
+                          example.toLowerCase();
+                        return newText;
+                      })}
+                    >
+                      + {example}
                     </span>
-                  </label>
-                  <div className="save-data-info">
-                    <Shield size={14} />
-                    Saved consultations can be reviewed by your doctor during appointments
-                  </div>
+                  ))}
                 </div>
-              )}
+              </div>
+            </div>
 
-              {!user && (
-                <div className="guest-notice">
-                  <AlertCircle size={16} />
-                  <span>
-                    You're using MediChain as a guest. Your consultation will not be saved. 
-                    <button onClick={handleSignup} className="link-button">
-                      Create an account
-                    </button> to save your medical history.
+            {/* Save Data Option for logged-in users */}
+            {user && (
+              <div className="save-data-option">
+                <label className="checkbox-container">
+                  <input
+                    type="checkbox"
+                    checked={saveData}
+                    onChange={(e) => setSaveData(e.target.checked)}
+                  />
+                  <span className="checkmark"></span>
+                  <span className="checkbox-text">
+                    <DatabaseIcon />
+                    Save this consultation to my medical record
                   </span>
+                </label>
+                <div className="save-data-info">
+                  <ShieldIcon />
+                  Saved consultations can be reviewed by your doctor during appointments
                 </div>
-              )}
+              </div>
+            )}
 
+            {/* Guest notice */}
+            {!user && (
+              <div className="ai-output-card yellow">
+                <div className="ai-output-title">
+                  <ExclamationIcon />
+                  Guest Mode
+                </div>
+                <div className="ai-output-content">
+                  You're using MediChain as a guest. Your consultation will not be saved. 
+                  <button onClick={handleSignup} className="link-button">
+                    Create an account
+                  </button> to save your medical history.
+                </div>
+              </div>
+            )}
+
+            <div className="ai-button-group">
               <button
                 onClick={handleDiagnosis}
                 disabled={loading}
-                className="diagnose-btn"
+                className="ai-primary-button"
               >
                 {loading ? (
                   <>
@@ -383,63 +423,69 @@ const AIHealth = () => {
                   </>
                 ) : (
                   <>
-                    <Brain size={20} />
+                    <SparklesIcon />
                     Get AI Diagnosis
                   </>
                 )}
               </button>
+              
+              {diagnosis && (
+                <button
+                  onClick={handleNewDiagnosis}
+                  className="ai-secondary-button"
+                >
+                  New Consultation
+                </button>
+              )}
             </div>
 
-            {/* Progress Bar */}
+            {/* Progress Section */}
             {loading && (
-              <div className="progress-section">
-                <div className="processing-animation">
-                  <div className="processing-spinner"></div>
-                  <div className="processing-step">
-                    {progressStatus}
-                  </div>
-                  <AIProgressBar 
-                    isLoading={true} 
-                    progress={progress} 
-                    status={progressStatus}
-                    className="medical-progress-bar"
-                    steps={[
-                      { label: 'Analysis', description: 'Evaluating symptoms' },
-                      { label: 'Diagnosis', description: 'Identifying condition' },
-                      { label: 'Treatment', description: 'Creating prescription' },
-                      { label: 'Finalization', description: 'Preparing results' }
-                    ]}
-                  />
+              <div className="ai-loading-container">
+                <AIProgressBar 
+                  isLoading={true} 
+                  progress={progress} 
+                  status={progressStatus}
+                  className="medical-progress-bar"
+                />
+                <div className="ai-loading-text">{progressStatus}</div>
+              </div>
+            )}
+          </div>
+
+          {/* Results Section */}
+          <div className="ai-card">
+            <div className="ai-card-header">
+              <ActivityIcon />
+              Diagnosis Results
+            </div>
+            
+            {!diagnosis && !loading && (
+              <div className="ai-empty-state">
+                <div className="ai-empty-icon">
+                  <HeartIcon />
+                </div>
+                <div className="ai-empty-title">Ready for Analysis</div>
+                <div className="ai-empty-subtitle">
+                  Enter your symptoms and patient information to receive an AI-powered health assessment
                 </div>
               </div>
             )}
 
-            {/* AI Status */}
-            <div className={`ai-status ai-status-${aiStatus}`}>
-              <Activity size={16} />
-              AI Status: {aiStatus === 'connected' ? 'Online' : 'Checking...'}
-            </div>
-          </div>
-
-          {/* Results Section */}
-          {diagnosis && (
-            <div className="diagnosis-results">
-              <h3>
-                <FileText size={20} />
-                AI Diagnosis Results
-              </h3>
-              
-              <div className="diagnosis-content">
+            {diagnosis && (
+              <div className="ai-output-section">
                 {/* Conversational Response */}
                 {diagnosis.conversational_response && (
-                  <div className="diagnosis-section conversational-response">
-                    <div className="conversational-text">
+                  <div className="ai-output-card blue">
+                    <div className="ai-output-title">
+                      <CheckIcon />
+                      AI Health Assessment
+                    </div>
+                    <div className="ai-output-content conversational-text">
                       {diagnosis.conversational_response.split('\n').map((line, index) => {
                         if (line.trim() === '') return <br key={index} />;
                         
-                        // Handle different formatting
                         if (line.includes('**') && line.includes('**')) {
-                          // Bold text
                           const parts = line.split('**');
                           return (
                             <p key={index}>
@@ -449,10 +495,8 @@ const AIHealth = () => {
                             </p>
                           );
                         } else if (line.startsWith('•')) {
-                          // Bullet points
                           return <p key={index} className="bullet-point">{line}</p>;
                         } else if (line.includes('⚠️') || line.includes('✅') || line.includes('👨‍⚕️') || line.includes('🩺') || line.includes('💊') || line.includes('🔬') || line.includes('⏰') || line.includes('🕐') || line.includes('👉')) {
-                          // Icon lines
                           return <p key={index} className="icon-line">{line}</p>;
                         } else {
                           return <p key={index}>{line}</p>;
@@ -461,154 +505,144 @@ const AIHealth = () => {
                     </div>
                   </div>
                 )}
-                
-                {/* Traditional diagnosis display (fallback) */}
+
+                {/* Medication Response Toggle */}
+                {diagnosis.medication_response && (
+                  <div className="ai-output-card green">
+                    <div className="ai-output-title">
+                      <CheckIcon />
+                      Medication Guidance
+                    </div>
+                    <div className="ai-output-content">
+                      <button 
+                        className="medication-toggle-btn"
+                        onClick={() => {
+                          setDiagnosis(prev => ({
+                            ...prev,
+                            showMedicationResponse: !prev.showMedicationResponse
+                          }));
+                        }}
+                      >
+                        {diagnosis.showMedicationResponse ? 'Show General Guidance' : 'Show Medication Focus'}
+                      </button>
+                      
+                      {diagnosis.showMedicationResponse && (
+                        <div className="medication-response">
+                          {diagnosis.medication_response.split('\n').map((line, index) => {
+                            if (line.trim() === '') return <br key={index} />;
+                            
+                            if (line.includes('**') && line.includes('**')) {
+                              const parts = line.split('**');
+                              return (
+                                <p key={index}>
+                                  {parts.map((part, i) => 
+                                    i % 2 === 1 ? <strong key={i}>{part}</strong> : part
+                                  )}
+                                </p>
+                              );
+                            } else if (line.startsWith('•')) {
+                              return <p key={index} className="bullet-point">{line}</p>;
+                            } else if (line.includes('⚠️') || line.includes('✅') || line.includes('👨‍⚕️') || line.includes('🩺') || line.includes('💊')) {
+                              return <p key={index} className="icon-line">{line}</p>;
+                            } else {
+                              return <p key={index}>{line}</p>;
+                            }
+                          })}
+                        </div>
+                      )}
+                    </div>
+                  </div>
+                )}
+
+                {/* Traditional Diagnosis (fallback) */}
                 {!diagnosis.conversational_response && (
                   <>
-                    <div className="diagnosis-section">
-                      <h4>Primary Diagnosis</h4>
-                      <p>{diagnosis.diagnosis}</p>
+                    <div className="ai-output-card blue">
+                      <div className="ai-output-title">Primary Diagnosis</div>
+                      <div className="ai-output-content">{diagnosis.diagnosis}</div>
                     </div>
                     
-                    <div className="diagnosis-section">
-                      <h4>Confidence Level</h4>
-                      <div className="confidence-bar">
-                        <div 
-                          className="confidence-fill" 
-                          style={{ width: `${diagnosis.confidence}%` }}
-                        ></div>
-                        <span className="confidence-text">{diagnosis.confidence}%</span>
+                    <div className="ai-output-card purple">
+                      <div className="ai-output-title">Confidence Level</div>
+                      <div className="ai-output-content">
+                        <div className="confidence-bar">
+                          <div 
+                            className="confidence-fill" 
+                            style={{ width: `${diagnosis.confidence}%` }}
+                          ></div>
+                          <span className="confidence-text">{diagnosis.confidence}%</span>
+                        </div>
                       </div>
                     </div>
                   </>
                 )}
-                
-                {/* Quick medication-focused response toggle */}
-                {diagnosis.medication_response && (
-                  <div className="diagnosis-section">
-                    <button 
-                      className="medication-toggle-btn"
-                      onClick={() => {
-                        setDiagnosis(prev => ({
-                          ...prev,
-                          showMedicationResponse: !prev.showMedicationResponse
-                        }));
-                      }}
-                    >
-                      {diagnosis.showMedicationResponse ? 'Show General Guidance' : 'Show Medication Focus'}
-                    </button>
-                    
-                    {diagnosis.showMedicationResponse && (
-                      <div className="medication-response">
-                        {diagnosis.medication_response.split('\n').map((line, index) => {
-                          if (line.trim() === '') return <br key={index} />;
-                          
-                          if (line.includes('**') && line.includes('**')) {
-                            const parts = line.split('**');
-                            return (
-                              <p key={index}>
-                                {parts.map((part, i) => 
-                                  i % 2 === 1 ? <strong key={i}>{part}</strong> : part
-                                )}
-                              </p>
-                            );
-                          } else if (line.startsWith('•')) {
-                            return <p key={index} className="bullet-point">{line}</p>;
-                          } else if (line.includes('⚠️') || line.includes('✅') || line.includes('👨‍⚕️') || line.includes('🩺') || line.includes('💊')) {
-                            return <p key={index} className="icon-line">{line}</p>;
-                          } else {
-                            return <p key={index}>{line}</p>;
-                          }
-                        })}
-                      </div>
-                    )}
+
+                {/* Medical Disclaimer */}
+                <div className="ai-output-card red">
+                  <div className="ai-output-title">
+                    <ExclamationIcon />
+                    Medical Disclaimer
                   </div>
-                )}
-                
-                {/* Traditional prescription display (fallback) */}
-                {!diagnosis.conversational_response && diagnosis.prescription && (
-                  <div className="diagnosis-section">
-                    <h4>Recommended Treatment</h4>
-                    {diagnosis.prescription.medications && diagnosis.prescription.medications.length > 0 && (
-                      <div className="treatment-subsection">
-                        <h5>Medications</h5>
-                        <ul>
-                          {diagnosis.prescription.medications.map((med, index) => (
-                            <li key={index}>{med}</li>
-                          ))}
-                        </ul>
-                      </div>
-                    )}
-                    
-                    {diagnosis.prescription.treatments && diagnosis.prescription.treatments.length > 0 && (
-                      <div className="treatment-subsection">
-                        <h5>Treatments</h5>
-                        <ul>
-                          {diagnosis.prescription.treatments.map((treatment, index) => (
-                            <li key={index}>{treatment}</li>
-                          ))}
-                        </ul>
-                      </div>
-                    )}
-                    
-                    {diagnosis.prescription.instructions && (
-                      <div className="treatment-subsection">
-                        <h5>Instructions</h5>
-                        <p>{diagnosis.prescription.instructions}</p>
-                      </div>
-                    )}
+                  <div className="ai-output-content">
+                    This AI diagnosis is for informational purposes only and should not replace 
+                    professional medical advice. Please consult with a qualified healthcare 
+                    provider for proper medical evaluation and treatment.
                   </div>
-                )}
-                
-                {!diagnosis.conversational_response && diagnosis.recommendations && diagnosis.recommendations.length > 0 && (
-                  <div className="diagnosis-section">
-                    <h4>Additional Recommendations</h4>
-                    <ul className="recommendations-list">
-                      {diagnosis.recommendations.map((rec, index) => (
-                        <li key={index}>{rec}</li>
-                      ))}
-                    </ul>
-                  </div>
-                )}
-                
-                <div className="medical-disclaimer">
-                  <AlertCircle size={16} />
-                  <span>
-                    <strong>Medical Disclaimer:</strong> This AI diagnosis is for informational purposes only 
-                    and should not replace professional medical advice. Please consult with a qualified 
-                    healthcare provider for proper medical evaluation and treatment.
-                  </span>
                 </div>
 
+                {/* Session Information */}
                 {sessionData && (
-                  <div className="session-info">
-                    {sessionData.saved ? (
-                      <div className="saved-notice">
-                        <Database size={16} />
-                        <span>This consultation has been saved to your medical record</span>
-                      </div>
-                    ) : (
-                      <div className="not-saved-notice">
-                        <AlertCircle size={16} />
-                        <span>This consultation was not saved and will be lost when you leave this page</span>
-                      </div>
-                    )}
+                  <div className="ai-output-card gray">
+                    <div className="ai-output-title">
+                      <DatabaseIcon />
+                      Session Information
+                    </div>
+                    <div className="ai-output-content">
+                      {sessionData.saved ? (
+                        <>
+                          <CheckIcon style={{ color: '#16a34a', marginRight: '0.5rem' }} />
+                          This consultation has been saved to your medical record
+                        </>
+                      ) : (
+                        <>
+                          <ExclamationIcon style={{ color: '#dc2626', marginRight: '0.5rem' }} />
+                          This consultation was not saved and will be lost when you leave this page
+                        </>
+                      )}
+                    </div>
                   </div>
                 )}
               </div>
-              
-              <button onClick={handleNewDiagnosis} className="new-diagnosis-btn">
-                New Consultation
-              </button>
-            </div>
-          )}
+            )}
 
-          {error && (
-            <div className="error-message">
-              <AlertCircle size={20} />
-              <span>{error}</span>
+            {error && (
+              <div className="ai-output-card red">
+                <div className="ai-output-title">
+                  <ExclamationIcon />
+                  Error
+                </div>
+                <div className="ai-output-content">{error}</div>
+              </div>
+            )}
+          </div>
+        </div>
+
+        {/* System Information */}
+        <div className="ai-system-info">
+          <div className="ai-system-grid">
+            <div className="ai-system-item">
+              <ActivityIcon />
+              AI Status: {aiStatus === 'connected' ? 'Online' : 'Checking...'}
             </div>
-          )}
+            <div className="ai-system-item">
+              <ShieldIcon />
+              {user ? `Logged in as ${user.first_name}` : 'Guest Mode'}
+            </div>
+            <div className="ai-system-item">
+              <DatabaseIcon />
+              Data Saving: {user && saveData ? 'Enabled' : 'Disabled'}
+            </div>
+          </div>
         </div>
       </main>
 
@@ -619,237 +653,21 @@ const AIHealth = () => {
             <h3>Account Required</h3>
             <p>To save your consultation history, you need to create an account or log in.</p>
             <div className="auth-prompt-actions">
-              <button onClick={handleSignup} className="auth-btn signup-btn">
-                <UserPlus size={16} /> Create Account
+              <button onClick={handleSignup} className="ai-primary-button">
+                <UserPlusIcon />
+                Create Account
               </button>
-              <button onClick={handleLogin} className="auth-btn login-btn">
-                <LogIn size={16} /> Log In
+              <button onClick={handleLogin} className="ai-primary-button">
+                <LoginIcon />
+                Log In
               </button>
-              <button onClick={closeAuthPrompt} className="auth-btn cancel-btn">
+              <button onClick={closeAuthPrompt} className="ai-secondary-button">
                 Continue as Guest
               </button>
             </div>
           </div>
         </div>
       )}
-
-      <style jsx>{`
-        .ai-health-header {
-          display: flex;
-          justify-content: space-between;
-          align-items: center;
-          padding: 1rem 2rem;
-          background: rgba(255, 255, 255, 0.95);
-          backdrop-filter: blur(10px);
-          border-bottom: 1px solid #e0e0e0;
-          position: fixed;
-          top: 0;
-          left: 0;
-          right: 0;
-          z-index: 1000;
-        }
-
-        .logo-container {
-          font-size: 1.5rem;
-          font-weight: bold;
-          color: #00d4aa;
-        }
-
-        .header-right {
-          display: flex;
-          align-items: center;
-          gap: 1rem;
-        }
-
-        .auth-btn {
-          display: flex;
-          align-items: center;
-          gap: 0.5rem;
-          padding: 0.5rem 1rem;
-          border: none;
-          border-radius: 6px;
-          cursor: pointer;
-          font-weight: 500;
-          transition: all 0.3s ease;
-        }
-
-        .login-btn {
-          background: transparent;
-          color: #333;
-          border: 1px solid #ddd;
-        }
-
-        .login-btn:hover {
-          background: #f5f5f5;
-        }
-
-        .signup-btn {
-          background: #00d4aa;
-          color: white;
-        }
-
-        .signup-btn:hover {
-          background: #00b899;
-        }
-
-        .user-info {
-          color: #333;
-          font-weight: 500;
-        }
-
-        .ai-assistant-main {
-          margin-top: 80px;
-          padding: 2rem;
-        }
-
-        .privacy-notice {
-          display: flex;
-          align-items: flex-start;
-          gap: 0.75rem;
-          background: #e8f5ff;
-          border: 1px solid #00d4aa;
-          border-radius: 8px;
-          padding: 1rem;
-          margin-bottom: 2rem;
-          color: #333;
-        }
-
-        .privacy-text {
-          line-height: 1.5;
-        }
-
-        .save-data-option {
-          margin: 1rem 0;
-          padding: 1rem;
-          background: #f8f9fa;
-          border-radius: 8px;
-          border: 1px solid #e9ecef;
-        }
-
-        .checkbox-container {
-          display: flex;
-          align-items: center;
-          gap: 0.75rem;
-          cursor: pointer;
-          margin-bottom: 0.5rem;
-        }
-
-        .checkbox-text {
-          display: flex;
-          align-items: center;
-          gap: 0.5rem;
-          font-weight: 500;
-          color: #333;
-        }
-
-        .save-data-info {
-          display: flex;
-          align-items: center;
-          gap: 0.5rem;
-          font-size: 0.9rem;
-          color: #666;
-          margin-left: 1.5rem;
-        }
-
-        .guest-notice {
-          display: flex;
-          align-items: center;
-          gap: 0.5rem;
-          background: #fff3cd;
-          border: 1px solid #ffeaa7;
-          border-radius: 6px;
-          padding: 0.75rem;
-          margin: 1rem 0;
-          font-size: 0.9rem;
-          color: #856404;
-        }
-
-        .link-button {
-          background: none;
-          border: none;
-          color: #00d4aa;
-          text-decoration: underline;
-          cursor: pointer;
-          font-weight: 500;
-          margin: 0 0.25rem;
-        }
-
-        .session-info {
-          margin-top: 1rem;
-          padding: 0.75rem;
-          border-radius: 6px;
-        }
-
-        .saved-notice {
-          display: flex;
-          align-items: center;
-          gap: 0.5rem;
-          background: #d4edda;
-          border: 1px solid #c3e6cb;
-          border-radius: 6px;
-          padding: 0.75rem;
-          color: #155724;
-        }
-
-        .not-saved-notice {
-          display: flex;
-          align-items: center;
-          gap: 0.5rem;
-          background: #fff3cd;
-          border: 1px solid #ffeaa7;
-          border-radius: 6px;
-          padding: 0.75rem;
-          color: #856404;
-        }
-
-        .modal-overlay {
-          position: fixed;
-          top: 0;
-          left: 0;
-          right: 0;
-          bottom: 0;
-          background: rgba(0, 0, 0, 0.5);
-          display: flex;
-          align-items: center;
-          justify-content: center;
-          z-index: 2000;
-        }
-
-        .auth-prompt-modal {
-          background: white;
-          border-radius: 12px;
-          padding: 2rem;
-          max-width: 400px;
-          width: 90%;
-          text-align: center;
-        }
-
-        .auth-prompt-modal h3 {
-          color: #333;
-          margin-bottom: 1rem;
-        }
-
-        .auth-prompt-modal p {
-          color: #666;
-          margin-bottom: 2rem;
-          line-height: 1.5;
-        }
-
-        .auth-prompt-actions {
-          display: flex;
-          flex-direction: column;
-          gap: 0.75rem;
-        }
-
-        .cancel-btn {
-          background: #6c757d;
-          color: white;
-        }
-
-        .cancel-btn:hover {
-          background: #5a6268;
-        }
-      `}</style>
     </div>
   );
 };
