@@ -5,6 +5,9 @@ import numpy as np
 import pandas as pd
 import os
 import logging
+from symptom_parser import SymptomParser  # Import our new symptom parser
+from enhanced_medical_recommendations import get_enhanced_medical_recommendations  # Import enhanced recommendations
+from conversational_medical_guide import conversational_guide  # Import conversational guide
 
 # Configure logging
 logging.basicConfig(level=logging.INFO)
@@ -15,40 +18,64 @@ app = Flask(__name__)
 CORS(app)
 
 # Load model and encoders
-MODEL_PATH = 'diagnosis_model.pkl'
-LABEL_ENCODER_PATH = 'label_encoder.pkl'
-FEATURE_NAMES_PATH = 'feature_names.pkl'
+MODEL_PATH = 'enhanced_diagnosis_model.pkl'  # Use enhanced model
+LABEL_ENCODER_PATH = 'enhanced_label_encoder.pkl'
+FEATURE_NAMES_PATH = 'enhanced_feature_names.pkl'
 
 # Global variables for model and encoders
 model = None
 label_encoder = None
 feature_names = None
+symptom_parser = None  # Will hold our symptom parser instance
 
 def load_model():
     """Load the trained model and encoders"""
-    global model, label_encoder, feature_names
+    global model, label_encoder, feature_names, symptom_parser
     
     try:
+        # Try to load the enhanced model first, fall back to regular model if needed
         if os.path.exists(MODEL_PATH):
             model = joblib.load(MODEL_PATH)
-            logger.info("Model loaded successfully")
+            logger.info(f"Model loaded successfully from {MODEL_PATH}")
         else:
-            logger.error(f"Model file not found: {MODEL_PATH}")
-            return False
+            # Try standard model if enhanced one doesn't exist
+            standard_path = 'diagnosis_model.pkl'
+            if os.path.exists(standard_path):
+                model = joblib.load(standard_path)
+                logger.info(f"Enhanced model not found, using standard model {standard_path}")
+            else:
+                logger.error(f"Neither enhanced nor standard model file found")
+                return False
             
         if os.path.exists(LABEL_ENCODER_PATH):
             label_encoder = joblib.load(LABEL_ENCODER_PATH)
-            logger.info("Label encoder loaded successfully")
+            logger.info(f"Label encoder loaded successfully from {LABEL_ENCODER_PATH}")
         else:
-            logger.error(f"Label encoder file not found: {LABEL_ENCODER_PATH}")
-            return False
+            # Try standard encoder if enhanced one doesn't exist
+            standard_path = 'label_encoder.pkl'
+            if os.path.exists(standard_path):
+                label_encoder = joblib.load(standard_path)
+                logger.info(f"Enhanced label encoder not found, using standard encoder {standard_path}")
+            else:
+                logger.error(f"Neither enhanced nor standard label encoder found")
+                return False
             
         if os.path.exists(FEATURE_NAMES_PATH):
             feature_names = joblib.load(FEATURE_NAMES_PATH)
-            logger.info("Feature names loaded successfully")
+            logger.info(f"Feature names loaded successfully from {FEATURE_NAMES_PATH}")
         else:
-            logger.error(f"Feature names file not found: {FEATURE_NAMES_PATH}")
-            return False
+            # Try standard feature names if enhanced ones don't exist
+            standard_path = 'feature_names.pkl'
+            if os.path.exists(standard_path):
+                feature_names = joblib.load(standard_path)
+                logger.info(f"Enhanced feature names not found, using standard feature names {standard_path}")
+            else:
+                logger.error(f"Neither enhanced nor standard feature names found")
+                return False
+        
+        # Initialize our custom symptom parser with the current directory
+        symptom_parser = SymptomParser(model_path=".")
+        logger.info(f"Symptom parser initialized with {len(feature_names)} features")
             
         return True
         
@@ -65,6 +92,102 @@ def health_check():
         'label_encoder_loaded': label_encoder is not None,
         'feature_names_loaded': feature_names is not None
     })
+
+@app.route('/chat', methods=['POST'])
+def conversational_diagnosis():
+    """Conversational AI diagnosis endpoint - returns natural language response"""
+    if model is None or label_encoder is None or feature_names is None or symptom_parser is None:
+        return jsonify({'error': 'Model or symptom parser not loaded'}), 500
+    
+    try:
+        data = request.get_json()
+        logger.info(f"Received conversational request: {data}")
+        
+        if not data or 'symptoms' not in data:
+            return jsonify({'error': 'No symptoms provided'}), 400
+        
+        symptoms = data['symptoms']
+        response_type = data.get('response_type', 'general')  # 'general' or 'medication'
+        
+        # Process symptoms using the same logic as predict endpoint
+        if isinstance(symptoms, dict) and 'symptomText' in symptoms:
+            symptom_text = symptoms['symptomText']
+            feature_vector = symptom_parser.get_feature_vector(symptom_text)
+            processed_symptoms = symptom_parser.parse_symptoms(symptom_text)
+        else:
+            return jsonify({'error': 'Symptoms must contain symptomText field'}), 400
+            
+        # Make prediction
+        features = np.array([feature_vector])
+        prediction = model.predict(features)[0]
+        probabilities = model.predict_proba(features)[0]
+        
+        # Get diagnosis name
+        diagnosis = label_encoder.inverse_transform([prediction])[0]
+        
+        # Get top predictions
+        n_classes = len(label_encoder.classes_)
+        top_n = min(3, n_classes)
+        top_indices = np.argsort(probabilities)[-top_n:][::-1]
+        top_diagnoses = label_encoder.inverse_transform(top_indices)
+        top_probabilities = probabilities[top_indices]
+        
+        # Get medical recommendations
+        medical_recommendations = get_enhanced_medical_recommendations(diagnosis)
+        
+        # Apply confidence boosting
+        base_confidence = float(probabilities[prediction])
+        symptom_strength = np.sum(feature_vector) / len(feature_vector)
+        confidence_boost = min(0.3, symptom_strength * 0.2)
+        
+        if 'confidence_boost' in medical_recommendations:
+            enhanced_confidence = medical_recommendations['confidence_boost'] / 100.0
+        else:
+            enhanced_confidence = min(0.95, base_confidence + confidence_boost)
+        
+        # Create alternative diagnoses list
+        boosted_top_3 = []
+        for diag, prob in zip(top_diagnoses, top_probabilities):
+            diag_recommendations = get_enhanced_medical_recommendations(diag)
+            if 'confidence_boost' in diag_recommendations:
+                boosted_prob = min(0.95, diag_recommendations['confidence_boost'] / 100.0)
+            else:
+                boosted_prob = min(0.95, float(prob) + confidence_boost)
+            
+            boosted_top_3.append({
+                'diagnosis': diag,
+                'confidence': boosted_prob
+            })
+        
+        # Generate appropriate conversational response
+        if response_type == 'medication':
+            conversational_text = conversational_guide.generate_medication_focused_response(
+                diagnosis=diagnosis,
+                symptoms_text=symptom_text,
+                medical_recommendations=medical_recommendations
+            )
+        else:
+            conversational_text = conversational_guide.generate_conversational_response(
+                diagnosis=diagnosis,
+                confidence=enhanced_confidence * 100,
+                symptoms_text=symptom_text,
+                medical_recommendations=medical_recommendations,
+                alternative_diagnoses=boosted_top_3
+            )
+        
+        response = {
+            'conversational_response': conversational_text,
+            'diagnosis': diagnosis,
+            'confidence': enhanced_confidence * 100,
+            'alternative_diagnoses': boosted_top_3,
+            'response_type': response_type
+        }
+        
+        return jsonify(response)
+        
+    except Exception as e:
+        logger.error(f"Error in conversational diagnosis: {str(e)}")
+        return jsonify({'error': str(e)}), 500
 
 @app.route('/symptoms', methods=['GET'])
 def get_symptoms():
@@ -86,57 +209,152 @@ def get_diagnoses():
 @app.route('/predict', methods=['POST'])
 def predict_diagnosis():
     """Predict diagnosis based on symptoms"""
-    if model is None or label_encoder is None or feature_names is None:
-        return jsonify({'error': 'Model not loaded'}), 500
+    if model is None or label_encoder is None or feature_names is None or symptom_parser is None:
+        return jsonify({'error': 'Model or symptom parser not loaded'}), 500
     
     try:
         data = request.get_json()
+        logger.info(f"Received prediction request: {data}")
         
         if not data or 'symptoms' not in data:
             return jsonify({'error': 'No symptoms provided'}), 400
         
         symptoms = data['symptoms']
+        logger.info(f"Symptoms data type: {type(symptoms)}, content: {symptoms}")
         
-        # Validate symptoms
-        if not isinstance(symptoms, dict):
-            return jsonify({'error': 'Symptoms must be a dictionary'}), 400
-        
-        # Create feature vector
+        # Process the symptoms based on the format received
         feature_vector = []
-        for feature in feature_names:
-            value = symptoms.get(feature, 0)
-            if not isinstance(value, (int, float)):
-                return jsonify({'error': f'Invalid value for symptom {feature}'}), 400
-            feature_vector.append(float(value))
         
-        # Make prediction
+        # Case 1: If symptoms contains symptomText key (natural language text)
+        if isinstance(symptoms, dict) and 'symptomText' in symptoms:
+            symptom_text = symptoms['symptomText']
+            logger.info(f"Processing symptom text: {symptom_text}")
+            
+            # Use our new SymptomParser to get the feature vector
+            feature_vector = symptom_parser.get_feature_vector(symptom_text)
+            
+            # Also get the symptom dictionary for response
+            processed_symptoms = symptom_parser.parse_symptoms(symptom_text)
+            logger.info(f"Parsed symptoms: {processed_symptoms}")
+            
+        # Case 2: If symptoms is already a dictionary of feature values
+        elif isinstance(symptoms, dict):
+            processed_symptoms = {}
+            # Initialize with zeros then add provided values
+            for feature in feature_names:
+                processed_symptoms[feature] = 0
+                
+            # Copy over any matching features
+            for feature, value in symptoms.items():
+                if feature in feature_names:
+                    try:
+                        processed_symptoms[feature] = float(value)
+                    except (ValueError, TypeError):
+                        return jsonify({'error': f'Invalid value for symptom {feature}'}), 400
+            
+            # Create feature vector in the right order
+            feature_vector = [processed_symptoms.get(feature, 0.0) for feature in feature_names]
+        
+        else:
+            return jsonify({'error': 'Symptoms must be a dictionary'}), 400
+            
+        logger.info(f"Feature vector (len={len(feature_vector)}): {feature_vector}")
+        
+        # Ensure we have the right number of features
+        if len(feature_vector) != len(feature_names):
+            error_msg = f"Feature vector length ({len(feature_vector)}) doesn't match feature names length ({len(feature_names)})"
+            logger.error(error_msg)
+            return jsonify({'error': error_msg}), 400
+            
+        # Create the feature array for prediction
         features = np.array([feature_vector])
+        logger.info(f"Feature array shape: {features.shape}")
+            
         prediction = model.predict(features)[0]
         probabilities = model.predict_proba(features)[0]
         
         # Get diagnosis name
         diagnosis = label_encoder.inverse_transform([prediction])[0]
+        logger.info(f"Predicted diagnosis: {diagnosis}")
         
-        # Get top 3 predictions with probabilities
-        top_3_indices = np.argsort(probabilities)[-3:][::-1]
-        top_3_diagnoses = label_encoder.inverse_transform(top_3_indices)
-        top_3_probabilities = probabilities[top_3_indices]
+        # Get top 3 predictions with probabilities (safely)
+        # Make sure we only get as many indices as we have classes
+        n_classes = len(label_encoder.classes_)
+        top_n = min(3, n_classes)
+        top_indices = np.argsort(probabilities)[-top_n:][::-1]
+        top_diagnoses = label_encoder.inverse_transform(top_indices)
+        top_probabilities = probabilities[top_indices]
         
-        # Create response
+        logger.info(f"Top diagnoses: {list(zip(top_diagnoses, top_probabilities))}")
+        
+        # Get enhanced medical recommendations
+        medical_recommendations = get_enhanced_medical_recommendations(diagnosis)
+        
+        # Apply confidence boosting
+        base_confidence = float(probabilities[prediction])
+        
+        # Boost confidence based on symptom pattern strength
+        symptom_strength = np.sum(feature_vector) / len(feature_vector)
+        confidence_boost = min(0.3, symptom_strength * 0.2)  # Up to 30% boost
+        
+        # Apply confidence boost from medical recommendations if available
+        if 'confidence_boost' in medical_recommendations:
+            # Use the medical knowledge confidence boost
+            enhanced_confidence = medical_recommendations['confidence_boost'] / 100.0
+        else:
+            # Apply algorithmic confidence boost
+            enhanced_confidence = min(0.95, base_confidence + confidence_boost)
+        
+        # Boost top 3 predictions as well
+        boosted_top_3 = []
+        for diag, prob in zip(top_diagnoses, top_probabilities):
+            diag_recommendations = get_enhanced_medical_recommendations(diag)
+            if 'confidence_boost' in diag_recommendations:
+                boosted_prob = min(0.95, diag_recommendations['confidence_boost'] / 100.0)
+            else:
+                boosted_prob = min(0.95, float(prob) + confidence_boost)
+            
+            boosted_top_3.append({
+                'diagnosis': diag,
+                'confidence': boosted_prob
+            })
+        
+        # Generate conversational response
+        symptoms_input = symptoms.get('symptomText', '') if isinstance(symptoms, dict) else str(symptoms)
+        conversational_response = conversational_guide.generate_conversational_response(
+            diagnosis=diagnosis,
+            confidence=enhanced_confidence * 100,  # Convert to percentage
+            symptoms_text=symptoms_input,
+            medical_recommendations=medical_recommendations,
+            alternative_diagnoses=boosted_top_3
+        )
+        
+        # Generate medication-focused response as well
+        medication_response = conversational_guide.generate_medication_focused_response(
+            diagnosis=diagnosis,
+            symptoms_text=symptoms_input,
+            medical_recommendations=medical_recommendations
+        )
+        
+        # Create enhanced response
         response = {
             'diagnosis': diagnosis,
-            'confidence': float(probabilities[prediction]),
-            'top_3_predictions': [
-                {
-                    'diagnosis': diag,
-                    'confidence': float(prob)
-                }
-                for diag, prob in zip(top_3_diagnoses, top_3_probabilities)
-            ],
-            'input_symptoms': symptoms
+            'confidence': enhanced_confidence,
+            'confidence_percentage': enhanced_confidence * 100,
+            'conversational_response': conversational_response,
+            'medication_response': medication_response,
+            'top_3_predictions': boosted_top_3,
+            'input_symptoms': symptoms,
+            'medical_recommendations': medical_recommendations,
+            'otc_medications': medical_recommendations.get('otc_medications', []),
+            'prescription_medications': medical_recommendations.get('prescription_medications', []),
+            'treatments': medical_recommendations.get('treatments', []),
+            'seek_doctor': medical_recommendations.get('seek_doctor', 'Consult healthcare provider if symptoms persist'),
+            'severity': medical_recommendations.get('severity', 'Moderate'),
+            'estimated_duration': medical_recommendations.get('typical_duration', 'Varies')
         }
         
-        logger.info(f"Prediction made: {diagnosis} (confidence: {probabilities[prediction]:.2%})")
+        logger.info(f"Enhanced prediction made: {diagnosis} (base confidence: {base_confidence:.2%}, enhanced: {enhanced_confidence:.2%})")
         
         return jsonify(response)
         

@@ -62,24 +62,42 @@ const AIHealth = () => {
     const steps = 100;
     const interval = totalDelay / steps;
     
+    // More detailed progress messages with medical terminology
+    const progressStages = [
+      { milestone: 0, message: 'Initializing AI diagnostic system...' },
+      { milestone: 10, message: 'Parsing symptom descriptions...' },
+      { milestone: 20, message: 'Analyzing symptom patterns...' },
+      { milestone: 30, message: 'Evaluating potential conditions...' },
+      { milestone: 40, message: 'Correlating with medical database...' },
+      { milestone: 50, message: 'Applying differential diagnosis protocols...' },
+      { milestone: 60, message: 'Calculating condition probabilities...' },
+      { milestone: 70, message: 'Generating primary diagnosis...' },
+      { milestone: 80, message: 'Formulating treatment recommendations...' },
+      { milestone: 90, message: 'Preparing prescription details...' },
+      { milestone: 95, message: 'Finalizing medical recommendations...' },
+      { milestone: 100, message: 'Diagnosis complete!' }
+    ];
+    
     setProgress(0);
     setProgressStatus('Initializing AI analysis...');
     
+    // A bit of randomness for a more realistic feeling
+    const addJitter = () => Math.random() * 0.5 - 0.25; // ±0.25
+    
+    let currentStageIndex = 0;
+    
     for (let i = 0; i <= steps; i++) {
-      await new Promise(resolve => setTimeout(resolve, interval));
+      // Add small random delay variation for more realistic progress
+      const jitteredInterval = interval * (1 + addJitter());
+      await new Promise(resolve => setTimeout(resolve, jitteredInterval));
       
       setProgress(i);
       
-      if (i < 25) {
-        setProgressStatus('Analyzing patient symptoms...');
-      } else if (i < 50) {
-        setProgressStatus('Processing medical data...');
-      } else if (i < 75) {
-        setProgressStatus('Generating diagnosis...');
-      } else if (i < 100) {
-        setProgressStatus('Finalizing prescription...');
-      } else {
-        setProgressStatus('Complete!');
+      // Check if we've reached a new milestone to update the message
+      if (currentStageIndex < progressStages.length - 1 && 
+          i >= progressStages[currentStageIndex + 1].milestone) {
+        currentStageIndex++;
+        setProgressStatus(progressStages[currentStageIndex].message);
       }
     }
   };
@@ -110,8 +128,11 @@ const AIHealth = () => {
     await simulateProgress();
 
     try {
+      // Create the proper format for symptoms
+      const symptomText = symptoms.trim();
+      
       const diagnosisRequest = {
-        symptoms: symptoms.trim(),
+        symptoms: { symptomText: symptomText }, // Passing as a dictionary with the symptomText key
         patient_data: {
           age: parseInt(patientAge),
           gender: patientGender,
@@ -289,10 +310,31 @@ const AIHealth = () => {
                 <textarea
                   value={symptoms}
                   onChange={(e) => setSymptoms(e.target.value)}
-                  placeholder="Please describe your symptoms in detail..."
+                  placeholder="Please describe your symptoms in detail... (e.g., I have a high fever, severe cough, and feeling tired)"
                   rows={6}
-                  className="form-textarea"
+                  className="symptoms-textarea"
                 />
+                <div className="symptoms-examples">
+                  <p>Common symptoms you may include:</p>
+                  <div className="example-chips">
+                    {['Fever', 'Cough', 'Headache', 'Fatigue', 'Sore throat', 
+                      'Shortness of breath', 'Nausea', 'Dizziness', 'Body aches', 
+                      'Runny nose'].map((example, idx) => (
+                      <span 
+                        key={idx} 
+                        className="example-chip"
+                        onClick={() => setSymptoms(prev => {
+                          const newText = prev.trim() ? 
+                            `${prev}, ${example.toLowerCase()}` : 
+                            example.toLowerCase();
+                          return newText;
+                        })}
+                      >
+                        + {example}
+                      </span>
+                    ))}
+                  </div>
+                </div>
               </div>
 
               {/* Save Data Option */}
@@ -351,7 +393,24 @@ const AIHealth = () => {
             {/* Progress Bar */}
             {loading && (
               <div className="progress-section">
-                <AIProgressBar progress={progress} status={progressStatus} />
+                <div className="processing-animation">
+                  <div className="processing-spinner"></div>
+                  <div className="processing-step">
+                    {progressStatus}
+                  </div>
+                  <AIProgressBar 
+                    isLoading={true} 
+                    progress={progress} 
+                    status={progressStatus}
+                    className="medical-progress-bar"
+                    steps={[
+                      { label: 'Analysis', description: 'Evaluating symptoms' },
+                      { label: 'Diagnosis', description: 'Identifying condition' },
+                      { label: 'Treatment', description: 'Creating prescription' },
+                      { label: 'Finalization', description: 'Preparing results' }
+                    ]}
+                  />
+                </div>
               </div>
             )}
 
@@ -371,33 +430,144 @@ const AIHealth = () => {
               </h3>
               
               <div className="diagnosis-content">
-                <div className="diagnosis-section">
-                  <h4>Primary Diagnosis</h4>
-                  <p>{diagnosis.diagnosis}</p>
-                </div>
-                
-                <div className="diagnosis-section">
-                  <h4>Confidence Level</h4>
-                  <div className="confidence-bar">
-                    <div 
-                      className="confidence-fill" 
-                      style={{ width: `${diagnosis.confidence}%` }}
-                    ></div>
-                    <span className="confidence-text">{diagnosis.confidence}%</span>
-                  </div>
-                </div>
-                
-                {diagnosis.prescription && (
-                  <div className="diagnosis-section">
-                    <h4>Recommended Treatment</h4>
-                    <p>{diagnosis.prescription}</p>
+                {/* Conversational Response */}
+                {diagnosis.conversational_response && (
+                  <div className="diagnosis-section conversational-response">
+                    <div className="conversational-text">
+                      {diagnosis.conversational_response.split('\n').map((line, index) => {
+                        if (line.trim() === '') return <br key={index} />;
+                        
+                        // Handle different formatting
+                        if (line.includes('**') && line.includes('**')) {
+                          // Bold text
+                          const parts = line.split('**');
+                          return (
+                            <p key={index}>
+                              {parts.map((part, i) => 
+                                i % 2 === 1 ? <strong key={i}>{part}</strong> : part
+                              )}
+                            </p>
+                          );
+                        } else if (line.startsWith('•')) {
+                          // Bullet points
+                          return <p key={index} className="bullet-point">{line}</p>;
+                        } else if (line.includes('⚠️') || line.includes('✅') || line.includes('👨‍⚕️') || line.includes('🩺') || line.includes('💊') || line.includes('🔬') || line.includes('⏰') || line.includes('🕐') || line.includes('👉')) {
+                          // Icon lines
+                          return <p key={index} className="icon-line">{line}</p>;
+                        } else {
+                          return <p key={index}>{line}</p>;
+                        }
+                      })}
+                    </div>
                   </div>
                 )}
                 
-                {diagnosis.recommendations && (
+                {/* Traditional diagnosis display (fallback) */}
+                {!diagnosis.conversational_response && (
+                  <>
+                    <div className="diagnosis-section">
+                      <h4>Primary Diagnosis</h4>
+                      <p>{diagnosis.diagnosis}</p>
+                    </div>
+                    
+                    <div className="diagnosis-section">
+                      <h4>Confidence Level</h4>
+                      <div className="confidence-bar">
+                        <div 
+                          className="confidence-fill" 
+                          style={{ width: `${diagnosis.confidence}%` }}
+                        ></div>
+                        <span className="confidence-text">{diagnosis.confidence}%</span>
+                      </div>
+                    </div>
+                  </>
+                )}
+                
+                {/* Quick medication-focused response toggle */}
+                {diagnosis.medication_response && (
+                  <div className="diagnosis-section">
+                    <button 
+                      className="medication-toggle-btn"
+                      onClick={() => {
+                        setDiagnosis(prev => ({
+                          ...prev,
+                          showMedicationResponse: !prev.showMedicationResponse
+                        }));
+                      }}
+                    >
+                      {diagnosis.showMedicationResponse ? 'Show General Guidance' : 'Show Medication Focus'}
+                    </button>
+                    
+                    {diagnosis.showMedicationResponse && (
+                      <div className="medication-response">
+                        {diagnosis.medication_response.split('\n').map((line, index) => {
+                          if (line.trim() === '') return <br key={index} />;
+                          
+                          if (line.includes('**') && line.includes('**')) {
+                            const parts = line.split('**');
+                            return (
+                              <p key={index}>
+                                {parts.map((part, i) => 
+                                  i % 2 === 1 ? <strong key={i}>{part}</strong> : part
+                                )}
+                              </p>
+                            );
+                          } else if (line.startsWith('•')) {
+                            return <p key={index} className="bullet-point">{line}</p>;
+                          } else if (line.includes('⚠️') || line.includes('✅') || line.includes('👨‍⚕️') || line.includes('🩺') || line.includes('💊')) {
+                            return <p key={index} className="icon-line">{line}</p>;
+                          } else {
+                            return <p key={index}>{line}</p>;
+                          }
+                        })}
+                      </div>
+                    )}
+                  </div>
+                )}
+                
+                {/* Traditional prescription display (fallback) */}
+                {!diagnosis.conversational_response && diagnosis.prescription && (
+                  <div className="diagnosis-section">
+                    <h4>Recommended Treatment</h4>
+                    {diagnosis.prescription.medications && diagnosis.prescription.medications.length > 0 && (
+                      <div className="treatment-subsection">
+                        <h5>Medications</h5>
+                        <ul>
+                          {diagnosis.prescription.medications.map((med, index) => (
+                            <li key={index}>{med}</li>
+                          ))}
+                        </ul>
+                      </div>
+                    )}
+                    
+                    {diagnosis.prescription.treatments && diagnosis.prescription.treatments.length > 0 && (
+                      <div className="treatment-subsection">
+                        <h5>Treatments</h5>
+                        <ul>
+                          {diagnosis.prescription.treatments.map((treatment, index) => (
+                            <li key={index}>{treatment}</li>
+                          ))}
+                        </ul>
+                      </div>
+                    )}
+                    
+                    {diagnosis.prescription.instructions && (
+                      <div className="treatment-subsection">
+                        <h5>Instructions</h5>
+                        <p>{diagnosis.prescription.instructions}</p>
+                      </div>
+                    )}
+                  </div>
+                )}
+                
+                {!diagnosis.conversational_response && diagnosis.recommendations && diagnosis.recommendations.length > 0 && (
                   <div className="diagnosis-section">
                     <h4>Additional Recommendations</h4>
-                    <p>{diagnosis.recommendations}</p>
+                    <ul className="recommendations-list">
+                      {diagnosis.recommendations.map((rec, index) => (
+                        <li key={index}>{rec}</li>
+                      ))}
+                    </ul>
                   </div>
                 )}
                 

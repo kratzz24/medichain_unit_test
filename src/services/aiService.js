@@ -31,10 +31,20 @@ export const aiService = {
    */
   getDiagnosis: async (diagnosisData) => {
     try {
+      console.log("Sending diagnosis request:", diagnosisData);
       const response = await api.post('/predict', diagnosisData);
+      console.log("Received diagnosis response:", response.data);
       
       // Transform the AI response to match frontend expectations
       const aiData = response.data;
+      
+      // Check for error message in response
+      if (aiData.error) {
+        return {
+          success: false,
+          error: aiData.error
+        };
+      }
       
       // Handle both normal diagnosis and unknown case responses
       if (aiData.status === 'unknown_case') {
@@ -54,26 +64,58 @@ export const aiService = {
         };
       }
       
-      // Handle normal diagnosis response
+      // Handle direct diagnosis response from run_ai_server.py
+      if (aiData.diagnosis) {
+        console.log("Handling direct diagnosis format:", aiData);
+        return {
+          success: true,
+          data: {
+            diagnosis: aiData.diagnosis || 'Unknown',
+            confidence: Math.round((aiData.confidence || 0) * 100),
+            differential_diagnoses: aiData.top_3_predictions || [],
+            prescription: {
+              medications: ['Consult a doctor for proper medication'],
+              treatments: ['Rest and hydration'],
+              instructions: 'Follow up with healthcare provider for accurate treatment plan'
+            },
+            recommendations: [
+              'Stay hydrated',
+              'Get adequate rest',
+              'Monitor symptoms for changes',
+              'Contact a healthcare professional if symptoms worsen'
+            ],
+            ai_model_version: 'MediChain-AI',
+            timestamp: new Date().toISOString(),
+            severity: 'Moderate',
+            urgency: 'normal'
+          }
+        };
+      }
+      
+      // Handle structured response format
       const analysis = aiData.analysis || {};
       const primaryDiagnosis = analysis.primary_diagnosis || {};
       const recommendations = aiData.recommendations || {};
       
       const transformedData = {
-        diagnosis: primaryDiagnosis.condition || 'Unknown',
-        confidence: Math.round((primaryDiagnosis.confidence || 0) * 100),
+        diagnosis: primaryDiagnosis.condition || aiData.diagnosis || 'Unknown',
+        confidence: Math.round((primaryDiagnosis.confidence || aiData.confidence || 0) * 100),
         explanation: primaryDiagnosis.explanation || '',
         prescription: {
-          medications: recommendations.medications || [],
-          treatments: recommendations.treatments || [],
+          medications: recommendations.medications || ['Based on your symptoms, consult a healthcare provider for appropriate medications'],
+          treatments: recommendations.treatments || ['Rest adequately', 'Stay hydrated'],
           instructions: recommendations.lifestyle_advice?.join('; ') || 'Follow up with healthcare provider'
         },
-        recommendations: recommendations.lifestyle_advice || [],
+        recommendations: recommendations.lifestyle_advice || [
+          'Monitor your symptoms',
+          'Contact a healthcare professional if symptoms worsen',
+          'Maintain good nutrition and hydration'
+        ],
         warnings: recommendations.warnings || [],
-        differential_diagnoses: analysis.differential_diagnoses || [],
+        differential_diagnoses: analysis.differential_diagnoses || aiData.top_3_predictions || [],
         ai_model_version: 'MediChain-AI',
-        timestamp: aiData.timestamp,
-        medical_disclaimer: aiData.medical_disclaimer,
+        timestamp: aiData.timestamp || new Date().toISOString(),
+        medical_disclaimer: aiData.medical_disclaimer || 'This AI diagnosis is for informational purposes only and should not replace professional medical advice.',
         severity: aiData.next_steps?.urgency_level || 'Moderate',
         urgency: aiData.next_steps?.immediate_actions ? 'high' : 'normal'
       };

@@ -1,0 +1,39 @@
+{
+  "training_date": "2025-08-28T09:44:17.013913",
+  "accuracy": "Unknown",
+  "n_classes": 22,
+  "classes": [
+    "Allergies",
+    "Anemia",
+    "Anxiety Disorder",
+    "Asthma",
+    "Bronchitis",
+    "COVID-19",
+    "Chronic Fatigue",
+    "Common Cold",
+    "Dehydration",
+    "Fever",
+    "Flu",
+    "Gastroenteritis",
+    "Heart Condition",
+    "Migraine",
+    "Panic Attack",
+    "Pneumonia",
+    "Severe Infection",
+    "Sinusitis",
+    "Strep Throat",
+    "Tension Headache",
+    "Tonsillitis",
+    "Upper Respiratory Infection"
+  ],
+  "features": [
+    "fever",
+    "cough",
+    "fatigue",
+    "shortness_of_breath",
+    "headache",
+    "sore_throat"
+  ],
+  "model_type": "GradientBoostingClassifier",
+  "confidence_threshold": 0.6
+}

@@ -263,6 +263,37 @@
   }
 }
 
+/* Processing Animation */
+.processing-animation {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 3rem 0;
+}
+
+.processing-spinner {
+  border: 4px solid rgba(0, 0, 0, 0.1);
+  border-top: 4px solid #4dd0e1;
+  border-radius: 50%;
+  width: 50px;
+  height: 50px;
+  animation: spin 1s linear infinite;
+  margin-bottom: 1rem;
+}
+
+.processing-step {
+  font-size: 1rem;
+  color: #333;
+  margin-bottom: 0.5rem;
+  display: flex;
+  align-items: center;
+}
+
+.processing-step svg {
+  margin-right: 0.5rem;
+}
+
 /* AI Response Styling */
 .ai-diagnosis-result {
   background: linear-gradient(135deg, #d4edda 0%, #c3e6cb 100%);
@@ -304,6 +335,190 @@
 .diagnosis-item strong {
   color: #155724;
   font-weight: 700;
+}
+
+/* Enhanced Diagnosis Results Styling */
+.diagnosis-results {
+  background: white;
+  border-radius: 12px;
+  box-shadow: 0 8px 30px rgba(0, 0, 0, 0.12);
+  padding: 2rem;
+  max-width: 800px;
+  margin: 0 auto 3rem;
+  position: relative;
+  z-index: 1;
+  animation: fadeIn 0.5s ease-in-out;
+}
+
+.diagnosis-results h3 {
+  color: #0d47a1;
+  display: flex;
+  align-items: center;
+  font-size: 1.5rem;
+  margin-bottom: 1.5rem;
+  padding-bottom: 0.75rem;
+  border-bottom: 2px solid #e0f2fe;
+}
+
+.diagnosis-results h3 svg {
+  margin-right: 0.5rem;
+}
+
+.diagnosis-content {
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+}
+
+.diagnosis-section {
+  padding: 1.25rem;
+  border-radius: 8px;
+  background-color: #f8fbff;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+  transition: transform 0.2s, box-shadow 0.2s;
+}
+
+.diagnosis-section:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+}
+
+.diagnosis-section h4 {
+  color: #0d47a1;
+  margin-bottom: 0.75rem;
+  font-size: 1.2rem;
+  display: flex;
+  align-items: center;
+}
+
+.diagnosis-section h4 svg {
+  margin-right: 0.5rem;
+}
+
+.diagnosis-section p {
+  color: #333;
+  line-height: 1.6;
+  margin: 0;
+}
+
+/* Confidence Bar */
+.confidence-bar {
+  height: 24px;
+  background: #e0e0e0;
+  border-radius: 12px;
+  position: relative;
+  overflow: hidden;
+  margin-top: 0.5rem;
+}
+
+.confidence-fill {
+  height: 100%;
+  background: linear-gradient(90deg, #4caf50, #8bc34a);
+  border-radius: 12px;
+  transition: width 1s cubic-bezier(0.34, 1.56, 0.64, 1);
+}
+
+.confidence-text {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  color: #333;
+  font-weight: 500;
+  text-shadow: 0 0 2px white;
+}
+
+/* Treatment Sections */
+.treatment-subsection {
+  margin-top: 1rem;
+  padding-top: 0.75rem;
+  border-top: 1px solid rgba(0, 0, 0, 0.05);
+}
+
+.treatment-subsection:first-child {
+  border-top: none;
+  padding-top: 0;
+  margin-top: 0;
+}
+
+.treatment-subsection h5 {
+  color: #333;
+  font-size: 1rem;
+  margin-bottom: 0.5rem;
+  display: flex;
+  align-items: center;
+}
+
+.treatment-subsection h5 svg {
+  margin-right: 0.4rem;
+  opacity: 0.7;
+}
+
+.treatment-subsection ul {
+  list-style-type: none;
+  padding-left: 1rem;
+  margin: 0.5rem 0;
+}
+
+.treatment-subsection li {
+  position: relative;
+  padding-left: 1.2rem;
+  margin-bottom: 0.4rem;
+  line-height: 1.5;
+}
+
+.treatment-subsection li:before {
+  content: '•';
+  color: #4dd0e1;
+  position: absolute;
+  left: 0;
+  font-size: 1.2em;
+}
+
+/* Recommendations List */
+.recommendations-list {
+  list-style-type: none;
+  padding-left: 0.5rem;
+  margin: 0.5rem 0;
+}
+
+.recommendations-list li {
+  position: relative;
+  padding-left: 1.5rem;
+  margin-bottom: 0.75rem;
+  line-height: 1.5;
+}
+
+.recommendations-list li:before {
+  content: '✓';
+  color: #4caf50;
+  position: absolute;
+  left: 0;
+  font-weight: bold;
+}
+
+/* Medical Disclaimer */
+.medical-disclaimer {
+  display: flex;
+  align-items: flex-start;
+  padding: 1rem;
+  border-radius: 8px;
+  background-color: rgba(255, 229, 100, 0.2);
+  border-left: 4px solid #ffca28;
+  margin-top: 2rem;
+  font-size: 0.9rem;
+  color: #5d4037;
+}
+
+.medical-disclaimer svg {
+  flex-shrink: 0;
+  margin-right: 0.75rem;
+  margin-top: 0.2rem;
+  color: #f57c00;
+}
+
+.medical-disclaimer span {
+  line-height: 1.5;
 }
 
 /* Responsive Design */
@@ -348,6 +563,99 @@
   }
 }
 
+/* Conversational Response Styles */
+.conversational-response {
+  background: #f8fbff;
+  border-left: 4px solid #2196f3;
+  padding: 1.5rem;
+  margin-bottom: 2rem;
+  border-radius: 8px;
+  box-shadow: 0 2px 10px rgba(33, 150, 243, 0.1);
+}
+
+.conversational-text {
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  line-height: 1.7;
+  color: #333;
+}
+
+.conversational-text p {
+  margin-bottom: 1rem;
+}
+
+.conversational-text .bullet-point {
+  margin-left: 1rem;
+  color: #555;
+  font-size: 0.95rem;
+}
+
+.conversational-text .icon-line {
+  font-weight: 600;
+  color: #2196f3;
+  margin: 1rem 0;
+  padding: 0.5rem;
+  background: rgba(33, 150, 243, 0.05);
+  border-radius: 4px;
+}
+
+.conversational-text strong {
+  color: #1976d2;
+  font-weight: 600;
+}
+
+.medication-toggle-btn {
+  background: linear-gradient(135deg, #4caf50, #45a049);
+  color: white;
+  border: none;
+  padding: 0.75rem 1.5rem;
+  border-radius: 25px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  margin-bottom: 1rem;
+  box-shadow: 0 2px 10px rgba(76, 175, 80, 0.2);
+}
+
+.medication-toggle-btn:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 4px 15px rgba(76, 175, 80, 0.3);
+}
+
+.medication-response {
+  background: #f1f8e9;
+  border-left: 4px solid #4caf50;
+  padding: 1.5rem;
+  border-radius: 8px;
+  margin-top: 1rem;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  line-height: 1.7;
+}
+
+.medication-response p {
+  margin-bottom: 1rem;
+  color: #333;
+}
+
+.medication-response .bullet-point {
+  margin-left: 1rem;
+  color: #555;
+  font-size: 0.95rem;
+}
+
+.medication-response .icon-line {
+  font-weight: 600;
+  color: #4caf50;
+  margin: 1rem 0;
+  padding: 0.5rem;
+  background: rgba(76, 175, 80, 0.05);
+  border-radius: 4px;
+}
+
+.medication-response strong {
+  color: #2e7d32;
+  font-weight: 600;
+}
+
 @media (max-width: 480px) {
   .ai-health-header {
     padding: 2rem 1rem;
@@ -364,5 +672,15 @@
   .ai-symptom-input,
   .ai-submit-btn {
     padding: 0.875rem 1.25rem;
+  }
+  
+  .conversational-response,
+  .medication-response {
+    padding: 1rem;
+  }
+  
+  .medication-toggle-btn {
+    width: 100%;
+    margin-bottom: 1rem;
   }
 }
