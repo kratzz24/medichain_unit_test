@@ -64,8 +64,12 @@ def predict():
         if not data:
             return jsonify({'error': 'No data provided'}), 400
         
-        # Extract symptoms from the request data
-        symptoms_text = data.get('symptoms', '') or data.get('chief_complaint', '')
+        # Extract symptoms from the request data - handle both formats
+        symptoms_data = data.get('symptoms', {})
+        if isinstance(symptoms_data, dict):
+            symptoms_text = symptoms_data.get('symptomText', '') or symptoms_data.get('chief_complaint', '')
+        else:
+            symptoms_text = symptoms_data or data.get('chief_complaint', '')
         
         if not symptoms_text:
             return jsonify({'error': 'Symptoms required'}), 400
@@ -415,6 +419,57 @@ def quick_diagnosis():
         
     except Exception as e:
         return jsonify({'error': f'Quick diagnosis failed: {str(e)}'}), 500
+
+@app.route('/api/ai/start-conversation', methods=['POST'])
+def start_ai_conversation():
+    """
+    Start a conversational AI diagnosis session
+    """
+    try:
+        if not ai_system:
+            return jsonify({'error': 'AI system not available'}), 503
+        
+        data = request.get_json()
+        initial_symptoms = data.get('symptoms', '')
+        
+        if not initial_symptoms:
+            return jsonify({'error': 'Initial symptoms required'}), 400
+        
+        result = ai_system.start_conversation(initial_symptoms)
+        
+        return jsonify({
+            'success': True,
+            'conversation_data': result
+        }), 200
+        
+    except Exception as e:
+        return jsonify({'error': f'Failed to start conversation: {str(e)}'}), 500
+
+@app.route('/api/ai/continue-conversation', methods=['POST'])
+def continue_ai_conversation():
+    """
+    Continue the conversational AI diagnosis
+    """
+    try:
+        if not ai_system:
+            return jsonify({'error': 'AI system not available'}), 503
+        
+        data = request.get_json()
+        user_response = data.get('response', '')
+        question_id = data.get('question_id', '')
+        
+        if not user_response:
+            return jsonify({'error': 'User response required'}), 400
+        
+        result = ai_system.continue_conversation(user_response, question_id)
+        
+        return jsonify({
+            'success': True,
+            'conversation_data': result
+        }), 200
+        
+    except Exception as e:
+        return jsonify({'error': f'Failed to continue conversation: {str(e)}'}), 500
 
 @app.route('/api/medical-records', methods=['POST'])
 def create_medical_record():

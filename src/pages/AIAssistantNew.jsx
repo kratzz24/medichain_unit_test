@@ -1,8 +1,9 @@
 import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { Brain, User, Activity, FileText, RefreshCw, Plus, AlertCircle, ThumbsUp, ThumbsDown, Info, LogIn, UserPlus } from 'lucide-react';
+import { Brain, User, Activity, FileText, RefreshCw, Plus, AlertCircle, ThumbsUp, ThumbsDown, Info, LogIn, UserPlus, MessageCircle } from 'lucide-react';
 import LoadingSpinner from '../components/LoadingSpinner';
 import AIProgressBar from '../components/AIProgressBar';
+import ConversationalAI from '../components/ConversationalAI';
 import { showToast } from '../components/CustomToast';
 import { aiService } from '../services/aiService';
 import { useAuth } from '../context/AuthContext';
@@ -21,6 +22,7 @@ const AIAssistant = () => {
   const [aiStatus, setAiStatus] = useState('checking');
   const [modelInfo, setModelInfo] = useState(null);
   const [feedbackSubmitted, setFeedbackSubmitted] = useState(false);
+  const [mode, setMode] = useState('quick'); // 'quick' or 'conversational'
   const { user } = useAuth();
   const navigate = useNavigate();
 
@@ -252,16 +254,103 @@ const AIAssistant = () => {
                   color: '#333',
                   marginBottom: '10px'
                 }}>
-                  Describe Your Symptoms
+                  AI Health Diagnosis
                 </h2>
                 <p style={{
                   color: '#666',
                   fontSize: '1rem',
                   lineHeight: '1.5'
                 }}>
-                  Provide detailed information about your symptoms for accurate AI analysis
+                  Choose your preferred diagnosis method
                 </p>
               </div>
+
+              {/* Mode Selection */}
+              <div style={{ marginBottom: '30px' }}>
+                <div style={{
+                  display: 'flex',
+                  justifyContent: 'center',
+                  gap: '15px',
+                  marginBottom: '20px'
+                }}>
+                  <button
+                    onClick={() => setMode('quick')}
+                    style={{
+                      padding: '15px 25px',
+                      borderRadius: '10px',
+                      border: mode === 'quick' ? '2px solid #3B82F6' : '2px solid #E5E7EB',
+                      backgroundColor: mode === 'quick' ? '#EBF4FF' : 'white',
+                      color: mode === 'quick' ? '#1D4ED8' : '#6B7280',
+                      fontWeight: '600',
+                      cursor: 'pointer',
+                      transition: 'all 0.2s',
+                      display: 'flex',
+                      alignItems: 'center',
+                      gap: '8px'
+                    }}
+                  >
+                    <Brain className="w-5 h-5" />
+                    Quick Diagnosis
+                  </button>
+                  <button
+                    onClick={() => setMode('conversational')}
+                    style={{
+                      padding: '15px 25px',
+                      borderRadius: '10px',
+                      border: mode === 'conversational' ? '2px solid #3B82F6' : '2px solid #E5E7EB',
+                      backgroundColor: mode === 'conversational' ? '#EBF4FF' : 'white',
+                      color: mode === 'conversational' ? '#1D4ED8' : '#6B7280',
+                      fontWeight: '600',
+                      cursor: 'pointer',
+                      transition: 'all 0.2s',
+                      display: 'flex',
+                      alignItems: 'center',
+                      gap: '8px'
+                    }}
+                  >
+                    <MessageCircle className="w-5 h-5" />
+                    Conversational Diagnosis
+                  </button>
+                </div>
+                <p style={{
+                  textAlign: 'center',
+                  color: '#6B7280',
+                  fontSize: '0.875rem'
+                }}>
+                  {mode === 'quick' 
+                    ? 'Describe all your symptoms at once for immediate diagnosis'
+                    : 'Interactive conversation with follow-up questions for precise diagnosis'
+                  }
+                </p>
+              </div>
+
+              {/* Show appropriate interface based on mode */}
+              {mode === 'conversational' ? (
+                <ConversationalAI
+                  onDiagnosisComplete={(diagnosisData) => {
+                    setDiagnosis(diagnosisData);
+                    setProgress(100);
+                    setProgressStatus('Diagnosis complete!');
+                  }}
+                />
+              ) : (
+                <>
+                  <div style={{ textAlign: 'center', marginBottom: '20px' }}>
+                    <h3 style={{
+                      fontSize: '1.5rem',
+                      fontWeight: '600',
+                      color: '#333',
+                      marginBottom: '5px'
+                    }}>
+                      Describe Your Symptoms
+                    </h3>
+                    <p style={{
+                      color: '#666',
+                      fontSize: '0.9rem'
+                    }}>
+                      Provide detailed information about your symptoms for accurate AI analysis
+                    </p>
+                  </div>
 
               {/* Progress Bar */}
               {loading && (
@@ -284,7 +373,7 @@ const AIAssistant = () => {
                 <textarea
                   value={symptoms}
                   onChange={(e) => setSymptoms(e.target.value)}
-                  placeholder="Describe your symptoms in detail (e.g., headache, fever, cough, stomach pain, duration, severity...)"
+                  placeholder="Describe your symptoms in detail (e.g., headache, fever, cough, stomach pain, severity...)"
                   style={{
                     width: '100%',
                     minHeight: '120px',
@@ -497,6 +586,8 @@ const AIAssistant = () => {
                   Clear
                 </button>
               </div>
+                </>
+              )}
 
               {/* Error Display */}
               {error && (

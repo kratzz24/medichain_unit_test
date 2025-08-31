@@ -346,9 +346,10 @@ const AIHealth = () => {
               <textarea
                 value={symptoms}
                 onChange={(e) => setSymptoms(e.target.value)}
-                placeholder="Please describe your symptoms in detail... (e.g., I have a high fever, severe cough, and feeling tired)"
+                placeholder="Please describe your symptoms in detail... (e.g., I have a high fever for 3 days, severe cough, and feeling tired)"
                 className="ai-textarea"
               />
+              
               <div className="symptoms-examples">
                 <p>Common symptoms you may include:</p>
                 <div className="example-chips">

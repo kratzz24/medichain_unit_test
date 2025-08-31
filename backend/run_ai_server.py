@@ -17,70 +17,66 @@ logger = logging.getLogger(__name__)
 app = Flask(__name__)
 CORS(app)
 
-# Load model and encoders
-MODEL_PATH = 'enhanced_diagnosis_model.pkl'  # Use enhanced model
+# Load model and encoders - Using enhanced comprehensive model
+MODEL_PATH = 'enhanced_diagnosis_model.pkl'  # Enhanced model with 56 diagnoses
 LABEL_ENCODER_PATH = 'enhanced_label_encoder.pkl'
 FEATURE_NAMES_PATH = 'enhanced_feature_names.pkl'
+PRESCRIPTIONS_PATH = 'enhanced_prescriptions_map.pkl'  # Enhanced prescriptions map
 
 # Global variables for model and encoders
 model = None
 label_encoder = None
 feature_names = None
+prescriptions_map = None  # Enhanced prescriptions map
 symptom_parser = None  # Will hold our symptom parser instance
 
 def load_model():
     """Load the trained model and encoders"""
-    global model, label_encoder, feature_names, symptom_parser
+    global model, label_encoder, feature_names, prescriptions_map, symptom_parser
     
     try:
-        # Try to load the enhanced model first, fall back to regular model if needed
+        # Load enhanced model
         if os.path.exists(MODEL_PATH):
             model = joblib.load(MODEL_PATH)
-            logger.info(f"Model loaded successfully from {MODEL_PATH}")
+            logger.info(f"Enhanced model loaded successfully from {MODEL_PATH}")
         else:
-            # Try standard model if enhanced one doesn't exist
-            standard_path = 'diagnosis_model.pkl'
-            if os.path.exists(standard_path):
-                model = joblib.load(standard_path)
-                logger.info(f"Enhanced model not found, using standard model {standard_path}")
-            else:
-                logger.error(f"Neither enhanced nor standard model file found")
-                return False
+            logger.error(f"Enhanced model file not found: {MODEL_PATH}")
+            return False
             
+        # Load enhanced label encoder
         if os.path.exists(LABEL_ENCODER_PATH):
             label_encoder = joblib.load(LABEL_ENCODER_PATH)
-            logger.info(f"Label encoder loaded successfully from {LABEL_ENCODER_PATH}")
+            logger.info(f"Enhanced label encoder loaded successfully from {LABEL_ENCODER_PATH}")
         else:
-            # Try standard encoder if enhanced one doesn't exist
-            standard_path = 'label_encoder.pkl'
-            if os.path.exists(standard_path):
-                label_encoder = joblib.load(standard_path)
-                logger.info(f"Enhanced label encoder not found, using standard encoder {standard_path}")
-            else:
-                logger.error(f"Neither enhanced nor standard label encoder found")
-                return False
+            logger.error(f"Enhanced label encoder file not found: {LABEL_ENCODER_PATH}")
+            return False
             
+        # Load enhanced feature names
         if os.path.exists(FEATURE_NAMES_PATH):
             feature_names = joblib.load(FEATURE_NAMES_PATH)
-            logger.info(f"Feature names loaded successfully from {FEATURE_NAMES_PATH}")
+            logger.info(f"Enhanced feature names loaded successfully from {FEATURE_NAMES_PATH}")
         else:
-            # Try standard feature names if enhanced ones don't exist
-            standard_path = 'feature_names.pkl'
-            if os.path.exists(standard_path):
-                feature_names = joblib.load(standard_path)
-                logger.info(f"Enhanced feature names not found, using standard feature names {standard_path}")
-            else:
-                logger.error(f"Neither enhanced nor standard feature names found")
-                return False
+            logger.error(f"Enhanced feature names file not found: {FEATURE_NAMES_PATH}")
+            return False
+            
+        # Load enhanced prescriptions map
+        if os.path.exists(PRESCRIPTIONS_PATH):
+            prescriptions_map = joblib.load(PRESCRIPTIONS_PATH)
+            logger.info(f"Enhanced prescriptions map loaded successfully from {PRESCRIPTIONS_PATH}")
+            logger.info(f"Loaded {len(prescriptions_map)} diagnosis prescriptions")
+        else:
+            logger.warning(f"Enhanced prescriptions map not found: {PRESCRIPTIONS_PATH}")
+            prescriptions_map = {}
         
         # Initialize our custom symptom parser with the current directory
         symptom_parser = SymptomParser(model_path=".")
         logger.info(f"Symptom parser initialized with {len(feature_names)} features")
+        logger.info(f"Total diagnoses available: {len(label_encoder.classes_)}")
             
         return True
         
     except Exception as e:
-        logger.error(f"Error loading model: {str(e)}")
+        logger.error(f"Error loading enhanced model: {str(e)}")
         return False
 
 @app.route('/health', methods=['GET'])
@@ -90,7 +86,10 @@ def health_check():
         'status': 'healthy',
         'model_loaded': model is not None,
         'label_encoder_loaded': label_encoder is not None,
-        'feature_names_loaded': feature_names is not None
+        'feature_names_loaded': feature_names is not None,
+        'prescriptions_loaded': prescriptions_map is not None,
+        'total_diagnoses': len(label_encoder.classes_) if label_encoder else 0,
+        'model_type': 'enhanced_comprehensive'
     })
 
 @app.route('/chat', methods=['POST'])
@@ -418,7 +417,7 @@ if __name__ == '__main__':
     # Load model before starting server
     if load_model():
         logger.info("Starting AI diagnosis server...")
-        app.run(host='0.0.0.0', port=5001, debug=True)
+        app.run(host='0.0.0.0', port=5001, debug=False)
     else:
         logger.error("Failed to load model. Please train the model first.")
         exit(1)

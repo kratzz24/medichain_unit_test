@@ -214,6 +214,46 @@ export const aiService = {
         status: 'disconnected'
       };
     }
+  },
+
+  /**
+   * Start a conversational AI diagnosis session
+   * @param {Object} data - Initial symptoms data
+   * @returns {Promise<Object>} Conversation response
+   */
+  startConversation: async (data) => {
+    try {
+      console.log("Starting AI conversation:", data);
+      const response = await axios.post('http://localhost:5000/api/ai/start-conversation', data);
+      console.log("Conversation started:", response.data);
+      return response.data;
+    } catch (error) {
+      console.error('Error starting conversation:', error);
+      if (error.isNetworkError) {
+        throw new Error('AI server is not running. Please start the AI service.');
+      }
+      throw new Error(error.response?.data?.error || 'Failed to start conversation');
+    }
+  },
+
+  /**
+   * Continue the conversational AI diagnosis
+   * @param {Object} data - User response data
+   * @returns {Promise<Object>} Conversation response
+   */
+  continueConversation: async (data) => {
+    try {
+      console.log("Continuing AI conversation:", data);
+      const response = await axios.post('http://localhost:5000/api/ai/continue-conversation', data);
+      console.log("Conversation continued:", response.data);
+      return response.data;
+    } catch (error) {
+      console.error('Error continuing conversation:', error);
+      if (error.isNetworkError) {
+        throw new Error('AI server is not running. Please start the AI service.');
+      }
+      throw new Error(error.response?.data?.error || 'Failed to continue conversation');
+    }
   }
 };
 
