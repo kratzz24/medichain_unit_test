@@ -78,6 +78,10 @@ const AIHealth = () => {
   const [symptoms, setSymptoms] = useState('');
   const [patientAge, setPatientAge] = useState('');
   const [patientGender, setPatientGender] = useState('');
+  const [duration, setDuration] = useState('');
+  const [intensity, setIntensity] = useState('');
+  const [showDurationInput, setShowDurationInput] = useState(false);
+  const [showIntensityInput, setShowIntensityInput] = useState(false);
   const [diagnosis, setDiagnosis] = useState(null);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState(null);
@@ -193,44 +197,157 @@ const AIHealth = () => {
     await simulateProgress();
 
     try {
-      // Create the proper format for symptoms
-      const symptomText = symptoms.trim();
+      // First, check if we have manual duration/intensity input or need to detect
+      let diagnosisRequest;
       
-      const diagnosisRequest = {
-        symptoms: { symptomText: symptomText }, // Passing as a dictionary with the symptomText key
-        patient_data: {
-          age: parseInt(patientAge),
-          gender: patientGender,
-          patient_id: user ? user.id : `guest_${Date.now()}`,
-          name: user ? `${user.first_name} ${user.last_name}` : 'Guest'
-        },
-        doctor_id: null, // No doctor for public access
-        include_recommendations: true,
-        detailed_analysis: true,
-        save_to_database: saveData && user, // Only save if user is logged in and wants to save
-        session_type: user ? 'authenticated' : 'guest'
-      };
-
-      console.log('Sending diagnosis request:', diagnosisRequest);
-      
-      const result = await aiService.getDiagnosis(diagnosisRequest);
-      
-      if (result.success) {
-        setDiagnosis(result.data);
-        setSessionData({
-          symptoms,
-          age: patientAge,
-          gender: patientGender,
-          timestamp: new Date().toISOString(),
-          saved: saveData && user
-        });
-        showToast.success('AI diagnosis completed successfully');
+      if (showDurationInput || showIntensityInput) {
+        // Use enhanced endpoint with manual inputs
+        diagnosisRequest = {
+          symptoms: symptoms.trim(),
+          duration: '',
+          intensity: '',
+          manual_duration_days: duration ? parseInt(duration) : undefined,
+          manual_intensity: intensity || undefined
+        };
         
-        if (saveData && user) {
-          showToast.info('Your diagnosis has been saved to your medical record');
+        console.log('Sending enhanced diagnosis request with manual inputs:', diagnosisRequest);
+        const response = await fetch('http://localhost:5001/diagnose-enhanced', {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+          },
+          body: JSON.stringify(diagnosisRequest)
+        });
+        
+        const result = await response.json();
+        
+        if (result.error) {
+          throw new Error(result.error);
         }
+        
+        // Transform the result for the frontend
+        const transformedResult = {
+          success: true,
+          data: {
+            diagnosis: result.primary_diagnosis,
+            confidence: Math.round(result.confidence * 100),
+            differential_diagnoses: result.top_predictions,
+            prescription: {
+              medications: result.recommendations?.medications || ['Consult healthcare provider'],
+              treatments: result.recommendations?.lifestyle || ['Rest and monitor symptoms'],
+              instructions: result.recommendations?.when_to_see_doctor?.join(', ') || 'Follow up with healthcare provider'
+            },
+            recommendations: result.recommendations?.lifestyle || ['Rest and monitor symptoms'],
+            ai_model_version: 'MediChain-AI-Comprehensive',
+            timestamp: result.timestamp,
+            severity: 'Moderate',
+            urgency: 'normal',
+            analysis_summary: result.analysis_summary
+          }
+        };
+        
+        if (transformedResult.success) {
+          setDiagnosis(transformedResult.data);
+          setSessionData({
+            symptoms,
+            age: patientAge,
+            gender: patientGender,
+            duration: duration,
+            intensity: intensity,
+            timestamp: new Date().toISOString(),
+            saved: saveData && user
+          });
+          showToast.success('AI diagnosis completed successfully');
+          
+          if (saveData && user) {
+            showToast.info('Your diagnosis has been saved to your medical record');
+          }
+        } else {
+          throw new Error(transformedResult.error || 'Failed to get diagnosis');
+        }
+        
       } else {
-        throw new Error(result.error || 'Failed to get diagnosis');
+        // First attempt - check what can be auto-detected
+        diagnosisRequest = {
+          symptoms: symptoms.trim(),
+          duration: '',
+          intensity: ''
+        };
+        
+        console.log('Sending initial diagnosis request to check detection:', diagnosisRequest);
+        const response = await fetch('http://localhost:5001/diagnose-enhanced', {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+          },
+          body: JSON.stringify(diagnosisRequest)
+        });
+        
+        const result = await response.json();
+        
+        if (result.error) {
+          throw new Error(result.error);
+        }
+        
+        // Check if duration or intensity need manual input
+        const needsDuration = result.analysis_summary?.needs_duration_input;
+        const needsIntensity = result.analysis_summary?.needs_intensity_input;
+        
+        if (needsDuration || needsIntensity) {
+          // Show manual input fields
+          setShowDurationInput(needsDuration);
+          setShowIntensityInput(needsIntensity);
+          setLoading(false);
+          
+          if (needsDuration && needsIntensity) {
+            showToast.info('Please provide duration and intensity for more accurate diagnosis');
+          } else if (needsDuration) {
+            showToast.info('Please provide symptom duration for more accurate diagnosis');
+          } else {
+            showToast.info('Please provide symptom intensity for more accurate diagnosis');
+          }
+          
+          return; // Don't proceed with diagnosis yet
+        }
+        
+        // If we reach here, auto-detection worked fine, proceed with result
+        const transformedResult = {
+          success: true,
+          data: {
+            diagnosis: result.primary_diagnosis,
+            confidence: Math.round(result.confidence * 100),
+            differential_diagnoses: result.top_predictions,
+            prescription: {
+              medications: result.recommendations?.medications || ['Consult healthcare provider'],
+              treatments: result.recommendations?.lifestyle || ['Rest and monitor symptoms'],
+              instructions: result.recommendations?.when_to_see_doctor?.join(', ') || 'Follow up with healthcare provider'
+            },
+            recommendations: result.recommendations?.lifestyle || ['Rest and monitor symptoms'],
+            ai_model_version: 'MediChain-AI-Comprehensive',
+            timestamp: result.timestamp,
+            severity: 'Moderate',
+            urgency: 'normal',
+            analysis_summary: result.analysis_summary
+          }
+        };
+        
+        if (transformedResult.success) {
+          setDiagnosis(transformedResult.data);
+          setSessionData({
+            symptoms,
+            age: patientAge,
+            gender: patientGender,
+            timestamp: new Date().toISOString(),
+            saved: saveData && user
+          });
+          showToast.success('AI diagnosis completed successfully');
+          
+          if (saveData && user) {
+            showToast.info('Your diagnosis has been saved to your medical record');
+          }
+        } else {
+          throw new Error(transformedResult.error || 'Failed to get diagnosis');
+        }
       }
       
     } catch (err) {
@@ -255,6 +372,10 @@ const AIHealth = () => {
     setSymptoms('');
     setPatientAge('');
     setPatientGender('');
+    setDuration('');
+    setIntensity('');
+    setShowDurationInput(false);
+    setShowIntensityInput(false);
     setDiagnosis(null);
     setError(null);
     setSaveData(false);
@@ -297,46 +418,49 @@ const AIHealth = () => {
           </p>
         </div>
 
-        <div className="ai-grid">
-          {/* Input Section */}
-          <div className="ai-card">
-            <div className="ai-card-header">
-              <ClipboardIcon />
-              Symptom Analysis
-            </div>
-            
-            <div className="ai-form-group">
-              <label className="ai-label">
-                <UserIcon />
-                Patient Age
-              </label>
-              <input
-                type="number"
-                value={patientAge}
-                onChange={(e) => setPatientAge(e.target.value)}
-                placeholder="Enter age"
-                min="1"
-                max="120"
-                className="ai-select"
-              />
-            </div>
-            
-            <div className="ai-form-group">
-              <label className="ai-label">
-                <UserIcon />
-                Gender
-              </label>
-              <select
-                value={patientGender}
-                onChange={(e) => setPatientGender(e.target.value)}
-                className="ai-select"
-              >
-                <option value="">Select gender</option>
-                <option value="male">Male</option>
-                <option value="female">Female</option>
-                <option value="other">Other</option>
-              </select>
-            </div>
+        <div className="ai-layout-container">
+          {/* Left Section - Input Form */}
+          <div className="ai-left-section">
+            <div className="ai-card">
+              <div className="ai-card-header">
+                <ClipboardIcon />
+                Symptom Analysis
+              </div>
+              
+              <div className="ai-form-group">
+                <label className="ai-label">
+                  <UserIcon />
+                  Patient Age
+                </label>
+                <input
+                  type="number"
+                  value={patientAge}
+                  onChange={(e) => setPatientAge(e.target.value)}
+                  placeholder="Enter age"
+                  min="1"
+                  max="120"
+                  className="ai-input"
+                />
+              </div>
+              
+              <div className="ai-form-group">
+                <label className="ai-label">
+                  <UserIcon />
+                  Gender
+                </label>
+                <div className="ai-select-wrapper">
+                  <select
+                    value={patientGender}
+                    onChange={(e) => setPatientGender(e.target.value)}
+                    className="ai-select-clean"
+                  >
+                    <option value="">Select gender</option>
+                    <option value="male">Male</option>
+                    <option value="female">Female</option>
+                    <option value="other">Other</option>
+                  </select>
+                </div>
+              </div>
 
             <div className="ai-form-group">
               <label className="ai-label">
@@ -411,6 +535,76 @@ const AIHealth = () => {
               </div>
             )}
 
+            {/* Duration and Intensity Input Fields - appear when needed */}
+            {(showDurationInput || showIntensityInput) && (
+              <div className="ai-output-card blue">
+                <div className="ai-output-title">
+                  <SparklesIcon />
+                  Additional Information Needed
+                </div>
+                <div className="ai-output-content">
+                  <p>Please provide the following details for a more accurate diagnosis:</p>
+                  
+                  {showDurationInput && (
+                    <div className="ai-form-group">
+                      <label className="ai-label">
+                        Duration of Symptoms (in days)
+                      </label>
+                      <input
+                        type="number"
+                        value={duration}
+                        onChange={(e) => setDuration(e.target.value)}
+                        placeholder="Enter number of days"
+                        min="1"
+                        max="365"
+                        className="ai-input"
+                      />
+                    </div>
+                  )}
+                  
+                  {showIntensityInput && (
+                    <div className="ai-form-group">
+                      <label className="ai-label">
+                        Intensity/Severity of Symptoms
+                      </label>
+                      <div className="ai-select-wrapper">
+                        <select
+                          value={intensity}
+                          onChange={(e) => setIntensity(e.target.value)}
+                          className="ai-select-clean"
+                        >
+                          <option value="">Select intensity</option>
+                          <option value="mild">Mild - Barely noticeable, doesn't affect daily activities</option>
+                          <option value="moderate">Moderate - Noticeable, some impact on daily activities</option>
+                          <option value="severe">Severe - Intense, significantly affects daily activities</option>
+                        </select>
+                      </div>
+                    </div>
+                  )}
+                  
+                  <div className="ai-button-group" style={{marginTop: '15px'}}>
+                    <button
+                      onClick={handleDiagnosis}
+                      disabled={loading || (showDurationInput && !duration) || (showIntensityInput && !intensity)}
+                      className="ai-primary-button"
+                    >
+                      {loading ? (
+                        <>
+                          <LoadingSpinner size="small" />
+                          Analyzing...
+                        </>
+                      ) : (
+                        <>
+                          <SparklesIcon />
+                          Get Updated Diagnosis
+                        </>
+                      )}
+                    </button>
+                  </div>
+                </div>
+              </div>
+            )}
+
             <div className="ai-button-group">
               <button
                 onClick={handleDiagnosis}
@@ -440,26 +634,77 @@ const AIHealth = () => {
               )}
             </div>
 
-            {/* Progress Section */}
-            {loading && (
-              <div className="ai-loading-container">
-                <AIProgressBar 
-                  isLoading={true} 
-                  progress={progress} 
-                  status={progressStatus}
-                  className="medical-progress-bar"
-                />
-                <div className="ai-loading-text">{progressStatus}</div>
-              </div>
-            )}
+            {/* Progress Section moved to right side */}
+            </div>
           </div>
 
-          {/* Results Section */}
-          <div className="ai-card">
-            <div className="ai-card-header">
-              <ActivityIcon />
-              Diagnosis Results
-            </div>
+          {/* Right Section - AI Analysis & Results */}
+          <div className="ai-right-section">
+            {/* AI Analysis Loading Panel */}
+            {loading && (
+              <div className="ai-analysis-panel">
+                <div className="ai-analysis-header">
+                  <div className="ai-analysis-icon">
+                    <SparklesIcon />
+                  </div>
+                  <div className="ai-analysis-title">AI Medical Analysis</div>
+                  <div className="ai-analysis-subtitle">Correlating with medical database...</div>
+                </div>
+                
+                <div className="ai-analysis-progress">
+                  <AIProgressBar 
+                    isLoading={true} 
+                    progress={progress} 
+                    status={progressStatus}
+                    className="enhanced-progress-bar"
+                  />
+                </div>
+                
+                <div className="ai-analysis-steps">
+                  <div className={`analysis-step ${progress >= 25 ? 'completed' : progress >= 0 ? 'active' : ''}`}>
+                    <div className="step-icon">1</div>
+                    <div className="step-content">
+                      <div className="step-title">Analyzing</div>
+                      <div className="step-description">Processing input data</div>
+                    </div>
+                  </div>
+                  <div className={`analysis-step ${progress >= 50 ? 'completed' : progress >= 25 ? 'active' : ''}`}>
+                    <div className="step-icon">2</div>
+                    <div className="step-content">
+                      <div className="step-title">Computing</div>
+                      <div className="step-description">Running AI algorithms</div>
+                    </div>
+                  </div>
+                  <div className={`analysis-step ${progress >= 75 ? 'completed' : progress >= 50 ? 'active' : ''}`}>
+                    <div className="step-icon">3</div>
+                    <div className="step-content">
+                      <div className="step-title">Diagnosing</div>
+                      <div className="step-description">Generating results</div>
+                    </div>
+                  </div>
+                  <div className={`analysis-step ${progress >= 100 ? 'completed' : progress >= 75 ? 'active' : ''}`}>
+                    <div className="step-icon">4</div>
+                    <div className="step-content">
+                      <div className="step-title">Complete</div>
+                      <div className="step-description">Analysis finished</div>
+                    </div>
+                  </div>
+                </div>
+                
+                <div className="ai-analysis-status">
+                  <div className="status-text">{progressStatus}</div>
+                  <div className="status-percentage">{Math.round(progress)}%</div>
+                </div>
+              </div>
+            )}
+
+            {/* Results Panel */}
+            {!loading && (
+              <div className="ai-card">
+                <div className="ai-card-header">
+                  <ActivityIcon />
+                  Diagnosis Results
+                </div>
             
             {!diagnosis && !loading && (
               <div className="ai-empty-state">
@@ -623,6 +868,8 @@ const AIHealth = () => {
                   Error
                 </div>
                 <div className="ai-output-content">{error}</div>
+              </div>
+            )}
               </div>
             )}
           </div>
