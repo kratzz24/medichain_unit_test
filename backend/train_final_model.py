@@ -113,10 +113,10 @@ def load_training_data():
         
         # Add minor variations
         # Vary duration slightly
-        varied_sample[15] = max(1, varied_sample[15] + random.randint(-2, 2))
+        varied_sample[14] = max(1, varied_sample[14] + random.randint(-2, 2))
         
         # Vary intensity slightly  
-        varied_sample[16] = max(1, min(3, varied_sample[16] + random.randint(-1, 1)))
+        varied_sample[15] = max(1, min(3, varied_sample[15] + random.randint(-1, 1)))
         
         # Sometimes add/remove a symptom
         if random.random() < 0.3:  # 30% chance
@@ -156,10 +156,10 @@ def prepare_features_and_labels(data):
                 feature_vector.append(0.0)
         
         # Duration (numeric)
-        feature_vector.append(float(sample[14]))
+        feature_vector.append(float(sample[14]))  # Position 14 for duration
         
         # Intensity (numeric)  
-        feature_vector.append(float(sample[15]))
+        feature_vector.append(float(sample[15]))  # Position 15 for intensity
         
         features.append(feature_vector)
         labels.append(sample[16])  # Diagnosis is at position 16

@@ -632,6 +632,73 @@ const AIHealth = () => {
                   </>
                 )}
 
+                {/* Top 3 Predictions with Medications */}
+                {diagnosis.top_predictions && diagnosis.top_predictions.length > 0 && (
+                  <div className="ai-output-card green">
+                    <div className="ai-output-title">
+                      <SparklesIcon />
+                      Top 3 Diagnostic Possibilities
+                    </div>
+                    <div className="ai-output-content">
+                      <div className="predictions-grid">
+                        {diagnosis.top_predictions.map((prediction, index) => (
+                          <div key={index} className={`prediction-card ${index === 0 ? 'primary' : ''}`}>
+                            <div className="prediction-header">
+                              <div className="prediction-rank">#{index + 1}</div>
+                              <div className="prediction-info">
+                                <div className="prediction-name">{prediction.diagnosis.replace(/_/g, ' ')}</div>
+                                <div className="prediction-confidence">
+                                  <span className="confidence-percentage">{prediction.confidence.toFixed(1)}%</span>
+                                  <div className="mini-confidence-bar">
+                                    <div 
+                                      className="mini-confidence-fill" 
+                                      style={{ width: `${prediction.confidence}%` }}
+                                    ></div>
+                                  </div>
+                                </div>
+                              </div>
+                            </div>
+                            
+                            {prediction.medications && (
+                              <div className="prediction-medications">
+                                <div className="medication-title">
+                                  💊 Recommended Medications:
+                                </div>
+                                <ul className="medication-list">
+                                  {prediction.medications.map((medication, medIndex) => (
+                                    <li key={medIndex} className="medication-item">
+                                      {medication}
+                                    </li>
+                                  ))}
+                                </ul>
+                                
+                                {prediction.dosage && (
+                                  <div className="medication-details">
+                                    <div className="detail-item">
+                                      <strong>Dosage:</strong> {prediction.dosage}
+                                    </div>
+                                    <div className="detail-item">
+                                      <strong>Duration:</strong> {prediction.duration}
+                                    </div>
+                                    <div className="detail-item">
+                                      <strong>Instructions:</strong> {prediction.instructions}
+                                    </div>
+                                  </div>
+                                )}
+                              </div>
+                            )}
+                          </div>
+                        ))}
+                      </div>
+                      
+                      <div className="predictions-disclaimer">
+                        <ExclamationIcon />
+                        <span>These are AI-generated possibilities. Always consult a healthcare professional for proper diagnosis and treatment.</span>
+                      </div>
+                    </div>
+                  </div>
+                )}
+
                 {/* Medical Disclaimer */}
                 <div className="ai-output-card red">
                   <div className="ai-output-title">

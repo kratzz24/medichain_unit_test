@@ -12,6 +12,7 @@ import re
 import logging
 from datetime import datetime
 import json
+from medication_recommendations import MedicationRecommendations
 
 # Configure logging
 logging.basicConfig(level=logging.INFO)
@@ -40,6 +41,9 @@ class ComprehensiveAIDiagnosis:
             
             # Initialize symptom parser
             self.symptom_parser = EnhancedSymptomParser()
+            
+            # Initialize medication recommendations
+            self.medication_recommendations = MedicationRecommendations()
             
         except Exception as e:
             logger.error(f"Error loading model: {e}")
@@ -88,22 +92,33 @@ class ComprehensiveAIDiagnosis:
             
             for idx in top_indices:
                 pred_diagnosis = self.label_encoder.inverse_transform([idx])[0]
-                pred_confidence = float(probabilities[idx])
+                pred_confidence = float(probabilities[idx]) * 100  # Convert to percentage
                 
                 # Apply boosting to primary prediction
                 if idx == prediction:
-                    pred_confidence = boosted_confidence
+                    pred_confidence = boosted_confidence * 100  # Convert to percentage
+                
+                # Get medication recommendations for this diagnosis
+                med_recommendations = self.medication_recommendations.get_recommendations(pred_diagnosis)
                 
                 top_predictions.append({
                     'diagnosis': pred_diagnosis,
-                    'confidence': pred_confidence
+                    'confidence': pred_confidence,
+                    'medications': med_recommendations['medications'][:3],  # Top 3 medications
+                    'dosage': med_recommendations['dosage'],
+                    'duration': med_recommendations['duration'],
+                    'instructions': med_recommendations['instructions']
                 })
+            
+            # Get comprehensive medication recommendations for all top predictions
+            medication_summary = self.medication_recommendations.get_multiple_recommendations(top_predictions)
             
             result = {
                 'primary_diagnosis': diagnosis,
-                'confidence': boosted_confidence,
-                'base_confidence': base_confidence,
+                'confidence': boosted_confidence * 100,  # Convert to percentage
+                'base_confidence': base_confidence * 100,  # Convert to percentage
                 'top_predictions': top_predictions,
+                'medication_recommendations': medication_summary,
                 'parsed_symptoms': parsed_result['symptoms'],
                 'duration_days': parsed_result['duration_days'],
                 'intensity': parsed_result['intensity'],

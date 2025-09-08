@@ -136,7 +136,10 @@ class ConfidenceBooster:
             boost_factors.append(f"Mild intensity: +{(factor-1)*100:.0f}%")
         
         # 5. Keyword Confidence Boost
-        raw_text = parsed_result.get('raw_text', '').lower()
+        raw_text = parsed_result.get('raw_text', '')
+        if isinstance(raw_text, dict):
+            raw_text = str(raw_text)
+        raw_text = str(raw_text).lower()
         confidence_keyword_count = sum(1 for keyword in self.confidence_keywords if keyword in raw_text)
         if confidence_keyword_count >= 3:
             factor = 1.12  # 12% boost for multiple confidence keywords
@@ -225,6 +228,12 @@ def diagnose():
         duration_text = data.get('duration', '')
         intensity_text = data.get('intensity', '')
         
+        # Handle different symptoms formats (string or dict with symptomText)
+        if isinstance(symptoms_text, dict):
+            symptoms_text = symptoms_text.get('symptomText', '')
+        elif not isinstance(symptoms_text, str):
+            symptoms_text = str(symptoms_text)
+        
         if not symptoms_text:
             return jsonify({
                 'error': 'Symptoms are required',
@@ -243,7 +252,7 @@ def diagnose():
             return jsonify(result), 500
         
         # Apply enhanced confidence boosting
-        base_confidence = result['confidence']
+        base_confidence = result['confidence'] / 100  # Convert from percentage to decimal for processing
         symptoms = result['parsed_symptoms']
         parsed_result = {
             'symptoms': symptoms,
@@ -259,22 +268,22 @@ def diagnose():
             base_confidence, symptoms, parsed_result, feature_vector
         )
         
-        # Update result with enhanced confidence
-        result['base_confidence'] = base_confidence
-        result['confidence'] = enhanced_confidence
+        # Update result with enhanced confidence (convert back to percentage)
+        result['base_confidence'] = base_confidence * 100
+        result['confidence'] = enhanced_confidence * 100
         result['confidence_boost_factors'] = boost_factors
         result['confidence_level'] = ai_diagnosis._get_confidence_level(enhanced_confidence)
         
         # Update top predictions with enhanced confidence for primary
         for pred in result['top_predictions']:
             if pred['diagnosis'] == result['primary_diagnosis']:
-                pred['confidence'] = enhanced_confidence
+                pred['confidence'] = enhanced_confidence * 100
                 break
         
         # Add enhancement metadata
         result['enhancement_info'] = {
-            'original_confidence': base_confidence,
-            'enhanced_confidence': enhanced_confidence,
+            'original_confidence': base_confidence * 100,
+            'enhanced_confidence': enhanced_confidence * 100,
             'boost_applied': enhanced_confidence > base_confidence,
             'boost_percentage': ((enhanced_confidence / base_confidence) - 1) * 100 if base_confidence > 0 else 0,
             'boost_factors_count': len(boost_factors)
@@ -346,7 +355,7 @@ def confidence_info():
                 }
             }
         },
-        'max_confidence': 0.95,
+        'max_confidence': 95,  # 95% maximum confidence
         'confidence_levels': {
             'Very High': '≥85%',
             'High': '75-84%',

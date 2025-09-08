@@ -32,7 +32,7 @@ export const aiService = {
   getDiagnosis: async (diagnosisData) => {
     try {
       console.log("Sending diagnosis request:", diagnosisData);
-      const response = await api.post('/predict', diagnosisData);
+      const response = await api.post('/diagnose', diagnosisData);
       console.log("Received diagnosis response:", response.data);
       
       // Transform the AI response to match frontend expectations
@@ -65,14 +65,23 @@ export const aiService = {
       }
       
       // Handle direct diagnosis response from run_ai_server.py
-      if (aiData.diagnosis) {
+      if (aiData.diagnosis || aiData.primary_diagnosis) {
         console.log("Handling direct diagnosis format:", aiData);
+        
+        // Format diagnosis name (replace underscores with spaces and capitalize)
+        const rawDiagnosis = aiData.diagnosis || aiData.primary_diagnosis || 'Unknown';
+        const formattedDiagnosis = rawDiagnosis.replace(/_/g, ' ')
+          .split(' ')
+          .map(word => word.charAt(0).toUpperCase() + word.slice(1).toLowerCase())
+          .join(' ');
+        
         return {
           success: true,
           data: {
-            diagnosis: aiData.diagnosis || 'Unknown',
-            confidence: Math.round((aiData.confidence || 0) * 100),
-            differential_diagnoses: aiData.top_3_predictions || [],
+            diagnosis: formattedDiagnosis,
+            confidence: Math.round(aiData.confidence || 0),
+            top_predictions: aiData.top_predictions || [],
+            differential_diagnoses: aiData.top_3_predictions || aiData.top_predictions || [],
             prescription: {
               medications: ['Consult a doctor for proper medication'],
               treatments: ['Rest and hydration'],
