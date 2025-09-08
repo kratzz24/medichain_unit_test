@@ -78,10 +78,6 @@ const AIHealth = () => {
   const [symptoms, setSymptoms] = useState('');
   const [patientAge, setPatientAge] = useState('');
   const [patientGender, setPatientGender] = useState('');
-  const [duration, setDuration] = useState('');
-  const [intensity, setIntensity] = useState('');
-  const [showDurationInput, setShowDurationInput] = useState(false);
-  const [showIntensityInput, setShowIntensityInput] = useState(false);
   const [diagnosis, setDiagnosis] = useState(null);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState(null);
@@ -197,157 +193,44 @@ const AIHealth = () => {
     await simulateProgress();
 
     try {
-      // First, check if we have manual duration/intensity input or need to detect
-      let diagnosisRequest;
+      // Create the proper format for symptoms
+      const symptomText = symptoms.trim();
       
-      if (showDurationInput || showIntensityInput) {
-        // Use enhanced endpoint with manual inputs
-        diagnosisRequest = {
-          symptoms: symptoms.trim(),
-          duration: '',
-          intensity: '',
-          manual_duration_days: duration ? parseInt(duration) : undefined,
-          manual_intensity: intensity || undefined
-        };
-        
-        console.log('Sending enhanced diagnosis request with manual inputs:', diagnosisRequest);
-        const response = await fetch('http://localhost:5001/diagnose-enhanced', {
-          method: 'POST',
-          headers: {
-            'Content-Type': 'application/json',
-          },
-          body: JSON.stringify(diagnosisRequest)
+      const diagnosisRequest = {
+        symptoms: { symptomText: symptomText }, // Passing as a dictionary with the symptomText key
+        patient_data: {
+          age: parseInt(patientAge),
+          gender: patientGender,
+          patient_id: user ? user.id : `guest_${Date.now()}`,
+          name: user ? `${user.first_name} ${user.last_name}` : 'Guest'
+        },
+        doctor_id: null, // No doctor for public access
+        include_recommendations: true,
+        detailed_analysis: true,
+        save_to_database: saveData && user, // Only save if user is logged in and wants to save
+        session_type: user ? 'authenticated' : 'guest'
+      };
+
+      console.log('Sending diagnosis request:', diagnosisRequest);
+      
+      const result = await aiService.getDiagnosis(diagnosisRequest);
+      
+      if (result.success) {
+        setDiagnosis(result.data);
+        setSessionData({
+          symptoms,
+          age: patientAge,
+          gender: patientGender,
+          timestamp: new Date().toISOString(),
+          saved: saveData && user
         });
+        showToast.success('AI diagnosis completed successfully');
         
-        const result = await response.json();
-        
-        if (result.error) {
-          throw new Error(result.error);
+        if (saveData && user) {
+          showToast.info('Your diagnosis has been saved to your medical record');
         }
-        
-        // Transform the result for the frontend
-        const transformedResult = {
-          success: true,
-          data: {
-            diagnosis: result.primary_diagnosis,
-            confidence: Math.round(result.confidence * 100),
-            differential_diagnoses: result.top_predictions,
-            prescription: {
-              medications: result.recommendations?.medications || ['Consult healthcare provider'],
-              treatments: result.recommendations?.lifestyle || ['Rest and monitor symptoms'],
-              instructions: result.recommendations?.when_to_see_doctor?.join(', ') || 'Follow up with healthcare provider'
-            },
-            recommendations: result.recommendations?.lifestyle || ['Rest and monitor symptoms'],
-            ai_model_version: 'MediChain-AI-Comprehensive',
-            timestamp: result.timestamp,
-            severity: 'Moderate',
-            urgency: 'normal',
-            analysis_summary: result.analysis_summary
-          }
-        };
-        
-        if (transformedResult.success) {
-          setDiagnosis(transformedResult.data);
-          setSessionData({
-            symptoms,
-            age: patientAge,
-            gender: patientGender,
-            duration: duration,
-            intensity: intensity,
-            timestamp: new Date().toISOString(),
-            saved: saveData && user
-          });
-          showToast.success('AI diagnosis completed successfully');
-          
-          if (saveData && user) {
-            showToast.info('Your diagnosis has been saved to your medical record');
-          }
-        } else {
-          throw new Error(transformedResult.error || 'Failed to get diagnosis');
-        }
-        
       } else {
-        // First attempt - check what can be auto-detected
-        diagnosisRequest = {
-          symptoms: symptoms.trim(),
-          duration: '',
-          intensity: ''
-        };
-        
-        console.log('Sending initial diagnosis request to check detection:', diagnosisRequest);
-        const response = await fetch('http://localhost:5001/diagnose-enhanced', {
-          method: 'POST',
-          headers: {
-            'Content-Type': 'application/json',
-          },
-          body: JSON.stringify(diagnosisRequest)
-        });
-        
-        const result = await response.json();
-        
-        if (result.error) {
-          throw new Error(result.error);
-        }
-        
-        // Check if duration or intensity need manual input
-        const needsDuration = result.analysis_summary?.needs_duration_input;
-        const needsIntensity = result.analysis_summary?.needs_intensity_input;
-        
-        if (needsDuration || needsIntensity) {
-          // Show manual input fields
-          setShowDurationInput(needsDuration);
-          setShowIntensityInput(needsIntensity);
-          setLoading(false);
-          
-          if (needsDuration && needsIntensity) {
-            showToast.info('Please provide duration and intensity for more accurate diagnosis');
-          } else if (needsDuration) {
-            showToast.info('Please provide symptom duration for more accurate diagnosis');
-          } else {
-            showToast.info('Please provide symptom intensity for more accurate diagnosis');
-          }
-          
-          return; // Don't proceed with diagnosis yet
-        }
-        
-        // If we reach here, auto-detection worked fine, proceed with result
-        const transformedResult = {
-          success: true,
-          data: {
-            diagnosis: result.primary_diagnosis,
-            confidence: Math.round(result.confidence * 100),
-            differential_diagnoses: result.top_predictions,
-            prescription: {
-              medications: result.recommendations?.medications || ['Consult healthcare provider'],
-              treatments: result.recommendations?.lifestyle || ['Rest and monitor symptoms'],
-              instructions: result.recommendations?.when_to_see_doctor?.join(', ') || 'Follow up with healthcare provider'
-            },
-            recommendations: result.recommendations?.lifestyle || ['Rest and monitor symptoms'],
-            ai_model_version: 'MediChain-AI-Comprehensive',
-            timestamp: result.timestamp,
-            severity: 'Moderate',
-            urgency: 'normal',
-            analysis_summary: result.analysis_summary
-          }
-        };
-        
-        if (transformedResult.success) {
-          setDiagnosis(transformedResult.data);
-          setSessionData({
-            symptoms,
-            age: patientAge,
-            gender: patientGender,
-            timestamp: new Date().toISOString(),
-            saved: saveData && user
-          });
-          showToast.success('AI diagnosis completed successfully');
-          
-          if (saveData && user) {
-            showToast.info('Your diagnosis has been saved to your medical record');
-          }
-        } else {
-          throw new Error(transformedResult.error || 'Failed to get diagnosis');
-        }
+        throw new Error(result.error || 'Failed to get diagnosis');
       }
       
     } catch (err) {
@@ -372,10 +255,6 @@ const AIHealth = () => {
     setSymptoms('');
     setPatientAge('');
     setPatientGender('');
-    setDuration('');
-    setIntensity('');
-    setShowDurationInput(false);
-    setShowIntensityInput(false);
     setDiagnosis(null);
     setError(null);
     setSaveData(false);
@@ -531,76 +410,6 @@ const AIHealth = () => {
                   <button onClick={handleSignup} className="link-button">
                     Create an account
                   </button> to save your medical history.
-                </div>
-              </div>
-            )}
-
-            {/* Duration and Intensity Input Fields - appear when needed */}
-            {(showDurationInput || showIntensityInput) && (
-              <div className="ai-output-card blue">
-                <div className="ai-output-title">
-                  <SparklesIcon />
-                  Additional Information Needed
-                </div>
-                <div className="ai-output-content">
-                  <p>Please provide the following details for a more accurate diagnosis:</p>
-                  
-                  {showDurationInput && (
-                    <div className="ai-form-group">
-                      <label className="ai-label">
-                        Duration of Symptoms (in days)
-                      </label>
-                      <input
-                        type="number"
-                        value={duration}
-                        onChange={(e) => setDuration(e.target.value)}
-                        placeholder="Enter number of days"
-                        min="1"
-                        max="365"
-                        className="ai-input"
-                      />
-                    </div>
-                  )}
-                  
-                  {showIntensityInput && (
-                    <div className="ai-form-group">
-                      <label className="ai-label">
-                        Intensity/Severity of Symptoms
-                      </label>
-                      <div className="ai-select-wrapper">
-                        <select
-                          value={intensity}
-                          onChange={(e) => setIntensity(e.target.value)}
-                          className="ai-select-clean"
-                        >
-                          <option value="">Select intensity</option>
-                          <option value="mild">Mild - Barely noticeable, doesn't affect daily activities</option>
-                          <option value="moderate">Moderate - Noticeable, some impact on daily activities</option>
-                          <option value="severe">Severe - Intense, significantly affects daily activities</option>
-                        </select>
-                      </div>
-                    </div>
-                  )}
-                  
-                  <div className="ai-button-group" style={{marginTop: '15px'}}>
-                    <button
-                      onClick={handleDiagnosis}
-                      disabled={loading || (showDurationInput && !duration) || (showIntensityInput && !intensity)}
-                      className="ai-primary-button"
-                    >
-                      {loading ? (
-                        <>
-                          <LoadingSpinner size="small" />
-                          Analyzing...
-                        </>
-                      ) : (
-                        <>
-                          <SparklesIcon />
-                          Get Updated Diagnosis
-                        </>
-                      )}
-                    </button>
-                  </div>
                 </div>
               </div>
             )}
