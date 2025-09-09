@@ -6,12 +6,12 @@ import { getFirestore, connectFirestoreEmulator } from 'firebase/firestore';
 // Your Firebase config from Firebase Console
 // Replace these values with your actual Firebase config
 const firebaseConfig = {
-  apiKey: "your-api-key",
-  authDomain: "your-project.firebaseapp.com",
-  projectId: "your-project-id",
-  storageBucket: "your-project.appspot.com",
-  messagingSenderId: "123456789",
-  appId: "your-app-id"
+  apiKey: "AIzaSyDij3Q998OYB3PkSQpzIkki3wFzSF_OUcM", // You'll need to get this from Firebase Console
+  authDomain: "medichain-8773b.firebaseapp.com",
+  projectId: "medichain-8773b",
+  storageBucket: "medichain-8773b.firebasestorage.app",
+  messagingSenderId: "236046401113",
+  appId: "1:236046401113:web:a27b992e14f464fac3fb48" // You'll need to get this from Firebase Console
 };
 
 // Initialize Firebase

@@ -1,4 +1,11 @@
 import React, { createContext, useContext, useState, useEffect } from 'react';
+import { auth } from '../config/firebase';
+import { 
+  signInWithEmailAndPassword, 
+  createUserWithEmailAndPassword,
+  signOut,
+  onAuthStateChanged
+} from 'firebase/auth';
 import axios from 'axios';
 
 // Create the authentication context
@@ -23,100 +30,86 @@ export const AuthProvider = ({ children }) => {
 
   // Check for existing authentication on mount
   useEffect(() => {
-    const checkExistingAuth = async () => {
-      try {
-        const token = localStorage.getItem('medichain_token');
-        if (!token) {
-          setLoading(false);
-          return;
-        }
+    const unsubscribe = onAuthStateChanged(auth, async (firebaseUser) => {
+      if (firebaseUser) {
+        try {
+          // Get ID token
+          const idToken = await firebaseUser.getIdToken();
+          
+          // Verify with backend
+          const response = await axios.post(`${API_URL}/auth/login`, {
+            id_token: idToken
+          });
 
-        // If token exists, verify with backend
-        const response = await axios.get(`${API_URL}/auth/verify`, {
-          headers: {
-            Authorization: `Bearer ${token}`
+          if (response.data.success) {
+            localStorage.setItem('medichain_token', idToken);
+            localStorage.setItem('medichain_user', JSON.stringify(response.data.user));
+            
+            setUser(response.data.user);
+            setIsAuthenticated(true);
+          } else {
+            // Clear Firebase auth if backend verification fails
+            await signOut(auth);
+            localStorage.removeItem('medichain_token');
+            localStorage.removeItem('medichain_user');
           }
-        });
-
-        if (response.data.success) {
-          setUser(response.data.user);
-          setIsAuthenticated(true);
-        } else {
-          // Clear invalid token
+        } catch (error) {
+          console.error('Backend verification error:', error);
+          // Clear Firebase auth if backend is unreachable
+          await signOut(auth);
           localStorage.removeItem('medichain_token');
           localStorage.removeItem('medichain_user');
         }
-      } catch (error) {
-        console.error('Auth check error:', error);
+      } else {
+        // User is signed out
         localStorage.removeItem('medichain_token');
         localStorage.removeItem('medichain_user');
-      } finally {
-        setLoading(false);
+        setIsAuthenticated(false);
+        setUser(null);
       }
-    };
+      setLoading(false);
+    });
 
-    checkExistingAuth();
+    return () => unsubscribe();
   }, []);
 
   // Login function
   const login = async (email, password) => {
     setLoading(true);
     setError(null);
-    
+
     try {
-      // Try to connect to backend first
-      try {
-        const response = await axios.post(`${API_URL}/auth/login`, {
-          email,
-          password
-        });
-        
-        if (response.data.success) {
-          localStorage.setItem('medichain_token', response.data.token);
-          localStorage.setItem('medichain_user', JSON.stringify(response.data.user));
-          
-          setUser(response.data.user);
-          setIsAuthenticated(true);
-          
-          return { 
-            success: true, 
-            message: 'Login successful',
-            user: response.data.user
-          };
-        } else {
-          throw new Error(response.data.error || 'Login failed');
-        }
-      } catch (apiError) {
-        console.log('Backend connection failed, using fallback mock login');
-        
-        // Fallback to mock login if backend is not available
-        // Check if the user exists in localStorage from signup
-        const storedUsers = JSON.parse(localStorage.getItem('medichain_users') || '[]');
-        const user = storedUsers.find(u => u.email === email);
-        
-        if (user && user.password === password) {
-          const mockToken = `mock_token_${Date.now()}`;
-          
-          localStorage.setItem('medichain_token', mockToken);
-          localStorage.setItem('medichain_user', JSON.stringify(user));
-          
-          setUser(user);
-          setIsAuthenticated(true);
-          
-          return { 
-            success: true, 
-            message: 'Login successful (mock)',
-            user: user
-          };
-        } else {
-          throw new Error('Invalid email or password');
-        }
+      // Sign in with Firebase
+      const userCredential = await signInWithEmailAndPassword(auth, email, password);
+      
+      // Get ID token
+      const idToken = await userCredential.user.getIdToken();
+      
+      // Verify with backend
+      const response = await axios.post(`${API_URL}/auth/login`, {
+        id_token: idToken
+      });
+
+      if (response.data.success) {
+        localStorage.setItem('medichain_token', idToken);
+        localStorage.setItem('medichain_user', JSON.stringify(response.data.user));
+
+        setUser(response.data.user);
+        setIsAuthenticated(true);
+
+        return {
+          success: true,
+          message: 'Login successful',
+          user: response.data.user
+        };
+      } else {
+        throw new Error(response.data.error || 'Login failed');
       }
     } catch (error) {
       setError(error.message || 'Login failed');
-      return { 
-        success: false, 
-        message: error.message || 'Login failed' 
+      return {
+        success: false,
+        message: error.message || 'Login failed'
       };
     } finally {
       setLoading(false);
@@ -127,76 +120,41 @@ export const AuthProvider = ({ children }) => {
   const signup = async (email, password, firstName, lastName, userType) => {
     setLoading(true);
     setError(null);
-    
+
     try {
-      // First try to connect to backend
-      try {
-        const response = await axios.post(`${API_URL}/auth/register`, {
-          email,
-          password,
-          name: `${firstName} ${lastName}`,
-          role: userType
-        });
-        
-        if (response.data.success) {
-          localStorage.setItem('medichain_token', response.data.token);
-          localStorage.setItem('medichain_user', JSON.stringify(response.data.user));
-          
-          setUser(response.data.user);
-          setIsAuthenticated(true);
-          
-          return { 
-            success: true, 
-            message: 'Account created successfully!',
-            user: response.data.user
-          };
-        } else {
-          throw new Error(response.data.error || 'Signup failed');
-        }
-      } catch (apiError) {
-        console.log('Backend connection failed, using fallback mock signup');
-        
-        // Fallback to mock signup if backend is not available
-        const storedUsers = JSON.parse(localStorage.getItem('medichain_users') || '[]');
-        
-        // Check if user already exists
-        if (storedUsers.some(u => u.email === email)) {
-          throw new Error('User already exists');
-        }
-        
-        // Create new user
-        const newUser = {
-          id: Date.now(),
-          email,
-          password, // In a real app, never store plain passwords
-          name: `${firstName} ${lastName}`,
-          role: userType,
-          created_at: new Date().toISOString()
-        };
-        
-        // Add user to stored users
-        storedUsers.push(newUser);
-        localStorage.setItem('medichain_users', JSON.stringify(storedUsers));
-        
-        // Auto login
-        const mockToken = `mock_token_${Date.now()}`;
-        localStorage.setItem('medichain_token', mockToken);
-        localStorage.setItem('medichain_user', JSON.stringify(newUser));
-        
-        setUser(newUser);
+      // Create user with Firebase
+      const userCredential = await createUserWithEmailAndPassword(auth, email, password);
+      
+      // Get ID token
+      const idToken = await userCredential.user.getIdToken();
+      
+      // Register with backend
+      const response = await axios.post(`${API_URL}/auth/register`, {
+        id_token: idToken,
+        name: `${firstName} ${lastName}`,
+        role: userType
+      });
+
+      if (response.data.success) {
+        localStorage.setItem('medichain_token', idToken);
+        localStorage.setItem('medichain_user', JSON.stringify(response.data.user));
+
+        setUser(response.data.user);
         setIsAuthenticated(true);
-        
-        return { 
-          success: true, 
-          message: 'Account created successfully! (mock)',
-          user: newUser
+
+        return {
+          success: true,
+          message: 'Account created successfully!',
+          user: response.data.user
         };
+      } else {
+        throw new Error(response.data.error || 'Signup failed');
       }
     } catch (error) {
       setError(error.message || 'Signup failed');
-      return { 
-        success: false, 
-        error: error.message || 'Signup failed' 
+      return {
+        success: false,
+        error: error.message || 'Signup failed'
       };
     } finally {
       setLoading(false);
@@ -204,12 +162,17 @@ export const AuthProvider = ({ children }) => {
   };
 
   // Logout function
-  const logout = () => {
-    localStorage.removeItem('medichain_token');
-    localStorage.removeItem('medichain_user');
-    setIsAuthenticated(false);
-    setUser(null);
-    setError(null);
+  const logout = async () => {
+    try {
+      await signOut(auth);
+      localStorage.removeItem('medichain_token');
+      localStorage.removeItem('medichain_user');
+      setIsAuthenticated(false);
+      setUser(null);
+      setError(null);
+    } catch (error) {
+      console.error('Logout error:', error);
+    }
   };
 
   // Update user function

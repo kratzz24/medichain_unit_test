@@ -3,6 +3,7 @@ import React from "react"
 import { useAuth } from "../context/AuthContext"
 import DoctorDashboard from "./DoctorDashboard"
 import PatientDashboard from "./PatientDashboard"
+import AdminDashboard from "./AdminDashboard"
 import LoadingSpinner from "../components/LoadingSpinner"
 
 const Dashboard = () => {
@@ -44,10 +45,14 @@ const Dashboard = () => {
   }
 
   // Route to appropriate dashboard based on user role
-  if (user.role === 'doctor') {
+  const userRole = user.profile?.role || user.role;
+  
+  if (userRole === 'doctor') {
     return <DoctorDashboard />;
-  } else if (user.role === 'patient') {
+  } else if (userRole === 'patient') {
     return <PatientDashboard />;
+  } else if (userRole === 'admin') {
+    return <AdminDashboard />;
   } else {
     // Default fallback for unknown roles
     return (
@@ -61,7 +66,8 @@ const Dashboard = () => {
         color: '#666'
       }}>
         <h2>Unknown User Role</h2>
-        <p>Unable to determine the appropriate dashboard for your role: {user.role}</p>
+        <p>Unable to determine the appropriate dashboard for your role: {userRole || 'undefined'}</p>
+        <p>User data: {JSON.stringify(user, null, 2)}</p>
         <p>Please contact support for assistance.</p>
       </div>
     );
