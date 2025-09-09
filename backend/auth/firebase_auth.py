@@ -144,6 +144,43 @@ class FirebaseAuthService:
                 'error': str(e)
             }
 
+    def sign_in_with_email_password(self, email, password):
+        """Sign in user with email and password (Note: This is for server-side only, client should use Firebase SDK)"""
+        try:
+            # Note: Firebase Admin SDK doesn't support sign in with email/password
+            # This is typically done on the client side with Firebase Auth SDK
+            # For server-side authentication, we recommend using custom tokens or other methods
+            # For now, we'll return an error indicating this should be done client-side
+            return {
+                'success': False,
+                'error': 'Email/password sign in should be done client-side with Firebase SDK'
+            }
+        except Exception as e:
+            return {'success': False, 'error': str(e)}
+
+    def create_user_with_email_password(self, email, password):
+        """Create a new user with email and password"""
+        try:
+            user = auth.create_user(
+                email=email,
+                password=password
+            )
+            
+            # Generate a custom token for the user
+            custom_token = self.create_custom_token(user.uid)
+            
+            return {
+                'success': True,
+                'user': {
+                    'uid': user.uid,
+                    'email': user.email,
+                    'email_verified': user.email_verified
+                },
+                'token': custom_token['token']
+            }
+        except Exception as e:
+            return {'success': False, 'error': str(e)}
+
 # Global instance
 firebase_auth_service = FirebaseAuthService()
 
@@ -190,7 +227,7 @@ def firebase_role_required(allowed_roles):
             
             try:
                 # Get user profile from Supabase
-                response = supabase.client.table('user_profiles').select('role').eq('firebase_uid', user_uid).single().execute()
+                response = supabase.service_client.table('user_profiles').select('role').eq('firebase_uid', user_uid).single().execute()
                 
                 if not response.data:
                     return jsonify({'error': 'User profile not found'}), 404
