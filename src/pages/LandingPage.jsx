@@ -176,6 +176,15 @@ const LandingPage = () => {
               >
                 Contact
               </a>
+              <a
+                className="nav-link"
+                onClick={(e) => {
+                  e.preventDefault();
+                  navigate('/contact');
+                }}
+              >
+                Contact Us
+              </a>
             </nav>
             <div className="cta-buttons">
               <button

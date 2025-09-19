@@ -10,6 +10,7 @@ import PatientAIHistory from './pages/PatientAIHistory'; // For doctors to view 
 import HealthRecord from './pages/HealthRecord'; // Patient health record page
 import ProtectedRoute from './components/ProtectedRoute';
 import './App.css';
+import MedichainContactUs from './frontend/MedichainContactUs';
 
 // Create placeholder components
 const ResetPassword = () => (
@@ -98,6 +99,8 @@ function App() {
                 </ProtectedRoute>
               } 
             />
+            
+            <Route path="/contact" element={<MedichainContactUs />} />
             
             {/* Redirect any unknown routes to landing page */}
             <Route path="*" element={<Navigate to="/" replace />} />
