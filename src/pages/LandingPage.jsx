@@ -262,7 +262,7 @@ const LandingPage = () => {
               <div className="feature-item-icon">🤖</div>
               <h3>AI-Driven Diagnosis</h3>
               <p>
-                Our advanced AI algorithms analyze symptoms and medical data to provide accurate, instant diagnostic recommendations, helping healthcare professionals make informed decisions faster than ever before.
+                AI analyzes symptoms/data for fast, accurate recommendations.
               </p>
             </div>
             <div className="feature-item">

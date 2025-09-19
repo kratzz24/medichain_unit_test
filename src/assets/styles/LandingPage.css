@@ -464,13 +464,13 @@ body {
   padding: 40px;
   text-align: center;
   box-shadow: 0 10px 40px rgba(0, 0, 0, 0.08);
-  transition: all 0.3s ease;
+  transition: transform 0.4s cubic-bezier(0.22, 1, 0.36, 1), box-shadow 0.4s cubic-bezier(0.22, 1, 0.36, 1);
   border: 1px solid rgba(255, 255, 255, 0.8);
 }
 
 .feature-item:hover {
-  transform: translateY(-10px);
-  box-shadow: 0 20px 60px rgba(0, 0, 0, 0.12);
+  transform: translateY(-16px) scale(1.04);
+  box-shadow: 0 24px 48px rgba(33, 150, 243, 0.18), 0 2px 8px rgba(0,0,0,0.06);
 }
 
 .feature-item-icon {
