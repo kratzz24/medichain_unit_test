@@ -17,10 +17,13 @@ import os
 try:
     from comprehensive_ai_diagnosis import ComprehensiveAIDiagnosis
     from medication_recommendations import MedicationRecommendations
-except ImportError as e:
-    print(f"❌ Import Error: {e}")
-    print("Make sure you're running from the backend directory")
+except ModuleNotFoundError as e:
+    print(f"ModuleNotFoundError: {e}")
     sys.exit(1)
+except SystemExit as e:
+    print(f"SystemExit: {e}")
+    # Prevent pytest from crashing
+    pass
 
 class TestMediChainAIDiagnosis(unittest.TestCase):
     """Test suite for the core AI diagnosis system"""
