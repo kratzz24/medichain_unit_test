@@ -469,7 +469,7 @@ body {
 }
 
 .feature-item:hover {
-  transform: translateY(-16px) scale(1.04);
+  transform: translateY(-16px) scale(1.04) rotate(-1deg);
   box-shadow: 0 24px 48px rgba(33, 150, 243, 0.18), 0 2px 8px rgba(0,0,0,0.06);
 }
 
