@@ -1,10 +1,17 @@
 import { render, screen } from '@testing-library/react';
 import App from './App';
-import { UNSAFE_enableFutureFlag } from 'react-router';
 
-// Enable future flags to suppress warnings
-UNSAFE_enableFutureFlag('v7_startTransition');
-UNSAFE_enableFutureFlag('v7_relativeSplatPath');
+beforeAll(() => {
+  jest.spyOn(console, 'warn').mockImplementation((message) => {
+    if (
+      message.includes('React Router Future Flag Warning') ||
+      message.includes('Relative route resolution within Splat routes')
+    ) {
+      return;
+    }
+    console.warn(message);
+  });
+});
 
 test('renders MediChain app', () => {
   render(<App />);
