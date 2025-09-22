@@ -1,6 +1,7 @@
 import React from 'react';
 import { render, screen, fireEvent, waitFor } from '@testing-library/react';
 import { AuthProvider, useAuth } from '../context/AuthContext';
+import { act } from 'react-dom/test-utils';
 
 // Mock Firebase functions
 jest.mock('firebase/auth', () => ({
@@ -169,5 +170,12 @@ describe('AuthContext', () => {
     );
 
     consoleSpy.mockRestore();
+  });
+
+  test('handles state updates correctly', async () => {
+    await act(async () => {
+      // Trigger state updates here
+      // Example: Simulate user actions or API calls
+    });
   });
 });

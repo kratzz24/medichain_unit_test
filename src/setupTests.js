@@ -17,22 +17,20 @@ global.ReadableStream = ReadableStream;
 global.fetch = require('jest-fetch-mock');
 
 // Mock localStorage
-const localStorageMock = {
-  getItem: jest.fn(),
+global.localStorage = {
+  getItem: jest.fn(() => null),
   setItem: jest.fn(),
   removeItem: jest.fn(),
   clear: jest.fn(),
 };
-global.localStorage = localStorageMock;
 
 // Mock sessionStorage
-const sessionStorageMock = {
-  getItem: jest.fn(),
+global.sessionStorage = {
+  getItem: jest.fn(() => null),
   setItem: jest.fn(),
   removeItem: jest.fn(),
   clear: jest.fn(),
 };
-global.sessionStorage = sessionStorageMock;
 
 // Mock navigator for Firebase
 Object.defineProperty(window, 'navigator', {
@@ -56,3 +54,5 @@ global.IntersectionObserver = class IntersectionObserver {
     return null;
   }
 };
+
+
